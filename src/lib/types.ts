@@ -49,27 +49,23 @@ export interface TemplateComponent {
 }
 
 export interface StoryModel {
-  id: number;
+  storyId: number;
   mainTitle: string;
   subTitle: string;
   fileName: string;
-  caption?: string;
-  authorAlias?: string;
-  datePublished?: string;
-  passedTime?: string;
-  banglaDate?: string;
-  canonicalUrl?: string;
-  ampUrl?: string;
-  isLive?: boolean | number;
-  hasVideo?: boolean;
-  alt?: string;
+  orderId?: number;
+  passedTime: string;
+  isLive: number;
+  isVideo: number;
+  canonicalUrl: string;
+  langVersion?: string;
 }
 
 export interface StoryListGroup {
-  displayTitle: string;
-  slug: string;
-  categoryOrder: number;
-  storyListType: string;
+  displayTitle?: string;
+  slug?: string;
+  categoryOrder?: number;
+  storyListType?: string;
   stories: StoryModel[];
 }
 
