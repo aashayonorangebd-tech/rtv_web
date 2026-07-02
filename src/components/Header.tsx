@@ -2,7 +2,6 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-// Removed Youtube from here to fix your error
 import { Home, Search, Menu, Globe, PlayCircle, Sun, Moon } from "lucide-react";
 
 const categories = [
@@ -28,17 +27,6 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-md">
-      {/* 1. TOP UTILITY BAR (Blackish) */}
-      <div className="bg-[#1a1a1a] text-gray-400 text-[11px] py-1 hidden md:block">
-          <div className="flex gap-4 items-center">
-            <button onClick={toggleTheme} className="hover:text-white flex items-center gap-1">
-               {mounted && (theme === "dark" ? <Sun size={12}/> : <Moon size={12}/>)}
-               {mounted && theme === "dark" ? "LIGHT MODE" : "DARK MODE"}
-            </button>
-            <a href="#" className="hover:text-white">আর্টস্টেশন</a>
-            <a href="#" className="hover:text-white">ব্যাকগ্রাউন্ড</a>
-          </div>
-        </div>
 
       {/* 2. MAIN BRANDING BAR (White) */}
       <div className="bg-white dark:bg-slate-900 border-b border-gray-100 py-3">
