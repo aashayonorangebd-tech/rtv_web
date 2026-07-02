@@ -1,5 +1,6 @@
 import type { StoryModel } from "@/lib/types";
 import { StoryCardLarge } from "@/components/StoryCard";
+import Image from "next/image";
 
 type Props = {
   title?: string;
@@ -33,18 +34,24 @@ export default function SectionGrid({ title, slug, stories }: Props) {
         </div>
         <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {rest.slice(0, 4).map((story) => (
-            <a
-              key={story.storyId}
-              href={story.canonicalUrl}
-              className="group"
-            >
-              <h3 className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3">
+            <div key={story.storyId} className="group">
+              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-md">
+                <Image
+                  src={story.fileName}
+                  alt={story.mainTitle}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              <h3 className="mt-2 text-sm font-semibold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3">
                 {story.mainTitle}
               </h3>
+
               <span className="mt-1 block text-xs text-foreground/40">
                 {story.passedTime}
               </span>
-            </a>
+            </div>
           ))}
         </div>
       </div>
