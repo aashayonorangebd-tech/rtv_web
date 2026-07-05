@@ -13,7 +13,7 @@ export default function HeroSection({ stories }: { stories: StoryModel[] }) {
         <StoryCardLarge story={lead} />
       </div>
 
-      <div className="md:col-span-1 flex flex-col justify-start md:border-r border-[#dddddd] dark:border-gray-800 lg:pr-6">
+      <div className="md:col-span-1 flex flex-col justify-start md:border-r border-[#dddddd] dark:border-gray-800 md:pr-4">
         {rightColStories.map((story) => (
           <StoryCardMedium key={story.storyId} story={story} />
         ))}
