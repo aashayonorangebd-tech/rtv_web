@@ -21,15 +21,15 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
           </span>
         )}
       </div>
-      
-      <h3 className="font-bold text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors pt-2 text-[26px] md:text-[34px] pb-2 leading-[38px] md:leading-[46px] line-clamp-3">
+
+      <h3 className="font-bold text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors pt-2 text-[24px] md:text-[28px] lg:text-[34px] pb-2 leading-[36px] md:leading-[42px] lg:leading-[48px] line-clamp-3">
         {story.mainTitle}
       </h3>
-      
-      <p className="text-[16px] text-[#444444] dark:text-gray-400 leading-[26px] line-clamp-2">
+
+      <p className="text-[15px] lg:text-[16px] text-[#444444] dark:text-gray-400 leading-[24px] lg:leading-[26px] line-clamp-2">
         {story.subTitle}
       </p>
-      
+
       <span className="mt-3 block text-[13px] font-medium text-[#888888] dark:text-gray-500">
         {story.passedTime}
       </span>
@@ -37,10 +37,8 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
   );
 }
 
-// ✅ NEW COMPONENT: This perfectly matches the stacked cards on the right side of the original site
 export function StoryCardMedium({ story }: { story: StoryModel }) {
   return (
-    // pb-5 and border-b create the horizontal dividers between the stacked items
     <a href={story.canonicalUrl} className="group block pb-5 mb-5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0">
       <div className="relative aspect-[16/9] overflow-hidden rounded-[2px] mb-3">
         <Image
@@ -56,26 +54,24 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
           </span>
         )}
       </div>
-      
-      {/* Title is slightly smaller than Large, but bigger than Small */}
-      <h3 className="font-bold text-[20px] md:text-[23px] leading-[30px] md:leading-[34px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
+
+      <h3 className="font-bold text-[18px] md:text-[20px] lg:text-[22px] leading-[26px] md:leading-[30px] lg:leading-[32px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
         {story.mainTitle}
       </h3>
     </a>
   );
 }
+
 export function StoryCardSmall({ story }: { story: StoryModel }) {
   return (
-    // Added py-3 and bottom borders to create list separators like the original
-    <a href={story.canonicalUrl} className="group flex gap-4 py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
-      {/* Increased width of side images to match original proportions */}
-      <div className="relative w-[140px] md:w-[155px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px]">
+    <a href={story.canonicalUrl} className="group flex gap-3.5 mb-5 last:mb-0">
+      <div className="relative w-[130px] md:w-[120px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px]">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="155px"
+          sizes="130px"
         />
         {story.isVideo === 1 && (
            <span className="absolute top-1 left-1 bg-black/75 text-white text-[10px] px-1.5 py-0.5 rounded-[2px]">
@@ -83,11 +79,11 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
           </span>
         )}
       </div>
-      <div className="flex-1 min-w-0 flex flex-col justify-start pt-0.5">
-        <h3 className="text-[17px] md:text-[19px] font-bold leading-[27px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
+      <div className="flex-1 min-w-0 flex flex-col justify-center">
+        <h3 className="text-[16px] md:text-[17px] font-semibold leading-[25px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
           {story.mainTitle}
         </h3>
-        <span className="mt-2 block text-[12px] font-medium text-[#888888] dark:text-gray-500">
+        <span className="mt-1.5 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
           {story.passedTime}
         </span>
       </div>
