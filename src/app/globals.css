@@ -2,25 +2,37 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: "SolaimanLipi";
+  src: url("/fonts/SolaimanLipi.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SolaimanLipi";
+  src: url("/fonts/SolaimanLipi.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Light Mode - Colors from source */
   --background: #ffffff;
-  --foreground: #555555; /* Primary text color in snippet */
-  --primary: #2c4b9c;    /* Navigation bar background */
-  --accent-red: #b91c1c; /* Live icon / red-700 */
-  --border: #e2e8f0;    /* slate-200 / border-slate-30 */
-  
+  --foreground: #555555;
+  --primary: #2c4b9c;
+  --accent-red: #b91c1c;
+  --border: #e2e8f0;
   --color-scheme: light;
 }
 
 .dark {
-  /* Dark Mode - Based on 'dark:bg-slate-800' and 'theme-color' meta */
-  --background: #0f172a; /* Tailwind slate-900 */
-  --foreground: #cbd5e1; /* slate-300 */
-  --primary: #2c4b9c;    /* Primary stays blue */
-  --surface: #1e293b;    /* slate-800 used in header */
-  --border: #334155;    /* slate-700 */
-  
+  --background: #0f172a;
+  --foreground: #cbd5e1;
+  --primary: #2c4b9c;
+  --surface: #1e293b;
+  --border: #334155;
   --color-scheme: dark;
 }
 
@@ -31,16 +43,19 @@
   --color-accent-red: var(--accent-red);
   --color-surface: var(--surface);
   --color-border: var(--border);
-  
-  /* Font setting based on 'font-bangla' in code */
-  --font-bangla: 'Hind Siliguri', sans-serif;
+  --font-bangla: "SolaimanLipi", sans-serif;
+  --font-sans: "SolaimanLipi", sans-serif;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   color-scheme: var(--color-scheme);
-  font-family: var(--font-bangla);
+  font-family: "SolaimanLipi", sans-serif;
+}
+
+* {
+  font-family: "SolaimanLipi", sans-serif;
 }
 
 @layer utilities {
