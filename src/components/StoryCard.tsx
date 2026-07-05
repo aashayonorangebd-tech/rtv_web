@@ -37,7 +37,11 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
 
 export function StoryCardMedium({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group block pb-5 mb-5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0">
+    <a 
+      href={story.canonicalUrl} 
+      className="group block pt-0 first:pt-0 pb-5 mb-5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0"
+    >
+      {/* Rest of your component code stays exactly the same */}
       <div className="relative aspect-[16/9] overflow-hidden rounded-[2px] mb-3">
         <Image
           src={story.fileName}
@@ -53,12 +57,13 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
         )}
       </div>
 
-      <h3 className="font-bold text-[18px] md:text-[20px] lg:text-[22px] leading-[26px] md:leading-[30px] lg:leading-[32px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
+      <h3 className="font-bold text-[18px] md:text-[15px] lg:text-[15px] leading-[20px] md:leading-[20px] lg:leading-[20px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
         {story.mainTitle}
       </h3>
     </a>
   );
 }
+
 
 export function StoryCardSmall({ story }: { story: StoryModel }) {
   return (
