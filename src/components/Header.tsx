@@ -28,14 +28,7 @@ export default function Header() {
   return (
     <header className="w-full font-sans bg-[#e2e2e2] dark:bg-slate-900">
       <div className="max-w-[1350px] mx-auto relative">
-
-        {/* 
-          Large Overlapping Logo - FIXED
-          1. Decreased size: w-[80px] on mobile, w-[105px] on desktop
-          2. Removed HTML backgrounds so the SVG can render cleanly without overlapping colors
-          3. Used 'h-auto object-contain' to keep the natural proportions of the logo
-        */}
-        <div className="absolute left-4 md:left-6 lg:left-8 top-1 md:top-2 z-50 w-[75px] md:w-[105px]">
+        <div className="absolute left-4 md:left-6 lg:left-8 top-1 md:top-2 z-45 w-[75px] md:w-[90px]">
           <a href="/" className="block drop-shadow-md hover:opacity-95 transition-opacity">
             <img
               src="/rtv-logo.svg"
