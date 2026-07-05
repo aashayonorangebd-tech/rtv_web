@@ -22,9 +22,9 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
         )}
       </div>
 
-     <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-500 hover:cursor-pointer pt-2 text-3xl pb-3 transition-colors line-clamp-3">
-            { story.mainTitle}
-      </h3>
+<h3 className="font-semibold text-black dark:text-white group-hover:text-blue-500 hover:cursor-pointer pt-2 pb-3 text-[25px] leading-[30px] transition-colors line-clamp-3">
+  {story.mainTitle}
+</h3>
 
 
       <p className="text-base text-[#555555] dark:text-slate-300 leading-[24px] lg:leading-[26px] line-clamp-3">
