@@ -29,32 +29,24 @@ export default function Header() {
     <header className="w-full font-sans bg-[#e2e2e2] dark:bg-slate-900">
       <div className="max-w-[1350px] mx-auto relative">
 
-        {/* Large Overlapping Logo - Removed outer border */}
-        <div className="absolute left-4 md:left-6 top-3 z-50 w-[90px] md:w-[125px] h-[90px] md:h-[125px] rounded-xl overflow-hidden shadow-lg flex flex-col">
-          <a href="/" className="flex flex-col h-full w-full">
-            <div className="bg-gradient-to-b from-[#005c99] to-[#0099cc] flex-1 relative flex items-center justify-center">
-              <img
-                src="/rtv-logo.svg"
-                alt="RTV"
-                className="w-[85%] h-[85%] object-contain drop-shadow-md"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling.style.display = 'flex';
-                }}
-              />
-              <div className="hidden absolute inset-0 items-center justify-center text-white">
-                <span className="font-serif italic text-4xl md:text-6xl font-bold tracking-tighter pr-2 md:pr-4">R</span>
-                <span className="font-sans italic text-xl md:text-2xl font-bold absolute right-2 md:right-3 bottom-2 md:bottom-4">tv</span>
-              </div>
-            </div>
-            <div className="bg-gradient-to-b from-[#cc0000] to-[#990000] h-[24px] md:h-[32px] flex items-center justify-center">
-              <span className="text-white text-[11px] md:text-[14px] font-bold tracking-widest">NEWS</span>
-            </div>
+        {/* 
+          Large Overlapping Logo - FIXED
+          1. Decreased size: w-[80px] on mobile, w-[105px] on desktop
+          2. Removed HTML backgrounds so the SVG can render cleanly without overlapping colors
+          3. Used 'h-auto object-contain' to keep the natural proportions of the logo
+        */}
+        <div className="absolute left-4 md:left-6 lg:left-8 top-1 md:top-2 z-50 w-[75px] md:w-[105px]">
+          <a href="/" className="block drop-shadow-md hover:opacity-95 transition-opacity">
+            <img
+              src="/rtv-logo.svg"
+              alt="RTV News"
+              className="w-full h-auto object-contain"
+            />
           </a>
         </div>
 
         {/* Top Bar (Gray) */}
-        <div className="h-[55px] md:h-[65px] flex items-center justify-between pl-[110px] md:pl-[160px] lg:pl-[180px] pr-4 md:pr-6">
+        <div className="h-[55px] md:h-[65px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6">
 
           {/* Left: Location & Date */}
           <div className="hidden lg:flex items-center gap-5 text-gray-600 dark:text-gray-300 text-[14px] font-medium">
@@ -70,7 +62,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Right: Actions & Links (Matched exactly with provided HTML structure) */}
+          {/* Right: Actions & Links */}
           <div className="flex items-center justify-center gap-x-3 ml-auto">
             <div className="hidden md:flex items-center justify-center">
               <a href="/election" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
@@ -125,11 +117,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Bottom Bar (Navy Blue) - Reduced height */}
-      <div className="w-full bg-[#304a8c] dark:bg-slate-950 border-t border-white/10">
-        <div className="max-w-[1350px] mx-auto h-[40px] md:h-[45px] flex items-center justify-between pl-[110px] md:pl-[160px] lg:pl-[180px] pr-4 md:pr-6">
+      {/* Bottom Bar (Navy Blue) */}
+      <div className="w-full bg-[#304a8c] dark:bg-slate-950 border-t border-white/10 shadow-md relative z-40">
+        <div className="max-w-[1350px] mx-auto h-[40px] md:h-[45px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6">
 
-          {/* Navigation Links - Made bold and eye-catching */}
+          {/* Navigation Links */}
           <nav className="flex-1 overflow-x-auto no-scrollbar h-full">
             <ul className="flex items-center h-full whitespace-nowrap">
               {categories.map((cat, index) => (
@@ -143,7 +135,7 @@ export default function Header() {
                     </a>
                   </li>
                   {index < categories.length && (
-                    <li className="text-white select-none text-lg font-bold flex items-center h-full">|</li>
+                    <li className="text-white/40 select-none text-sm font-bold flex items-center h-full">|</li>
                   )}
                 </React.Fragment>
               ))}
