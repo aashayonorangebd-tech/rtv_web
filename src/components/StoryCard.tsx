@@ -3,28 +3,73 @@ import type { StoryModel } from "@/lib/types";
 
 export function StoryCardLarge({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group block">
-      <div className="relative aspect-[16/9] overflow-hidden rounded-lg">
+    <a href={story.canonicalUrl} className="group block mb-4">
+      {/* FIXED: Removed large rounded corners to match the sharp news design of original site */}
+      <div className="relative aspect-[16/9] overflow-hidden rounded-[2px]">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 768px) 100vw, 66vw"
         />
         {story.isVideo === 1 && (
-          <span className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-0.5 rounded">
+          <span className="absolute top-2 left-2 bg-black/75 text-white text-xs px-2 py-1 rounded-sm flex items-center gap-1">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
+              <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
+            </svg>
             ভিডিও
           </span>
         )}
       </div>
-      <h2 className="mt-3 text-lg font-bold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3">
+      
+      {/* 
+        FIXED: 
+        - Color is pure black (#000000) exactly like original.
+        - Exact padding from your screenshot (pt-2, pb-3).
+        - Exact 30px size (text-3xl) with custom 44px leading so Bengali text fits perfectly.
+        - Exact Hover blue color match.
+      */}
+      <h3 className="font-semibold text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors pt-3 text-[26px] md:text-3xl pb-2 leading-[38px] md:leading-[44px] line-clamp-3">
         {story.mainTitle}
-      </h2>
-      <p className="mt-1 text-sm text-foreground/60 line-clamp-2">
+      </h3>
+      
+      {/* FIXED: Adjusted description text color to exact gray and tightened line-height */}
+      <p className="text-[15px] text-[#444444] dark:text-gray-400 leading-[26px] line-clamp-2">
         {story.subTitle}
       </p>
-      <span className="mt-2 block text-xs text-foreground/40">
+      
+      <span className="mt-2.5 block text-[12px] font-medium text-[#888888] dark:text-gray-500">
+        {story.passedTime}
+      </span>
+    </a>
+  );
+}
+
+export function StoryCardMedium({ story }: { story: StoryModel }) {
+  return (
+    <a href={story.canonicalUrl} className="group block mb-5 last:mb-0">
+      <div className="relative aspect-[16/9] overflow-hidden rounded-[2px]">
+        <Image
+          src={story.fileName}
+          alt={story.mainTitle}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        {story.isVideo === 1 && (
+          <span className="absolute top-2 left-2 bg-black/75 text-white text-xs px-2 py-0.5 rounded-sm flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
+              <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
+            </svg>
+            ভিডিও
+          </span>
+        )}
+      </div>
+      <h3 className="font-semibold text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors pt-2 text-lg md:text-xl leading-[28px] md:leading-[30px] line-clamp-3">
+        {story.mainTitle}
+      </h3>
+      <span className="mt-1.5 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
         {story.passedTime}
       </span>
     </a>
@@ -33,26 +78,28 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
 
 export function StoryCardSmall({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group flex gap-3">
-      <div className="relative w-28 aspect-[16/9] shrink-0 overflow-hidden rounded">
+    <a href={story.canonicalUrl} className="group flex gap-3.5 mb-5 last:mb-0">
+      {/* FIXED: Adjusted width to exactly match the side list proportions of original */}
+      <div className="relative w-[130px] md:w-[120px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px]">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-          sizes="112px"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="130px"
         />
         {story.isVideo === 1 && (
-          <span className="absolute top-1 left-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">
+           <span className="absolute top-1 left-1 bg-black/75 text-white text-[10px] px-1.5 py-0.5 rounded-[2px]">
             ভিডিও
           </span>
         )}
       </div>
-      <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3">
+      <div className="flex-1 min-w-0 flex flex-col justify-center">
+        {/* FIXED: Pure black, tight line height, precise hover color */}
+        <h3 className="text-[16px] md:text-[17px] font-semibold leading-[25px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
           {story.mainTitle}
         </h3>
-        <span className="mt-1 block text-[11px] text-foreground/40">
+        <span className="mt-1.5 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
           {story.passedTime}
         </span>
       </div>
@@ -62,21 +109,21 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
 
 export function StoryCardListItem({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group flex gap-3 pb-3 border-b border-border last:border-b-0">
-      <div className="relative w-24 aspect-[16/9] shrink-0 overflow-hidden rounded">
+    <a href={story.canonicalUrl} className="group flex gap-3 py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
+      <div className="relative w-[110px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px]">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-          sizes="96px"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="110px"
         />
       </div>
-      <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-2">
+      <div className="flex-1 min-w-0 flex flex-col justify-center">
+        <h3 className="text-[16px] font-medium leading-[24px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
           {story.mainTitle}
         </h3>
-        <span className="mt-1 block text-[11px] text-foreground/40">
+        <span className="mt-1 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
           {story.passedTime}
         </span>
       </div>
@@ -86,11 +133,11 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
 
 export function StoryCardText({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group block pb-3 border-b border-border last:border-b-0">
-      <h3 className="text-[15px] font-semibold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-2">
+    <a href={story.canonicalUrl} className="group block py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
+      <h3 className="text-[16px] font-medium leading-[25px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
         {story.mainTitle}
       </h3>
-      <span className="mt-1 block text-xs text-foreground/40">
+      <span className="mt-1.5 block text-[12px] font-medium text-[#888888] dark:text-gray-500">
         {story.passedTime}
       </span>
     </a>

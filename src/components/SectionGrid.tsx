@@ -44,7 +44,7 @@ export default function SectionGrid({ title, slug, stories }: Props) {
                 />
               </div>
 
-              <h3 className="mt-2 text-sm font-semibold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3">
+              <h3 className="mt-2 text-[1.2rem] font-bold leading-[23px] text-foreground group-hover:text-primary transition-colors line-clamp-3">
                 {story.mainTitle}
               </h3>
 

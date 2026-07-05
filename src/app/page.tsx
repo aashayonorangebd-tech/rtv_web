@@ -19,7 +19,7 @@ export default async function Home() {
 
   if (!data) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center text-foreground/60">
+      <div className="max-w-[1350px] mx-auto px-4 py-20 text-center text-foreground/60">
         Unable to load content. Please try again later.
       </div>
     );
