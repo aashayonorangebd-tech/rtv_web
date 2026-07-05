@@ -22,17 +22,15 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
         )}
       </div>
 
-      <h3 className="font-bold text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors pt-2 text-[24px] md:text-[28px] lg:text-[34px] pb-2 leading-[36px] md:leading-[42px] lg:leading-[48px] line-clamp-3">
-        {story.mainTitle}
+     <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-500 hover:cursor-pointer pt-2 text-3xl pb-3 transition-colors line-clamp-3">
+            { story.mainTitle}
       </h3>
 
-      <p className="text-[15px] lg:text-[16px] text-[#444444] dark:text-gray-400 leading-[24px] lg:leading-[26px] line-clamp-2">
-        {story.subTitle}
-      </p>
 
-      <span className="mt-3 block text-[13px] font-medium text-[#888888] dark:text-gray-500">
-        {story.passedTime}
-      </span>
+      <p className="text-base text-[#555555] dark:text-slate-300 leading-[24px] lg:leading-[26px] line-clamp-3">
+  {story.subTitle}
+</p>
+
     </a>
   );
 }
@@ -46,7 +44,7 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
           alt={story.mainTitle}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 1024px) 100vw, 33vw"
+          sizes="(max-width: 1024px) 90vw, 33vw"
         />
         {story.isVideo === 1 && (
            <span className="absolute top-2 left-2 bg-black/75 text-white text-[10px] px-1.5 py-0.5 rounded-[2px]">
