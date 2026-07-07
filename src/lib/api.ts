@@ -1,3 +1,5 @@
+import type { StoryModel, PopularApiItem, LatestApiItem } from "@/lib/types";
+
 export const API_CONFIG = {
   dev: "https://beta-api.rtvonline.com",
   prod: "https://api.rtvonline.com",
@@ -36,3 +38,18 @@ export const ENDPOINTS = {
     prayerTimes: "/api/utils/prayer-time",
   },
 } as const;
+
+export function toStoryModel(
+  item: PopularApiItem | LatestApiItem
+): StoryModel {
+  return {
+    storyId: item.id,
+    mainTitle: item.mainTitle,
+    subTitle: "subTitle" in item ? (item as PopularApiItem).subTitle : "",
+    fileName: item.fileName ?? "",
+    passedTime: "passedTime" in item ? (item as LatestApiItem).passedTime : "",
+    isLive: item.isLive,
+    isVideo: item.hasVideo ? 1 : 0,
+    canonicalUrl: item.canonicalUrl,
+  };
+}

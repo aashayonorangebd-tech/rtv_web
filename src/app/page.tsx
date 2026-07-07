@@ -1,5 +1,6 @@
 import HomePage from "@/components/HomePage";
-import type { HomeTemplateResponse, CollectionItem } from "@/lib/types";
+import type { HomeTemplateResponse, CollectionItem, StoryModel } from "@/lib/types";
+import { toStoryModel } from "@/lib/api";
 
 interface CollectionStoriesResponse {
   collection: Record<string, CollectionItem>;
@@ -9,7 +10,7 @@ async function getHomeData(): Promise<HomeTemplateResponse | null> {
   try {
     const res = await fetch(
       `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/collection/view/all-active-temp-collection/stories`,
-      { next: { revalidate: 60 } }
+      { cache: "no-store" }
     );
     if (!res.ok) return null;
     return res.json();
@@ -24,7 +25,7 @@ async function getCollectionStories(
   try {
     const res = await fetch(
       `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/collection/view/collection/stories?collections=${collectionId}`,
-      { next: { revalidate: 60 } }
+      { cache: "no-store" }
     );
     if (!res.ok) return null;
     return res.json();
@@ -33,8 +34,40 @@ async function getCollectionStories(
   }
 }
 
+async function getPopularStories(): Promise<StoryModel[]> {
+  try {
+    const res = await fetch(
+      `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/story/view/popular-page?page=0&size=5`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.map(toStoryModel);
+  } catch {
+    return [];
+  }
+}
+
+async function getLatestStories(): Promise<StoryModel[]> {
+  try {
+    const res = await fetch(
+      `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/story/view/latest-tab`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.model || []).map(toStoryModel);
+  } catch {
+    return [];
+  }
+}
+
 export default async function Home() {
-  const data = await getHomeData();
+  const [data, popularStories, latestStories] = await Promise.all([
+    getHomeData(),
+    getPopularStories(),
+    getLatestStories(),
+  ]);
 
   if (!data) {
     return (
@@ -53,5 +86,12 @@ export default async function Home() {
     subHeroData = await getCollectionStories(subHeroComp.collectionId);
   }
 
-  return <HomePage data={data} subHeroData={subHeroData} />;
+  return (
+    <HomePage
+      data={data}
+      subHeroData={subHeroData}
+      popularStories={popularStories}
+      latestStories={latestStories}
+    />
+  );
 }

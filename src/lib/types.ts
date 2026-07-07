@@ -209,3 +209,31 @@ export interface PrayerTime {
 export interface PrayerTimeResponse {
   data: PrayerTime[];
 }
+
+// Sidebar widget API types
+export interface PopularApiItem {
+  id: number;
+  mainTitle: string;
+  subTitle: string;
+  fileName: string;
+  hasVideo: boolean;
+  canonicalUrl: string;
+  isLive: number;
+  viewCount: number;
+}
+
+export interface LatestApiItem {
+  id: number;
+  mainTitle: string;
+  passedTime: string;
+  fileName?: string;
+  hasVideo: boolean;
+  canonicalUrl: string;
+  isLive: number;
+  datePublish: string;
+  viewCount: number;
+}
+
+export interface LatestResponse {
+  model: LatestApiItem[];
+}

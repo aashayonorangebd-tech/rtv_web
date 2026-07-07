@@ -5,9 +5,13 @@ import SidebarTabWidget from "@/components/SidebarTabWidget";
 export default function SubHeroGrid({
   stories,
   sidebarStories,
+  popularStories = [],
+  latestStories = [],
 }: {
   stories: StoryModel[];
   sidebarStories: StoryModel[];
+  popularStories: StoryModel[];
+  latestStories: StoryModel[];
 }) {
   if (!stories || stories.length === 0) return null;
 
@@ -39,8 +43,8 @@ export default function SubHeroGrid({
 
         <div className="md:col-span-1 md:pl-4">
           <SidebarTabWidget
-            latestStories={sidebarStories}
-            popularStories={sidebarStories}
+            latestStories={latestStories.length > 0 ? latestStories : sidebarStories}
+            popularStories={popularStories.length > 0 ? popularStories : sidebarStories}
           />
         </div>
       </div>

@@ -1,13 +1,17 @@
-import type { HomeTemplateResponse, CollectionItem } from "@/lib/types";
+import type { HomeTemplateResponse, CollectionItem, StoryModel } from "@/lib/types";
 import HeroSection from "@/components/HeroSection";
 import SubHeroGrid from "@/components/SubHeroGrid";
 
 export default function HomePage({
   data,
   subHeroData,
+  popularStories = [],
+  latestStories = [],
 }: {
   data: HomeTemplateResponse;
   subHeroData: { collection: Record<string, CollectionItem> } | null;
+  popularStories: StoryModel[];
+  latestStories: StoryModel[];
 }) {
   const leadComp = data.templateComponentList.find(
     (c) => c.componentId === "s1_comp4"
@@ -39,6 +43,8 @@ export default function HomePage({
         <SubHeroGrid
           stories={subHeroStories}
           sidebarStories={sidebarStories}
+          popularStories={popularStories}
+          latestStories={latestStories}
         />
       )}
     </div>
