@@ -43,6 +43,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# design system (generated, not source)
+DESIGN_SYSTEM.md
+interview.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

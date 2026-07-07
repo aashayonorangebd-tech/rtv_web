@@ -4,8 +4,8 @@ import { useState } from "react";
 import type { StoryModel } from "@/lib/types";
 
 const TABS = [
-  { key: "latest", label: "সর্বশেষ" },
   { key: "popular", label: "পাঠক প্রিয়" },
+  { key: "latest", label: "সর্বশেষ" },
 ];
 
 export default function SidebarTabWidget({
@@ -15,50 +15,60 @@ export default function SidebarTabWidget({
   latestStories: StoryModel[];
   popularStories: StoryModel[];
 }) {
-  const [activeTab, setActiveTab] = useState("latest");
-  const stories =
-    activeTab === "latest" ? latestStories : popularStories;
+  const [activeTab, setActiveTab] = useState("popular");
+  const stories = activeTab === "latest" ? latestStories : popularStories;
 
   return (
-    <div>
-      <div className="flex border-b border-[#dddddd] dark:border-gray-800">
-        {TABS.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`px-4 pb-2 pt-0 text-sm font-semibold transition-colors ${
-              activeTab === tab.key
-                ? "text-[#0055a5] dark:text-blue-400 border-b-2 border-[#0055a5] dark:border-blue-400"
-                : "text-[#666666] dark:text-gray-400 hover:text-[#0055a5] dark:hover:text-blue-400"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+    <div className="w-full">
+      {/* Tab Navigation */}
+      <div className="text-base text-black whitespace-nowrap mb-4">
+        <div className="flex gap-x-2">
+          {TABS.map((tab) => {
+            const isActive = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`w-full text-center dark:text-white dark:border py-1 rounded-md cursor-pointer transition duration-300 ${
+                  isActive
+                    ? "bg-[#2c4b9c] text-white font-bold"
+                    : "bg-transparent text-gray-700 dark:text-gray-300 hover:text-[#2c4b9c]"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="mt-3">
-        {stories.slice(0, 5).map((story, idx) => (
-          <a
-            key={story.storyId}
-            href={story.canonicalUrl}
-            className="flex gap-3 py-2.5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 group"
-          >
-            <span className="text-[15px] font-bold text-[#0055a5] dark:text-blue-400 w-6 shrink-0 leading-5">
-              {String(idx + 1).padStart(2, "0")}
-            </span>
-            <h4 className="text-[14px] font-medium leading-[20px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-              {story.mainTitle}
-            </h4>
-          </a>
-        ))}
-        <a
-          href="#"
-          className="mt-3 block w-full text-center bg-[#0055a5] hover:bg-[#003d7a] text-white text-sm font-semibold py-2.5 rounded-[2px] transition-colors"
-        >
-          সব খবর
-        </a>
+      {/* List Content */}
+      <div className="w-full border-0">
+        <div className="flex flex-col justify-start gap-y-1 transition-opacity duration-300 overflow-y-auto h-min sm:h-[25rem] opacity-100 no-scrollbar">
+          {stories.slice(0, 10).map((story, idx) => (
+            <div
+              key={story.storyId || idx}
+              className="flex flex-col items-start justify-center py-2.5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0"
+            >
+              <a href={story.canonicalUrl} className="w-full">
+                <p className="px-[5px] text-black dark:text-slate-300 hover:text-[#005adf] dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px] font-semibold">
+                  {story.mainTitle}
+                </p>
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* "সব খবর" (All News) Button */}
+      <a
+        href="https://rtvonline.com/all-news/all-most-viewed-news"
+        className="block mt-4"
+      >
+        <div className="mx-auto py-1 bg-[#5d68c2] hover:bg-[#4c56af] text-center rounded transition-colors cursor-pointer">
+          <p className="text-base text-white font-bold">সব খবর</p>
+        </div>
+      </a>
     </div>
   );
 }
