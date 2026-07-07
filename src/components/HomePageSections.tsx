@@ -1,50 +1,43 @@
+// ─── HomePageSections ─────────────────────────────────────────────────────
+// Orchestrator component that composes ALL sections below the SubHeroGrid.
+// Each section is separated by an AdBanner where appropriate.
+//
+// Section order:
+//   1. AdBanner
+//   2. SpecialReportCarousel  ("বিশেষ প্রতিবেদন")
+//   3. AdBanner
+//   4. CategorySection        ("জাতীয়")
+//   5. AdBanner
+//   6. CategorySection        ("রাজনীতি")
+//   7. CategorySection        ("অর্থনীতি")
+//   8. AdBanner
+//   9. CategorySection        ("আন্তর্জাতিক")
+//  10. CategorySection        ("বিনোদন")
+//  11. CategorySection        ("খেলা")
+//  12. CategorySection        ("লাইফস্টাইল")
+//
+// All data is hardcoded Bengali placeholder content (no API calls).
+// Images use picsum.photos with unique seeds for reproducibility.
+// ─────────────────────────────────────────────────────────────────────────
+
 import AdBanner from "@/components/AdBanner";
 import SpecialReportCarousel from "@/components/SpecialReportCarousel";
 import CategorySection from "@/components/CategorySection";
 import type { CategoryStory } from "@/components/CategorySection";
 
-const placeholderHeadlines: CategoryStory[] = [
-  {
-    id: 1,
-    title: "আধুনিক স্বাস্থ্যসেবায় ঢামেকের অবদান জাতীয় গর্বের বিষয়: প্রধানমন্ত্রী",
-    summary:
-      "প্রধানমন্ত্রী তারেক রহমানের সফরের পর বাংলাদেশি শ্রমিকদের জন্য আবারও খুলে দেওয়া হয়েছে মালয়েশিয়ার শ্রমবাজার। আগামী এক থেকে দুই মাসের মধ্যে বিনা খরচে কর্মী পাঠানো শুরু হবে বলে আশা করছে সরকার।",
-    imageSeed: 101,
-  },
-  {
-    id: 2,
-    title: "১৬ জেলায় বন্যার শঙ্কা, এইচএসসি পরীক্ষার্থীদের যে বার্তা দিলো আন্তঃশিক্ষা বোর্ড",
-    imageSeed: 102,
-  },
-  {
-    id: 3,
-    title: "জয়পুরহাটে ট্রাক-ইজিবাইকের সংঘর্ষে ২ জনের মৃত্যু",
-    imageSeed: 103,
-  },
-  {
-    id: 4,
-    title: "বিশ্ববাজারে আরও কমল সোনার দাম",
-    summary:
-      "ঢাকা মেডিকেল কলেজের ৮০ বছর পূর্তি ও ৮১তম প্রতিষ্ঠাবার্ষিকী উপলক্ষে প্রধানমন্ত্রী তারেক রহমান প্রাক্তন, বর্তমান ছাত্র-ছাত্রী, কর্মকর্তা-কর্মচারীদের আন্তরিক শুভেচ্ছা ও অভিনন্দন জানিয়েছেন।",
-    imageSeed: 104,
-  },
-  {
-    id: 5,
-    title: "সেনাবাহিনীর গ্রীষ্মকালীন মহড়া আকস্মিক পরিদর্শন করলেন প্রধানমন্ত্রী",
-    imageSeed: 105,
-  },
-  {
-    id: 6,
-    title: "তুরস্কে ন্যাটো শীর্ষ সম্মেলন শুরু, ৩ বিষয়ে অগ্রাধিকার",
-    imageSeed: 106,
-  },
-];
+// ── CATEGORY DATA SETS ──────────────────────────────────────────────────
+// Each array follows the CategoryStory shape:
+//   first item  → featured (large 8-col card with optional summary)
+//   next 2 items → side cards (smaller 4-col, title only)
+//   extra items ignored (CategorySection only uses stories[0..2])
 
+// ── জাতীয় (National) ────────────────────────────────────────────────────
 const nationalStories: CategoryStory[] = [
   {
     id: 10,
     title: "আধুনিক স্বাস্থ্যসেবায় ঢামেকের অবদান জাতীয় গর্বের বিষয়: প্রধানমন্ত্রী",
-    summary: "প্রধানমন্ত্রী তারেক রহমান ঢাকা মেডিকেল কলেজের ৮০ বছর পূর্তি উপলক্ষে আয়োজিত অনুষ্ঠানে প্রধান অতিথি হিসেবে বক্তব্য রাখেন এবং স্বাস্থ্যসেবার মান উন্নয়নে সরকারের নানা উদ্যোগের কথা তুলে ধরেন।",
+    summary:
+      "প্রধানমন্ত্রী তারেক রহমান ঢাকা মেডিকেল কলেজের ৮০ বছর পূর্তি উপলক্ষে আয়োজিত অনুষ্ঠানে প্রধান অতিথি হিসেবে বক্তব্য রাখেন এবং স্বাস্থ্যসেবার মান উন্নয়নে সরকারের নানা উদ্যোগের কথা তুলে ধরেন।",
     imageSeed: 201,
   },
   {
@@ -60,7 +53,8 @@ const nationalStories: CategoryStory[] = [
   {
     id: 13,
     title: "নবম পে-স্কেল বাস্তবায়ন নিয়ে এবার নতুন পরিকল্পনা সরকারের",
-    summary: "সরকারি কর্মচারীদের নবম পে-স্কেল বাস্তবায়নে নতুন একটি কমিটি গঠন করা হয়েছে যা আগামী তিন মাসের মধ্যে তাদের প্রতিবেদন জমা দেবে বলে জানিয়েছেন সংশ্লিষ্ট autoridades।",
+    summary:
+      "সরকারি কর্মচারীদের নবম পে-স্কেল বাস্তবায়নে নতুন একটি কমিটি গঠন করা হয়েছে যা আগামী তিন মাসের মধ্যে তাদের প্রতিবেদন জমা দেবে বলে জানিয়েছেন সংশ্লিষ্ট autoridades।",
     imageSeed: 204,
   },
   {
@@ -75,11 +69,13 @@ const nationalStories: CategoryStory[] = [
   },
 ];
 
+// ── রাজনীতি (Politics) ──────────────────────────────────────────────────
 const politicsStories: CategoryStory[] = [
   {
     id: 20,
     title: "'জুলাই অভ্যুত্থান দমনে আ.লীগের অপরাধের প্রমাণ পেয়েছে ট্রাইব্যুনালের সংস্থা'",
-    summary: "জুলাই গণ-অভ্যুত্থান দমনে দল হিসেবে বাংলাদেশ আওয়ামী লীগের অপরাধের প্রাথমিক প্রমাণ পেয়েছে আন্তর্জাতিক অপরাধ ট্রাইব্যুনালের তদন্ত সংস্থা।",
+    summary:
+      "জুলাই গণ-অভ্যুত্থান দমনে দল হিসেবে বাংলাদেশ আওয়ামী লীগের অপরাধের প্রাথমিক প্রমাণ পেয়েছে আন্তর্জাতিক অপরাধ ট্রাইব্যুনালের তদন্ত সংস্থা।",
     imageSeed: 301,
   },
   {
@@ -94,11 +90,13 @@ const politicsStories: CategoryStory[] = [
   },
 ];
 
+// ── অর্থনীতি (Economy) ──────────────────────────────────────────────────
 const economyStories: CategoryStory[] = [
   {
     id: 30,
     title: "বিশ্ববাজারে আরও কমল সোনার দাম, জ্বালানি তেলের দামও কমার সম্ভাবনা",
-    summary: "আন্তর্জাতিক বাজারে সোনার দাম টানা তৃতীয় দিনের মতো কমেছে। একই সঙ্গে অপরিশোধিত জ্বালানি তেলের দামেও দেখা দিয়েছে নিম্নমুখী প্রবণতা।",
+    summary:
+      "আন্তর্জাতিক বাজারে সোনার দাম টানা তৃতীয় দিনের মতো কমেছে। একই সঙ্গে অপরিশোধিত জ্বালানি তেলের দামেও দেখা দিয়েছে নিম্নমুখী প্রবণতা।",
     imageSeed: 401,
   },
   {
@@ -113,11 +111,13 @@ const economyStories: CategoryStory[] = [
   },
 ];
 
+// ── আন্তর্জাতিক (International) ─────────────────────────────────────────
 const internationalStories: CategoryStory[] = [
   {
     id: 40,
     title: "তুরস্কে ন্যাটো শীর্ষ সম্মেলন শুরু, ৩ বিষয়ে অগ্রাধিকার",
-    summary: "তুরস্কের ইস্তাম্বুলে শুরু হয়েছে ন্যাটো শীর্ষ সম্মেলন। ইউক্রেন যুদ্ধ, সন্ত্রাসবাদ মোকাবিলা এবং সাইবার নিরাপত্তা এ সম্মেলনের প্রধান অগ্রাধিকার।",
+    summary:
+      "তুরস্কের ইস্তাম্বুলে শুরু হয়েছে ন্যাটো শীর্ষ সম্মেলন। ইউক্রেন যুদ্ধ, সন্ত্রাসবাদ মোকাবিলা এবং সাইবার নিরাপত্তা এ সম্মেলনের প্রধান অগ্রাধিকার।",
     imageSeed: 501,
   },
   {
@@ -132,11 +132,13 @@ const internationalStories: CategoryStory[] = [
   },
 ];
 
+// ── বিনোদন (Entertainment) ──────────────────────────────────────────────
 const entertainmentStories: CategoryStory[] = [
   {
     id: 50,
     title: "আমির খানের তৃতীয় স্ত্রী গৌরী স্প্র্যাটের সম্পদের পরিমাণ কত?",
-    summary: "বলিউডের জনপ্রিয় অভিনেতা আমির খানের তৃতীয় স্ত্রী গৌরী স্প্র্যাটের সম্পদের পরিমাণ নিয়ে চলছে নানা জল্পনা। সম্প্রতি এক সাক্ষাৎকারে তিনি নিজের ব্যবসা ও সম্পদ নিয়ে কথা বলেছেন।",
+    summary:
+      "বলিউডের জনপ্রিয় অভিনেতা আমির খানের তৃতীয় স্ত্রী গৌরী স্প্র্যাটের সম্পদের পরিমাণ নিয়ে চলছে নানা জল্পনা। সম্প্রতি এক সাক্ষাৎকারে তিনি নিজের ব্যবসা ও সম্পদ নিয়ে কথা বলেছেন।",
     imageSeed: 601,
   },
   {
@@ -151,11 +153,13 @@ const entertainmentStories: CategoryStory[] = [
   },
 ];
 
+// ── খেলা (Sports) ────────────────────────────────────────────────────────
 const sportsStories: CategoryStory[] = [
   {
     id: 60,
     title: "বাংলাদেশ-ভারত টেস্ট সিরিজের সময়সূচি ঘোষণা",
-    summary: "বাংলাদেশ ও ভারতের মধ্যকার টেস্ট সিরিজের পূর্ণাঙ্গ সময়সূচি ঘোষণা করা হয়েছে। প্রথম টেস্ট হবে চট্টগ্রামে, দ্বিতীয় টেস্ট ঢাকায়।",
+    summary:
+      "বাংলাদেশ ও ভারতের মধ্যকার টেস্ট সিরিজের পূর্ণাঙ্গ সময়সূচি ঘোষণা করা হয়েছে। প্রথম টেস্ট হবে চট্টগ্রামে, দ্বিতীয় টেস্ট ঢাকায়।",
     imageSeed: 701,
   },
   {
@@ -170,11 +174,13 @@ const sportsStories: CategoryStory[] = [
   },
 ];
 
+// ── লাইফস্টাইল (Lifestyle) ──────────────────────────────────────────────
 const lifestyleStories: CategoryStory[] = [
   {
     id: 70,
     title: "এইচএসসি ইংরেজি দ্বিতীয় পত্র: শেষ মুহূর্তের প্রস্তুতি",
-    summary: "আগামীকাল এইচএসসি ইংরেজি দ্বিতীয় পত্র পরীক্ষা। পরীক্ষার্থীদের জন্য গুরুত্বপূর্ণ কিছু টিপস এবং শেষ মুহূর্তের প্রস্তুতির কৌশল নিয়ে এ প্রতিবেদন।",
+    summary:
+      "আগামীকাল এইচএসসি ইংরেজি দ্বিতীয় পত্র পরীক্ষা। পরীক্ষার্থীদের জন্য গুরুত্বপূর্ণ কিছু টিপস এবং শেষ মুহূর্তের প্রস্তুতির কৌশল নিয়ে এ প্রতিবেদন।",
     imageSeed: 801,
   },
   {
@@ -189,6 +195,8 @@ const lifestyleStories: CategoryStory[] = [
   },
 ];
 
+// ── SIDEBAR HEADLINES ─────────────────────────────────────────────────────
+// Reused across category sidebars (sliced differently per section).
 const sidebarLabels = [
   "সারা দেশে বাড়ছে ডেঙ্গুর প্রকোপ, ২৪ ঘণ্টায় ২৩৫ জন হাসপাতালে",
   "এবার মেট্রোরেলে ভাঙচুর, গ্রেপ্তার ২",
@@ -198,15 +206,20 @@ const sidebarLabels = [
   "শিক্ষাপ্রতিষ্ঠানে খোলা রাখার নির্দেশনা নতুন সিদ্ধান্ত",
 ];
 
+// ── HomePageSections — compose all sections in order ─────────────────────
 export default function HomePageSections() {
   return (
     <>
+      {/* ── Mid-page ad banner ───────────────────────────────────────── */}
       <AdBanner />
 
+      {/* ── বিশেষ প্রতিবেদন (Special Report Carousel) ───────────────── */}
       <SpecialReportCarousel />
 
+      {/* ── Ad banner separator ──────────────────────────────────────── */}
       <AdBanner />
 
+      {/* ── জাতীয় ────────────────────────────────────────────────────── */}
       <CategorySection
         title="জাতীয়"
         href="/national"
@@ -214,8 +227,10 @@ export default function HomePageSections() {
         sidebarHeadlines={sidebarLabels}
       />
 
+      {/* ── Ad banner separator ──────────────────────────────────────── */}
       <AdBanner />
 
+      {/* ── রাজনীতি ──────────────────────────────────────────────────── */}
       <CategorySection
         title="রাজনীতি"
         href="/politics"
@@ -223,6 +238,7 @@ export default function HomePageSections() {
         sidebarHeadlines={sidebarLabels.slice(0, 5)}
       />
 
+      {/* ── অর্থনীতি ─────────────────────────────────────────────────── */}
       <CategorySection
         title="অর্থনীতি"
         href="/economy"
@@ -230,8 +246,10 @@ export default function HomePageSections() {
         sidebarHeadlines={sidebarLabels.slice(1, 6)}
       />
 
+      {/* ── Ad banner separator ──────────────────────────────────────── */}
       <AdBanner />
 
+      {/* ── আন্তর্জাতিক ──────────────────────────────────────────────── */}
       <CategorySection
         title="আন্তর্জাতিক"
         href="/international"
@@ -239,6 +257,7 @@ export default function HomePageSections() {
         sidebarHeadlines={sidebarLabels.slice(0, 4)}
       />
 
+      {/* ── বিনোদন ──────────────────────────────────────────────────── */}
       <CategorySection
         title="বিনোদন"
         href="/entertainment"
@@ -246,6 +265,7 @@ export default function HomePageSections() {
         sidebarHeadlines={sidebarLabels.slice(2, 6)}
       />
 
+      {/* ── খেলা ─────────────────────────────────────────────────────── */}
       <CategorySection
         title="খেলা"
         href="/sports"
@@ -253,6 +273,7 @@ export default function HomePageSections() {
         sidebarHeadlines={sidebarLabels.slice(0, 3)}
       />
 
+      {/* ── লাইফস্টাইল ───────────────────────────────────────────────── */}
       <CategorySection
         title="লাইফস্টাইল"
         href="/lifestyle"
