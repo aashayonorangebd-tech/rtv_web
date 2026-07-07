@@ -10,7 +10,7 @@ async function getHomeData(): Promise<HomeTemplateResponse | null> {
   try {
     const res = await fetch(
       `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/collection/view/all-active-temp-collection/stories`,
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
     if (!res.ok) return null;
     return res.json();
@@ -25,7 +25,7 @@ async function getCollectionStories(
   try {
     const res = await fetch(
       `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/collection/view/collection/stories?collections=${collectionId}`,
-      { cache: "no-store" }
+      { next: { revalidate: 60 } }
     );
     if (!res.ok) return null;
     return res.json();
@@ -38,7 +38,7 @@ async function getPopularStories(): Promise<StoryModel[]> {
   try {
     const res = await fetch(
       `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/story/view/popular-page?page=0&size=5`,
-      { cache: "no-store" }
+      { next: { revalidate: 120 } }
     );
     if (!res.ok) return [];
     const data = await res.json();
@@ -52,7 +52,7 @@ async function getLatestStories(): Promise<StoryModel[]> {
   try {
     const res = await fetch(
       `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/story/view/latest-tab`,
-      { cache: "no-store" }
+      { next: { revalidate: 30 } }
     );
     if (!res.ok) return [];
     const data = await res.json();
