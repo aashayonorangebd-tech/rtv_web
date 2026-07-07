@@ -58,7 +58,7 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
         )}
       </div>
 
-      <h3 className="font-bold text-[18px] md:text-[15px] lg:text-[15px] leading-[20px] md:leading-[20px] lg:leading-[20px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
+      <h3 className="font-bold text-[18px] md:text-[15px] lg:text-[15px] leading-[20px] md:leading-[20px] lg:leading-[20px] min-h-[40px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
         {story.mainTitle}
       </h3>
     </a>
@@ -76,7 +76,6 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="130px"
-          priority
         />
         {story.isVideo === 1 && (
            <span className="absolute top-1 left-1 bg-black/75 text-white text-[10px] px-1.5 py-0.5 rounded-[2px]">
@@ -106,7 +105,6 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="110px"
-          priority
         />
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">

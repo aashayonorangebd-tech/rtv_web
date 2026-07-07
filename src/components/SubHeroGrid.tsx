@@ -30,7 +30,7 @@ export default function SubHeroGrid({
           ))}
         </div>
 
-        <div className="md:col-span-1 md:pr-4 pb-6 md:pb-0">
+        <div className="md:col-span-1 md:border-r border-[#dddddd] dark:border-gray-800 md:pr-4 pb-6 md:pb-0">
           {col3.map((story) => (
             <StoryCardMedium key={story.storyId} story={story} />
           ))}
