@@ -1,3 +1,25 @@
+// ─── SidebarTabWidget ─────────────────────────────────────────────────────
+// Tab-switching widget for the 3-col sidebar in SubHeroGrid.
+// Two tabs: "পাঠক প্রিয়" (popular) and "সর্বশেষ" (latest).
+//
+// Layout (top → bottom):
+//   ┌──────────────────┐
+//   │ পাঠক প্রিয় | সর্বশেষ │  ← 50/50 tabs, active = blue bg
+//   ├──────────────────┤
+//   │ Headline 1       │  ← scrollable list (h-min sm:h-[25rem])
+//   │ Headline 2       │     scrollbar matches tab color (#2c4b9c)
+//   │ ...              │
+//   ├──────────────────┤
+//   │    সব খবর        │  ← blue button
+//   ├──────────────────┤
+//   │  300×250 Ad      │  ← placeholder below tabs
+//   └──────────────────┘
+//
+// Props:
+//   latestStories  : StoryModel[] for "সর্বশেষ" tab (API-driven)
+//   popularStories : StoryModel[] for "পাঠক প্রিয়" tab (API-driven)
+// ─────────────────────────────────────────────────────────────────────────
+
 "use client";
 
 import { useState } from "react";
@@ -20,7 +42,8 @@ export default function SidebarTabWidget({
 
   return (
     <div className="w-full">
-      {/* Tab Navigation */}
+      {/* ── TAB NAVIGATION ──────────────────────────────────────────────
+          50/50 split, active tab = blue bg + white bold text             */}
       <div className="text-base text-black whitespace-nowrap mb-4">
         <div className="flex gap-x-2">
           {TABS.map((tab) => {
@@ -29,7 +52,7 @@ export default function SidebarTabWidget({
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`w-full text-center dark:text-white dark:border py-1 rounded-md cursor-pointer transition duration-300 ${
+                className={`w-full text-center dark:text-white dark:border py-0.5 rounded-md cursor-pointer transition duration-300 ${
                   isActive
                     ? "bg-[#2c4b9c] text-white font-bold"
                     : "bg-transparent text-gray-700 dark:text-gray-300 hover:text-[#2c4b9c]"
@@ -42,16 +65,24 @@ export default function SidebarTabWidget({
         </div>
       </div>
 
-      {/* List Content */}
+      {/* ── SCROLLABLE HEADLINE LIST ────────────────────────────────────
+          h-min sm:h-[25rem] → auto on mobile, fixed 25rem scroll on sm+
+          Scrollbar styled to match tab color (#2c4b9c)                 */}
       <div className="w-full border-0">
-        <div className="flex flex-col justify-start gap-y-1 transition-opacity duration-300 overflow-y-auto h-min sm:h-[25rem] opacity-100 no-scrollbar">
+        <div
+          className="flex flex-col justify-start gap-y-1 transition-opacity duration-300 overflow-y-auto h-min sm:h-[25rem] opacity-100"
+          style={{
+            scrollbarColor: "#2c4b9c #e2e8f0",
+            scrollbarWidth: "thin",
+          }}
+        >
           {stories.slice(0, 10).map((story, idx) => (
             <div
               key={story.storyId || idx}
-              className="flex flex-col items-start justify-center py-2.5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0"
+              className="flex flex-col items-start justify-center py-2.5 border-b border-[#dddddd] dark:border-gray-700 last:border-b-0"
             >
               <a href={story.canonicalUrl} className="w-full">
-                <p className="px-[5px] text-black dark:text-slate-300 hover:text-[#005adf] dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px] font-semibold">
+                <p className="px-[5px] text-black dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px]">
                   {story.mainTitle}
                 </p>
               </a>
@@ -60,15 +91,21 @@ export default function SidebarTabWidget({
         </div>
       </div>
 
-      {/* "সব খবর" (All News) Button */}
+      {/* ── "সব খবর" BUTTON ────────────────────────────────────────────
+          Full-width blue button at 80% opacity, linking to all news     */}
       <a
         href="https://rtvonline.com/all-news/all-most-viewed-news"
         className="block mt-4"
       >
-        <div className="mx-auto py-1 bg-[#5d68c2] hover:bg-[#4c56af] text-center rounded transition-colors cursor-pointer">
+        <div className="mx-auto py-0.5 bg-[#2c4b9c]/80 hover:bg-[#2c4b9c] text-center rounded transition-colors cursor-pointer">
           <p className="text-base text-white font-bold">সব খবর</p>
         </div>
       </a>
+
+      {/* ── AD PLACEHOLDER (300×250) below the tab content ─────────────── */}
+      <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400 mt-4">
+        বিজ্ঞাপন — 300×250
+      </div>
     </div>
   );
 }
