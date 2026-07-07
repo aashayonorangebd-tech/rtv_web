@@ -8,7 +8,7 @@ export default function HeroSection({ stories }: { stories: StoryModel[] }) {
   const rightColStories = rest.slice(0, 2);
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-10 mt-4">
+    <section className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-10 mt-4 md:px-25 ">
       <div className="md:col-span-2 mb-8 md:mb-0">
         <StoryCardLarge story={lead} />
       </div>
