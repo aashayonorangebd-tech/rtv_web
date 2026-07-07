@@ -16,7 +16,9 @@ export default function HomePage({
   if (!leadComp) return null;
 
   const leadCol = data.collection[leadComp.collectionId];
-  const leadStories = leadCol?.storyList?.[0]?.stories?.slice(0, 4) || [];
+  const allLeadStories = leadCol?.storyList?.[0]?.stories || [];
+  const leadStories = allLeadStories.slice(0, 4);
+  const sidebarStories = allLeadStories.slice(4, 9);
 
   const subHeroComp = data.templateComponentList.find(
     (c) => c.componentId === "s2_comp1"
@@ -33,7 +35,12 @@ export default function HomePage({
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6">
       <HeroSection stories={leadStories} />
-      {subHeroStories.length > 0 && <SubHeroGrid stories={subHeroStories} />}
+      {subHeroStories.length > 0 && (
+        <SubHeroGrid
+          stories={subHeroStories}
+          sidebarStories={sidebarStories}
+        />
+      )}
     </div>
   );
 }

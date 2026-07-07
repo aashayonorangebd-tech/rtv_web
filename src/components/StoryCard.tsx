@@ -4,13 +4,14 @@ import type { StoryModel } from "@/lib/types";
 export function StoryCardLarge({ story }: { story: StoryModel }) {
   return (
     <a href={story.canonicalUrl} className="group block">
-      <div className="relative aspect-[16/9] overflow-hidden rounded-[2px] mb-3">
+      <div className="relative w-full max-w-full aspect-video overflow-hidden rounded-[2px] mb-3 bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 1024px) 100vw, 66vw"
+          priority
         />
         {story.isVideo === 1 && (
           <span className="absolute top-2 left-2 bg-black/75 text-white text-xs px-2 py-1 rounded-[2px] flex items-center gap-1">
@@ -41,14 +42,14 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
       href={story.canonicalUrl} 
       className="group block pt-0 first:pt-0 pb-5 mb-5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0"
     >
-      {/* Rest of your component code stays exactly the same */}
-      <div className="relative aspect-[16/9] overflow-hidden rounded-[2px] mb-3">
+      <div className="relative w-full max-w-full aspect-video overflow-hidden rounded-[2px] mb-3 bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 1024px) 90vw, 33vw"
+          priority
         />
         {story.isVideo === 1 && (
            <span className="absolute top-2 left-2 bg-black/75 text-white text-[10px] px-1.5 py-0.5 rounded-[2px]">
@@ -68,13 +69,14 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
 export function StoryCardSmall({ story }: { story: StoryModel }) {
   return (
     <a href={story.canonicalUrl} className="group flex gap-3.5 mb-5 last:mb-0">
-      <div className="relative w-[130px] md:w-[120px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px]">
+      <div className="relative w-[130px] md:w-[120px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="130px"
+          priority
         />
         {story.isVideo === 1 && (
            <span className="absolute top-1 left-1 bg-black/75 text-white text-[10px] px-1.5 py-0.5 rounded-[2px]">
@@ -97,13 +99,14 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
 export function StoryCardListItem({ story }: { story: StoryModel }) {
   return (
     <a href={story.canonicalUrl} className="group flex gap-3 py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
-      <div className="relative w-[110px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px]">
+      <div className="relative w-[110px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="110px"
+          priority
         />
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
