@@ -37,7 +37,7 @@ async function getCollectionStories(
 async function getPopularStories(): Promise<StoryModel[]> {
   try {
     const res = await fetch(
-      `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/story/view/popular-page?page=0&size=5`,
+      `${process.env.API_BASE_URL || "https://api.rtvonline.com"}/api/story/view/popular-page?page=0&size=10`,
       { next: { revalidate: 120 } }
     );
     if (!res.ok) return [];
