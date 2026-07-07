@@ -38,11 +38,11 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
 
 export function StoryCardMedium({ story }: { story: StoryModel }) {
   return (
-    <a 
-      href={story.canonicalUrl} 
-      className="group block pt-0 first:pt-0 pb-5 mb-5 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0"
+    <a
+      href={story.canonicalUrl}
+      className="group block pb-3 mb-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0"
     >
-      <div className="relative w-full max-w-full aspect-video overflow-hidden rounded-[2px] mb-3 bg-gray-100 dark:bg-slate-800">
+      <div className="relative w-full aspect-video overflow-hidden rounded-[2px] mb-2 bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
@@ -58,7 +58,7 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
         )}
       </div>
 
-      <h3 className="font-bold text-[18px] md:text-[15px] lg:text-[15px] leading-[20px] md:leading-[20px] lg:leading-[20px] min-h-[40px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+      <h3 className="font-bold text-[18px] md:text-[15px] lg:text-[15px] leading-[20px] md:leading-[20px] lg:leading-[20px] h-[40px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
         {story.mainTitle}
       </h3>
     </a>
@@ -76,6 +76,7 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="130px"
+          priority
         />
         {story.isVideo === 1 && (
            <span className="absolute top-1 left-1 bg-black/75 text-white text-[10px] px-1.5 py-0.5 rounded-[2px]">
@@ -105,6 +106,7 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="110px"
+          priority
         />
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
