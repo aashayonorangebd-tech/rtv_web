@@ -16,8 +16,9 @@ export default function SubHeroGrid({
   const col3 = stories.slice(6, 9);
 
   return (
-    <section className="border-t border-[#dddddd] dark:border-gray-800 pt-6 mt-6 md:px-25">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+    <section className="mt-6 md:px-25">
+      <div className="border-t border-[#dddddd] dark:border-gray-800" />
+      <div className="pt-6 grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
         <div className="md:col-span-1 md:border-r border-[#dddddd] dark:border-gray-800 md:pr-4 pb-6 md:pb-0">
           {col1.map((story) => (
             <StoryCardMedium key={story.storyId} story={story} />
