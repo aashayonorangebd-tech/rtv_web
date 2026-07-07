@@ -26,7 +26,7 @@ export default function SidebarTabWidget({
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`px-4 py-2 text-sm font-semibold transition-colors ${
+            className={`px-4 pb-2 pt-0 text-sm font-semibold transition-colors ${
               activeTab === tab.key
                 ? "text-[#0055a5] dark:text-blue-400 border-b-2 border-[#0055a5] dark:border-blue-400"
                 : "text-[#666666] dark:text-gray-400 hover:text-[#0055a5] dark:hover:text-blue-400"
@@ -52,6 +52,12 @@ export default function SidebarTabWidget({
             </h4>
           </a>
         ))}
+        <a
+          href="#"
+          className="mt-3 block w-full text-center bg-[#0055a5] hover:bg-[#003d7a] text-white text-sm font-semibold py-2.5 rounded-[2px] transition-colors"
+        >
+          সব খবর
+        </a>
       </div>
     </div>
   );
