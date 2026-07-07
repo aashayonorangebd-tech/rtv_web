@@ -2,10 +2,8 @@ import type { StoryModel } from "@/lib/types";
 
 export default function HeroSection({
   stories,
-  sidebarStories = [],
 }: {
   stories: StoryModel[];
-  sidebarStories?: StoryModel[];
 }) {
   if (!stories || stories.length === 0) return null;
 
@@ -81,32 +79,14 @@ export default function HeroSection({
           </div>
         </div>
 
-        {/* ── 3-col sidebar — ads or sidebar stories ── */}
+        {/* ── 3-col sidebar — ad section only ── */}
         <div className="md:col-span-3 flex flex-col justify-between gap-4">
-          {sidebarStories.length > 0 ? (
-            <div className="flex flex-col">
-              {sidebarStories.map((story) => (
-                <a
-                  key={story.storyId}
-                  className="group block py-3 border-b border-slate-200 dark:border-gray-700 first:pt-0"
-                  href={story.canonicalUrl}
-                >
-                  <h4 className="font-medium text-sm leading-snug text-black dark:text-white group-hover:text-blue-500 transition-colors">
-                    {story.mainTitle}
-                  </h4>
-                </a>
-              ))}
-            </div>
-          ) : (
-            <>
-              <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400">
-                Ad Space 300×250
-              </div>
-              <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400">
-                Ad Space 300×250
-              </div>
-            </>
-          )}
+          <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400">
+            Ad Space 300×250
+          </div>
+          <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400">
+            Ad Space 300×250
+          </div>
         </div>
 
       </div>

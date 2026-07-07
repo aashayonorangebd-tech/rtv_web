@@ -39,7 +39,7 @@ export default function HomePage({
 
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6">
-      <HeroSection stories={leadStories} sidebarStories={sidebarStories} />
+      <HeroSection stories={leadStories} />
       {subHeroStories.length > 0 && (
         <SubHeroGrid
           stories={subHeroStories}
