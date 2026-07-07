@@ -1,6 +1,7 @@
 import type { HomeTemplateResponse, CollectionItem, StoryModel } from "@/lib/types";
 import HeroSection from "@/components/HeroSection";
 import SubHeroGrid from "@/components/SubHeroGrid";
+import HomePageSections from "@/components/HomePageSections";
 
 export default function HomePage({
   data,
@@ -38,7 +39,7 @@ export default function HomePage({
 
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6">
-      <HeroSection stories={leadStories} />
+      <HeroSection stories={leadStories} sidebarStories={sidebarStories} />
       {subHeroStories.length > 0 && (
         <SubHeroGrid
           stories={subHeroStories}
@@ -47,6 +48,7 @@ export default function HomePage({
           latestStories={latestStories}
         />
       )}
+      <HomePageSections />
     </div>
   );
 }

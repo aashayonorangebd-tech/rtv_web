@@ -58,6 +58,29 @@ body {
   font-family: "SolaimanLipi", sans-serif;
 }
 
+.section-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.main-container {
+  max-width: 1350px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.main-title-post {
+  font-size: 1.2rem;
+  line-height: 23px;
+  font-weight: 700;
+  color: rgb(18 18 18);
+}
+
+.dark .main-title-post {
+  color: #fff;
+}
+
 @layer utilities {
   /* Site uses 'disable-scrollbars' class in navigation */
   .disable-scrollbars {
