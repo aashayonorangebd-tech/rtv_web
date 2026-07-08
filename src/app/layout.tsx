@@ -9,6 +9,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import AnchorAd from "@/components/AnchorAd";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <ScrollToTop />
+          <AnchorAd />
         </ThemeProvider>
       </body>
     </html>
