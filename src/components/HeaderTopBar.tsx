@@ -7,6 +7,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useTheme } from "@/components/ThemeProvider";
 import { MapPin, Calendar, Sun } from "lucide-react";
 
@@ -41,16 +42,22 @@ export default function HeaderTopBar() {
             <span className="text-[13px] font-light text-gray-800 dark:text-gray-200 hover:text-blue-700">নির্বাচন</span>
           </a>
         </div>
-        <div className="hidden md:flex items-center justify-center mr-5">
+        <div className="hidden md:flex items-center justify-center">
           <a href="/latest" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
             <span className="text-[13px] font-light text-gray-800 dark:text-gray-200 hover:text-blue-700">সর্বশেষ</span>
           </a>
         </div>
-        <div className="flex items-center justify-center mr-2 md:mr-5">
+        <div className="flex items-center justify-center">
           <a href="/live" className="w-auto h-auto flex flex-row items-center justify-center gap-1.5 text-center">
-            <div className="bg-[#0072bc] text-white text-[11px] font-bold italic px-2.5 py-0.5 rounded-full shadow-sm">
-              Rtv
-            </div>
+            <Image
+              alt="live_icon"
+              src="/rtvIcon/live_icon2.png"
+              width={200}
+              height={200}
+              decoding="async"
+              loading="lazy"
+              className="object-contain pb-1 h-8 w-auto"
+            />
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-700 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-red-700"></span>
