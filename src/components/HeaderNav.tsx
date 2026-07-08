@@ -23,7 +23,7 @@ export default function HeaderNav({
   menuItems: MenuItem[];
 }) {
   return (
-    <div className="w-[calc(100%+170px)] -ml-[85px] -mr-[85px] bg-[#304a8c] dark:bg-slate-950 border-t border-white/10 shadow-md relative z-40">
+    <div className="w-[calc(100%+170px)] -ml-[85px] -mr-[85px] bg-[#304a8c] border-t border-white/10 shadow-md relative z-40">
       <div className="px-[85px]">
         <div className="max-w-[1350px] mx-auto h-[33px] md:h-[35px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6">
         <nav className="flex-1 overflow-x-auto disable-scrollbars h-full">
