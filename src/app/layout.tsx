@@ -7,6 +7,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import ThemeProvider from "@/components/ThemeProvider";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,13 +26,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bn" suppressHydrationWarning className="h-full">
-      <body className="min-h-full flex flex-col px-[85px] py-[10px]">
+     <body className="min-h-full flex flex-col px-4 pt-2 md:px-[85px] md:pt-[10px]">
+
         <Script id="theme-init" strategy="beforeInteractive">
           {`(function(){try{var t=localStorage.getItem("theme")||"system",r=t==="system"?(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"):t;document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add(r),document.documentElement.style.colorScheme=r}catch(e){}})()`}
         </Script>
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>
+          <Footer />
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>
