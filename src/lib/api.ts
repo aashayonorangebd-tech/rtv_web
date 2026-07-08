@@ -1,3 +1,13 @@
+// ─── API Configuration & Helpers ─────────────────────────────────────────────
+// Central config for all API endpoints used across the app.
+// BASE_URL is set via process.env.API_BASE_URL (defaults to api.rtvonline.com).
+//
+// Exports:
+//   API_CONFIG  — dev/prod base URLs
+//   ENDPOINTS   — full endpoint path builder
+//   toStoryModel() — normalises PopularApiItem | LatestApiItem → StoryModel
+// ─────────────────────────────────────────────────────────────────────────────
+
 import type { StoryModel, PopularApiItem, LatestApiItem } from "@/lib/types";
 
 export const API_CONFIG = {

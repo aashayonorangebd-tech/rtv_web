@@ -1,4 +1,8 @@
+"use client";
+
 import type { StoryModel } from "@/lib/types";
+import { useAdblockerDetected } from "@/lib/useAdblockerDetected";
+import AdBanner from "@/components/AdBanner";
 
 // ─── HeroSection ─────────────────────────────────────────────────────────
 // 12-column responsive hero grid for the homepage lead stories + ad sidebar.
@@ -13,6 +17,8 @@ export default function HeroSection({
 }: {
   stories: StoryModel[];
 }) {
+  const adsBlocked = useAdblockerDetected();
+
   // ── Guard: bail if no stories ──────────────────────────────────────────
   if (!stories || stories.length === 0) return null;
 
@@ -34,8 +40,9 @@ export default function HeroSection({
             LEFT — MAIN CONTENT   (9 cols + border-right)
             ═══════════════════════════════════════════════════════════════
             Wraps lead story (8 cols) + right column (4 cols).
-            Border-right separates from the ad sidebar.                */}
-        <div className="md:col-span-9 md:border-r md:border-slate-300 md:pr-2.5 dark:border-gray-700">
+            Border-right separates from the ad sidebar.
+            If adblocker detected → spans full 12 cols.                */}
+        <div className={`${adsBlocked ? "md:col-span-12" : "md:col-span-9"} md:border-r md:border-slate-300 md:pr-2.5 dark:border-gray-700`}>
 
           {/* ── Inner 12-col grid (gap-5) ──────────────────────────────── */}
           <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
@@ -117,21 +124,20 @@ export default function HeroSection({
         </div>{/* end left 9-col container */}
 
         {/* ═══════════════════════════════════════════════════════════════
-            RIGHT — AD SIDEBAR  (3 cols)
+            RIGHT — AD SIDEBAR  (3 cols, hidden when adblocker detected)
             ═══════════════════════════════════════════════════════════════
             Two stacked 300×250 ad placeholders.
-            Only visible on md+ screens (below, stacks full-width).    */}
-        <div className="md:col-span-3 flex flex-col justify-between gap-4">
-          {/* Ad slot 1 — top */}
-          <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400">
-            Ad Space 300×250
-          </div>
+            If adblocker detected → not rendered at all.
+            md+ only (below, stacks full-width).                        */}
+        {!adsBlocked && (
+          <div className="md:col-span-3 flex flex-col justify-between gap-4">
+            {/* Ad slot 1 — top */}
+            <AdBanner height={250} />
 
-          {/* Ad slot 2 — bottom */}
-          <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400">
-            Ad Space 300×250
+            {/* Ad slot 2 — bottom */}
+            <AdBanner height={250} />
           </div>
-        </div>
+        )}
 
       </div>{/* end outer 12-col grid */}
     </section>

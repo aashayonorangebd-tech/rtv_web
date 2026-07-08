@@ -1,7 +1,13 @@
+// ─── HeaderTopBar ────────────────────────────────────────────────────────────
+// Top bar with location, date, action links (নির্বাচন, সর্বশেষ, LIVE, video),
+// English link, and dark/light theme toggle.
+// Theme toggle uses the custom useTheme from ThemeProvider.
+// ─────────────────────────────────────────────────────────────────────────────
+
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/ThemeProvider";
 import { MapPin, Calendar, Sun } from "lucide-react";
 
 export default function HeaderTopBar() {

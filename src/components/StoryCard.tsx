@@ -1,3 +1,15 @@
+// ─── StoryCard ───────────────────────────────────────────────────────────────
+// Five card variants for rendering StoryModel data across the homepage:
+//   Large    — full-width hero card with image + title + subtitle
+//   Medium   — grid card with image + h-20 title
+//   Small    — horizontal card (130px image + title + time)
+//   ListItem — horizontal card (110px image + title + time, no subtitle)
+//   Text     — title-only list item with time
+//
+// Video stories show a "ভিডিও" badge on the image.
+// All images: aspect-video, object-cover, hover zoom (scale-105).
+// ─────────────────────────────────────────────────────────────────────────────
+
 import Image from "next/image";
 import type { StoryModel } from "@/lib/types";
 

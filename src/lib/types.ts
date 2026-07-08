@@ -1,3 +1,10 @@
+// ─── Type definitions for all API responses & domain models ──────────────────
+// Navigation  → MenuItem, RibbonItem, FooterItem, NavigationResponse
+// Collection  → TemplateComponent, StoryModel, CollectionItem, HomeTemplateResponse
+// Story       → PopularApiItem, LatestApiItem (union → StoryModel via toStoryModel)
+// Category    → CategoryItem
+// ─────────────────────────────────────────────────────────────────────────────
+
 // Navigation
 export interface MenuItem {
   id: number;

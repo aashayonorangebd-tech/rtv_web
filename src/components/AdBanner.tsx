@@ -1,22 +1,50 @@
-// ─── AdBanner ─────────────────────────────────────────────────────────────
-// Reusable mid-page advertisement placeholder.
-// Renders a centered 970×90 banner with a "বিজ্ঞাপন" label.
-// Visible on sm+ screens via container; wraps full-width on mobile.
-// Accepts optional className for additional spacing overrides.
-// ─────────────────────────────────────────────────────────────────────────
+// ─── AdBanner ────────────────────────────────────────────────────────────────
+// Ad placeholder component that detects adblockers.
+// When blocked: returns null (collapses space).
+// Default height is 250px (300×250), override via height prop.
+// Supports className passthrough for wrapper styling.
+// ─────────────────────────────────────────────────────────────────────────────
 
-export default function AdBanner({ className = "" }: { className?: string }) {
+"use client";
+
+import { useAdblockerDetected } from "@/lib/useAdblockerDetected";
+
+export default function AdBanner({
+  className = "",
+  height = 250,
+}: {
+  className?: string;
+  height?: number;
+}) {
+  const blocked = useAdblockerDetected();
+
+  if (blocked) return null;
+
+  const isSmall = height === 90;
+
   return (
-    // Outer container — centered, horizontal padding on sm+, vertical margin
-    <div
-      className={`sm:container mt-4 sm:px-4 mx-auto dark:text-white sm:my-5 ${className}`}
-    >
-      {/* Flex center wrapper to keep banner aligned */}
-      <div className="flex justify-center items-center overflow-hidden">
-        {/* Banner box — 970×90 fixed size, gray placeholder bg, centered text */}
-        <div className="w-[970px] max-w-full h-[90px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400">
-          বিজ্ঞাপন — 970×90
+    <div className={className}>
+      {isSmall && (
+        <div
+          className="pg-ad-label"
+          style={{
+            margin: 0,
+            fontWeight: 300,
+            letterSpacing: 1,
+            fontSize: 12,
+            textAlign: "center",
+            padding: "5px 0px 6px 0px",
+            color: "#aaa",
+          }}
+        >
+          বিজ্ঞাপন
         </div>
+      )}
+      <div
+        className={`w-full bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400`}
+        style={{ minHeight: height }}
+      >
+        Ad Space 300×{height}
       </div>
     </div>
   );
