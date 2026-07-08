@@ -8,6 +8,7 @@ import type { MenuItem } from "@/lib/types";
 import HeaderLogo from "@/components/HeaderLogo";
 import HeaderTopBar from "@/components/HeaderTopBar";
 import HeaderNav from "@/components/HeaderNav";
+import StickyHeader from "@/components/StickyHeader";
 
 async function getNavigation(): Promise<MenuItem[]> {
   try {
@@ -27,12 +28,14 @@ export default async function Header() {
   const menuItems = await getNavigation();
 
   return (
-  <header className="w-full font-sans bg-white dark:bg-slate-900 mt-[3px]">
-      <div className="max-w-[1350px] mx-auto relative">
-        <HeaderLogo />
-        <HeaderTopBar />
-      </div>
-      <HeaderNav menuItems={menuItems} />
-    </header>
+    <StickyHeader>
+      <header className="w-full font-sans bg-white dark:bg-slate-900 mt-[3px]">
+        <div className="max-w-[1350px] mx-auto relative">
+          <HeaderLogo />
+          <HeaderTopBar />
+        </div>
+        <HeaderNav menuItems={menuItems} />
+      </header>
+    </StickyHeader>
   );
 }
