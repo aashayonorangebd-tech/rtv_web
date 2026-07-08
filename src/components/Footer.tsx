@@ -83,7 +83,7 @@ export default async function Footer() {
   return (
     <footer className="w-full dark:bg-inherit dark:text-white mt-8">
       {/* ── Top: footer navigation links ─────────────────────────────── */}
-      <div className="w-screen relative left-1/2 -translate-x-1/2">
+      <div className="-mx-[85px]">
         <div>
           <hr className="border-gray-300 dark:border-gray-600" />
         </div>
@@ -206,7 +206,7 @@ export default async function Footer() {
       </div>
 
       {/* ── Bottom: copyright ──────────────────────────────────────────── */}
-      <div className="w-screen relative left-1/2 -translate-x-1/2 bg-[#2c4b9d]">
+      <div className="-mx-[85px] bg-[#2c4b9d]">
         <div className="text-white text-center h-7 flex items-center justify-center">
           <p className="font-light text-[15px]">© স্বত্বাধিকার সংরক্ষিত ২০১৬-২০২৬ | RTV Online |</p>
         </div>
