@@ -73,9 +73,9 @@ export default async function Footer() {
       {/* ── Top: footer navigation links ─────────────────────────────── */}
       <div>
         <div>
-          <hr className="border-gray-300 dark:border-gray-600" />
+          <hr className="w-full border-gray-300 dark:border-gray-600" />
         </div>
-        <div className="flex items-center justify-center gap-x-5 text-[1rem] font-bold py-3 flex-wrap">
+        <div className="flex items-center justify-center gap-x-5 text-[1rem] font-normal py-1 flex-wrap">
           {sortedLinks.map((link) => (
             <a
               key={link.id}
