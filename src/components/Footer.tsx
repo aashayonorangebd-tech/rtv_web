@@ -7,6 +7,16 @@
 //   5. Privacy / Terms links
 //
 // Data: footerList is fetched from /api/navigation (Next.js deduplicates the fetch).
+//
+// Full-width <hr> fix:
+//   The body has px-[85px] which constrains all children to a centered content
+//   area. To make the <hr> span the full viewport width, we wrap the top section
+//   (hr + nav links + hr) in a div with:
+//     w-screen          → force width to 100vw regardless of parent constraints
+//     relative          → establish positioning context for the centering trick
+//     left-1/2          → push left edge to the center of the parent
+//     -translate-x-1/2  → pull back by 50% of own width, centering it perfectly
+//   The nav links inside use max-w-[1350px] mx-auto to stay aligned with content.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { FooterItem } from "@/lib/types";
@@ -71,11 +81,11 @@ export default async function Footer() {
   return (
     <footer className="w-full dark:bg-inherit dark:text-white mt-8">
       {/* ── Top: footer navigation links ─────────────────────────────── */}
-      <div>
+      <div className="w-screen relative left-1/2 -translate-x-1/2">
         <div>
-          <hr className="w-full border-gray-300 dark:border-gray-600" />
+          <hr className="border-gray-300 dark:border-gray-600" />
         </div>
-        <div className="flex items-center justify-center gap-x-5 text-[1rem] font-normal py-1 flex-wrap">
+        <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-center gap-x-5 text-[1rem] font-normal py-1 flex-wrap">
           {sortedLinks.map((link) => (
             <a
               key={link.id}
