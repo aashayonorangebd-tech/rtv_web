@@ -2,9 +2,13 @@
 
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
+import { useAdblockerDetected } from "@/lib/useAdblockerDetected";
 
 export default function AnchorAd() {
+  const blocked = useAdblockerDetected();
   const [minimized, setMinimized] = useState(false);
+
+  if (blocked) return null;
 
   return (
     <div className="w-full">
