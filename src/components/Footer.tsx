@@ -204,6 +204,13 @@ export default async function Footer() {
           </div>
         </div>
       </div>
+
+      {/* ── Bottom: copyright ──────────────────────────────────────────── */}
+      <div className="w-screen relative left-1/2 -translate-x-1/2 bg-[#2c4b9d]">
+        <div className="text-white text-center h-7 flex items-center justify-center">
+          <p className="font-light text-[15px]">© স্বত্বাধিকার সংরক্ষিত ২০১৬-২০২৬ | RTV Online |</p>
+        </div>
+      </div>
     </footer>
   );
 }

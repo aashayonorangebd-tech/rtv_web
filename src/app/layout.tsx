@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bn" suppressHydrationWarning className="h-full">
-      <body className="min-h-full flex flex-col px-[85px] py-[10px]">
+      <body className="min-h-full flex flex-col px-[85px] pt-[10px]">
         <Script id="theme-init" strategy="beforeInteractive">
           {`(function(){try{var t=localStorage.getItem("theme")||"system",r=t==="system"?(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"):t;document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add(r),document.documentElement.style.colorScheme=r}catch(e){}})()`}
         </Script>
