@@ -40,12 +40,14 @@ const SOCIAL_LINKS: {
   bg: string;
   viewBox: string;
   svg: React.ReactNode;
+  fill?: string;
 }[] = [
   {
     href: "https://www.facebook.com/rtvonline/",
     bg: "bg-blue-600",
     viewBox: "0 0 24 24",
-    svg: <path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z" />,
+    fill: "none",
+    svg: <path d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z" fill="currentColor" />,
   },
   {
     href: "https://x.com/rtvonline",
@@ -159,18 +161,30 @@ export default async function Footer() {
             <p className="text-[1.225rem] my-2.5 text-gray-800 dark:text-white">
               মোবাইল অ্যাপস ডাউনলোড করুন
             </p>
-            <div className="flex items-center justify-center gap-3">
-              <a
-                href="https://play.google.com/store/apps/details?id=com.rtv.newsportal"
-                className="bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 text-gray-800 dark:text-white text-sm font-medium px-4 py-2 rounded transition-colors"
-              >
-                Google Play
+            <div className="flex items-center justify-center ">
+              <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal">
+                <img
+                  alt="logo_apps"
+                  src="/rtvIcon/store_icon/andriod.webp"
+                  width={100}
+                  height={100}
+                  decoding="async"
+                  data-nimg="1"
+                  loading="lazy"
+                  style={{ color: "transparent", width: 128, height: "auto" }}
+                />
               </a>
-              <a
-                href="https://apps.apple.com/us/app/rtv-news/id6753746064"
-                className="bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 text-gray-800 dark:text-white text-sm font-medium px-4 py-2 rounded transition-colors"
-              >
-                App Store
+              <a href="https://apps.apple.com/us/app/rtv-news/id6753746064">
+                <img
+                  alt="logo_apps"
+                  src="/rtvIcon/store_icon/apple.webp"
+                  width={100}
+                  height={100}
+                  decoding="async"
+                  data-nimg="1"
+                  loading="lazy"
+                  style={{ color: "transparent", width: 128, height: "auto" }}
+                />
               </a>
             </div>
             <p className="text-[1rem] font-bold mt-2.5 text-gray-800 dark:text-white">
@@ -180,7 +194,7 @@ export default async function Footer() {
               {SOCIAL_LINKS.map((social, i) => (
                 <a key={i} href={social.href}>
                   <div className={`${social.bg} w-8 h-8 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity`}>
-                    <svg className="w-4 h-4 text-white" viewBox={social.viewBox || "0 0 24 24"} fill="currentColor">
+                    <svg className="w-4 h-4 text-white" viewBox={social.viewBox || "0 0 24 24"} fill={social.fill || "currentColor"}>
                       {social.svg}
                     </svg>
                   </div>
