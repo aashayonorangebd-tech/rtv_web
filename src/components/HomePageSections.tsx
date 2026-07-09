@@ -14,6 +14,7 @@ import SpecialReportCarousel from "@/components/SpecialReportCarousel";
 import CategorySection from "@/components/CategorySection";
 import EntertainmentSection from "@/components/EntertainmentSection";
 import CountrySection from "@/components/CountrySection";
+import InternationalSection from "@/components/InternationalSection";
 
 // ── Section config — one per templateComponent after s1/s2 ────────────
 export interface SectionConfig {
@@ -112,6 +113,12 @@ export default function HomePageSections({
             />
           ) : sec.title === "দেশজুড়ে" ? (
             <CountrySection
+              title={sec.title}
+              href={sec.slug}
+              stories={sec.stories}
+            />
+          ) : sec.title === "আন্তর্জাতিক" ? (
+            <InternationalSection
               title={sec.title}
               href={sec.slug}
               stories={sec.stories}
