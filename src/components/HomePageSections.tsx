@@ -13,6 +13,8 @@ import AdBanner from "@/components/AdBanner";
 import SpecialReportCarousel from "@/components/SpecialReportCarousel";
 import CategorySection from "@/components/CategorySection";
 import EntertainmentSection from "@/components/EntertainmentSection";
+import CountrySection from "@/components/CountrySection";
+import InternationalSection from "@/components/InternationalSection";
 
 // ── Section config — one per templateComponent after s1/s2 ────────────
 export interface SectionConfig {
@@ -98,11 +100,25 @@ export default function HomePageSections({
       {/* ── Remaining Category Sections with ad banners between ─────── */}
       {resolved.map((sec, i) => (
         <div key={i}>
-          <div className="my-6">
-            <AdBanner height={90} />
+          <div className="sm:container mt-4 sm:px-4 mx-auto dark:text-white sm:my-5">
+            <div className="flex justify-center items-center dark:bg-inherit overflow-hidden">
+              <AdBanner height={90} />
+            </div>
           </div>
           {sec.title === "বিনোদন" ? (
             <EntertainmentSection
+              title={sec.title}
+              href={sec.slug}
+              stories={sec.stories}
+            />
+          ) : sec.title === "দেশজুড়ে" ? (
+            <CountrySection
+              title={sec.title}
+              href={sec.slug}
+              stories={sec.stories}
+            />
+          ) : sec.title === "আন্তর্জাতিক" ? (
+            <InternationalSection
               title={sec.title}
               href={sec.slug}
               stories={sec.stories}
