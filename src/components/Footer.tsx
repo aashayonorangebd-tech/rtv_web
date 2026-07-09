@@ -107,7 +107,7 @@ export default async function Footer() {
           {/* ── Column 1: Logo + Privacy links ─────────────────────────── */}
           <div className="mt-1 flex flex-col justify-between items-start">
             <div className="h-auto w-1/5 max-sm:w-[120px]">
-              <a href="https://rtvonline.com">
+              <a href="/">
                 <img
                   alt="RTV Logo"
                   src="/rtv-logo.svg"
