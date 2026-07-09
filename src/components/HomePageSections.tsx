@@ -13,6 +13,7 @@ import AdBanner from "@/components/AdBanner";
 import SpecialReportCarousel from "@/components/SpecialReportCarousel";
 import CategorySection from "@/components/CategorySection";
 import EntertainmentSection from "@/components/EntertainmentSection";
+import CountrySection from "@/components/CountrySection";
 
 // ── Section config — one per templateComponent after s1/s2 ────────────
 export interface SectionConfig {
@@ -105,6 +106,12 @@ export default function HomePageSections({
           </div>
           {sec.title === "বিনোদন" ? (
             <EntertainmentSection
+              title={sec.title}
+              href={sec.slug}
+              stories={sec.stories}
+            />
+          ) : sec.title === "দেশজুড়ে" ? (
+            <CountrySection
               title={sec.title}
               href={sec.slug}
               stories={sec.stories}
