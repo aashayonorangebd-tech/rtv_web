@@ -1,6 +1,6 @@
 "use client";
 
-import { React, useMemo } from "react";
+import React, { useMemo } from "react";
 import type { StoryDetailsResponse, StoryModel } from "@/lib/types";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
 import AdBanner from "@/components/AdBanner";
@@ -122,16 +122,6 @@ export default function StoryPageClient({
                 )}
               </article>
 
-              {/* App Store Links */}
-              <div className="w-full my-4 flex justify-center items-center gap-x-3 sm:gap-x-4 mx-auto">
-                <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal" target="_blank" rel="noreferrer">
-                  <img src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fandriod.webp&w=256&q=75" alt="Android App" width="125" height="37" />
-                </a>
-                <a href="https://apps.apple.com/us/app/rtv-news/id6753746064" target="_blank" rel="noreferrer">
-                  <img src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fapple.webp&w=256&q=75" alt="Apple App" width="125" height="37" />
-                </a>
-              </div>
-
               {/* Google News Banner */}
               <div className="mt-6 mb-4">
                 <a href="https://news.google.com/publications/CAAqBwgKMPuE0QswuqDoAw?ceid=BD:bn&oc=3" target="_blank" rel="noreferrer">
@@ -146,11 +136,21 @@ export default function StoryPageClient({
                 </a>
               </div>
 
+              {/* App Store Links */}
+              <div className="w-full my-4 flex justify-center items-center gap-x-3 sm:gap-x-4 mx-auto">
+                <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal" target="_blank" rel="noreferrer">
+                  <img src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fandriod.webp&w=256&q=75" alt="Android App" width="125" height="37" />
+                </a>
+                <a href="https://apps.apple.com/us/app/rtv-news/id6753746064" target="_blank" rel="noreferrer">
+                  <img src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fapple.webp&w=256&q=75" alt="Apple App" width="125" height="37" />
+                </a>
+              </div>
+
               {/* Tags */}
               <div className="flex flex-wrap flex-wrap items-center justify-start gap-2 mt-5 mb-5 mx-2 sm:mx-0 list-none">
                 {story.tags?.map((tag) => (
                   <span key={tag.id} className="bg-[#e8e8e9] dark:bg-slate-500 rounded-[5px] py-1 hover:drop-shadow-md">
-                    <a href={`/topic/${tag.slug}`} className="text-[1.2rem] outline-none px-3 cursor-pointer hover:text-[#D12026] dark:hover:text-[#d8d7d7]">
+                    <a href={`/topic/${tag.slug}`} className="text-[1.2rem] outline-none px-3 cursor-pointer hover:text-[#D12026] dark:text-white dark:hover:text-white">
                       {tag.name}
                     </a>
                   </span>
@@ -174,6 +174,9 @@ export default function StoryPageClient({
         {/* ── RIGHT COLUMN: SIDEBAR (3 Columns) ──────────────────────────── */}
         <div className="max-sm:col-span-12 md:col-span-3" id="printBlock1">
           <div className="grid grid-cols-1 justify-center gap-y-3">
+            {story.categories?.[0] && (
+              <div className="h-11" aria-hidden="true" />
+            )}
 
             {/* Sidebar Ad Placeholder */}
             <AdBanner height={250} />
