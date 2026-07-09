@@ -45,7 +45,7 @@ export default function CategorySection({
 
         <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b dark:border-gray-700">
           {/* ─── 9-COL MAIN CONTENT (border-right) ──────────────────── */}
-          <div className="col-span-full md:col-span-12 lg:col-span-9 border-r border-slate-300 md:pr-2.5 dark:border-gray-700">
+          <div className="col-span-full md:col-span-12 lg:col-span-9 border-r border-[#e2e2e2] md:pr-2.5 dark:border-gray-700">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
               {/* ── Side stories (4 cols) ───────────────────────────── */}
               <div className="col-span-4 sm:flex sm:flex-col gap-5">
@@ -64,7 +64,7 @@ export default function CategorySection({
                       />
                     </div>
                     <div className="pt-2">
-                      <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-blue-500">
+                      <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">
                         {story.mainTitle}
                       </h3>
                     </div>
@@ -87,7 +87,7 @@ export default function CategorySection({
                     />
                   </div>
                   <div className="pt-2 my-2.5">
-                    <h3 className="dark:text-white text-[1.5rem] leading-[23px] font-bold group-hover:text-blue-500">
+                    <h3 className="dark:text-white text-[1.5rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">
                       {featured.mainTitle}
                     </h3>
                   </div>
@@ -110,7 +110,7 @@ export default function CategorySection({
                 className="flex flex-row items-start gap-2 group border-b dark:border-gray-700 pb-3 last:border-b-0 last:pb-0"
               >
                 <div className="flex-1 min-w-0">
-                  <p className="text-base leading-[22px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-5">
+                  <p className="text-base leading-[22px] text-[#555] dark:text-slate-300 group-hover:text-[#0d6efd] dark:hover:text-blue-300 font-normal line-clamp-5">
                     {story.mainTitle}
                   </p>
                 </div>

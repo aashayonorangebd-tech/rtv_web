@@ -45,7 +45,7 @@ export default function SidebarTabWidget({
     <div className="w-full">
       {/* ── TAB NAVIGATION ──────────────────────────────────────────────
           50/50 split, active tab = blue bg + white bold text             */}
-      <div className="text-base text-black whitespace-nowrap mb-4">
+      <div className="text-base text-[#555] whitespace-nowrap mb-4">
         <div className="flex gap-x-2">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.key;
@@ -83,7 +83,7 @@ export default function SidebarTabWidget({
               className="flex flex-col items-start justify-center py-2.5 border-b border-[#dddddd] dark:border-gray-700 last:border-b-0"
             >
               <a href={storyPath(story)} className="w-full">
-                <p className="px-[5px] text-black dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px]">
+                <p className="px-[5px] text-[#555] dark:text-slate-300 hover:text-[#0d6efd] dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px]">
                   {story.mainTitle}
                 </p>
               </a>

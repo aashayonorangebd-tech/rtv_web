@@ -4,17 +4,31 @@
 
 @font-face {
   font-family: "SolaimanLipi";
-  src: url("/fonts/SolaimanLipi.ttf") format("truetype");
-  font-weight: normal;
   font-style: normal;
+  font-weight: 400;
+  src: url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.eot") format("embedded-opentype"),
+       url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.woff") format("woff"),
+       url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.ttf") format("truetype"),
+       url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.svg") format("svg");
   font-display: swap;
 }
 
 @font-face {
   font-family: "SolaimanLipi";
-  src: url("/fonts/SolaimanLipi.ttf") format("truetype");
-  font-weight: bold;
   font-style: normal;
+  font-weight: 700;
+  src: url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.eot") format("embedded-opentype"),
+       url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.woff") format("woff"),
+       url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.ttf") format("truetype"),
+       url("https://cdn.rtvonline.com/common/fonts/solaimanlipi_20-04-07.svg") format("svg");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheWallStreetJournal";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://cdn.rtvonline.com/common/fonts/OldStandard-Regular.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -51,11 +65,14 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   color-scheme: var(--color-scheme);
-  font-family: "SolaimanLipi", sans-serif;
+  font-family: "SolaimanLipi", "TheWallStreetJournal", sans-serif !important;
+  font-size: 18px;
+  line-height: 26px;
+  background-color: rgba(47, 52, 63, 0.01);
 }
 
 * {
-  font-family: "SolaimanLipi", sans-serif;
+  font-family: "SolaimanLipi", "TheWallStreetJournal", sans-serif !important;
 }
 
 .section-padding {

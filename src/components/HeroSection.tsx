@@ -40,7 +40,7 @@ export default function HeroSection({
             Wraps lead story (8 cols) + right column (4 cols).
             Border-right separates from the ad sidebar.
             If adblocker detected → spans full 12 cols.                */}
-        <div className="md:col-span-9 md:border-r md:border-slate-300 md:pr-2.5 dark:border-gray-700">
+        <div className="md:col-span-9 md:border-r md:border-[#e2e2e2] md:pr-2.5 dark:border-gray-700">
 
           {/* ── Inner 12-col grid (gap-5) ──────────────────────────────── */}
           <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
@@ -66,7 +66,7 @@ export default function HeroSection({
                 </div>
 
                 {/* Headline — text-3xl ≈ 30px, dark on light / white on dark */}
-                <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-500 hover:cursor-pointer pt-2 text-3xl pb-3 leading-[1.3] transition-colors">
+                <h3 className="font-bold text-[#121212] dark:text-white group-hover:text-[#0d6efd] hover:cursor-pointer pt-2 text-3xl pb-3 leading-[1.3] transition-colors">
                   {lead.mainTitle}
                 </h3>
 
@@ -105,14 +105,14 @@ export default function HeroSection({
                     </div>
 
                     {/* Headline — text-xl ≈ 20px, pl-1 for slight indent */}
-                    <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-500 hover:cursor-pointer pt-2 text-xl pl-1 pb-2 leading-[1.3] transition-colors">
+                    <h3 className="font-bold text-[#121212] dark:text-white group-hover:text-[#0d6efd] hover:cursor-pointer pt-2 text-xl pl-1 pb-2 leading-[1.3] transition-colors">
                       {story.mainTitle}
                     </h3>
                   </a>
 
                   {/* ── Divider <hr> between story 1 and story 2 ──────── */}
                   {index === 0 && (
-                    <hr className="border-slate-200 dark:border-gray-700" />
+                    <hr className="border-[#e2e2e2] dark:border-gray-700" />
                   )}
                 </div>
               ))}
