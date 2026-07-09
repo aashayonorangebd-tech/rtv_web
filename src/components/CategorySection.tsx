@@ -30,11 +30,11 @@ export default function CategorySection({
   href?: string;
   stories: StoryModel[];
 }) {
-  if (stories.length === 0) return null;
+  if (stories.length < 3) return null;
 
-  // ── Slot stories ─────────────────────────────────────────────────────
-  const featured = stories[0];             // largest 8-col card
-  const sideStories = stories.slice(1, 3); // two 4-col side cards
+  // ── Slot stories: first 2 medium, 3rd bigger, rest in sidebar ─────────
+  const sideStories = stories.slice(0, 2); // two 4-col medium cards
+  const featured = stories[2];             // larger 8-col card
   const sidebarStories = stories.slice(3); // remaining → sidebar list
 
   return (

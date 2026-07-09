@@ -1,7 +1,6 @@
 "use client";
 
 import type { StoryModel } from "@/lib/types";
-import { useAdblockerDetected } from "@/lib/useAdblockerDetected";
 import AdBanner from "@/components/AdBanner";
 
 // ─── HeroSection ─────────────────────────────────────────────────────────
@@ -17,8 +16,6 @@ export default function HeroSection({
 }: {
   stories: StoryModel[];
 }) {
-  const adsBlocked = useAdblockerDetected();
-
   // ── Guard: bail if no stories ──────────────────────────────────────────
   if (!stories || stories.length === 0) return null;
 
@@ -42,7 +39,7 @@ export default function HeroSection({
             Wraps lead story (8 cols) + right column (4 cols).
             Border-right separates from the ad sidebar.
             If adblocker detected → spans full 12 cols.                */}
-        <div className={`${adsBlocked ? "md:col-span-12" : "md:col-span-9"} md:border-r md:border-slate-300 md:pr-2.5 dark:border-gray-700`}>
+        <div className="md:col-span-9 md:border-r md:border-slate-300 md:pr-2.5 dark:border-gray-700">
 
           {/* ── Inner 12-col grid (gap-5) ──────────────────────────────── */}
           <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
@@ -129,15 +126,13 @@ export default function HeroSection({
             Two stacked 300×250 ad placeholders.
             If adblocker detected → not rendered at all.
             md+ only (below, stacks full-width).                        */}
-        {!adsBlocked && (
           <div className="md:col-span-3 flex flex-col justify-between gap-4">
             {/* Ad slot 1 — top */}
-            <AdBanner height={250} />
+            <AdBanner height={250} collapseOnBlock={false} />
 
             {/* Ad slot 2 — bottom */}
-            <AdBanner height={250} />
+            <AdBanner height={250} collapseOnBlock={false} />
           </div>
-        )}
 
       </div>{/* end outer 12-col grid */}
     </section>

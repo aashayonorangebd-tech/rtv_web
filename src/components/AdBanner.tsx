@@ -12,13 +12,25 @@ import { useAdblockerDetected } from "@/lib/useAdblockerDetected";
 export default function AdBanner({
   className = "",
   height = 250,
+  collapseOnBlock = true,
 }: {
   className?: string;
   height?: number;
+  collapseOnBlock?: boolean;
 }) {
   const blocked = useAdblockerDetected();
 
-  if (blocked) return null;
+  if (blocked) {
+    if (collapseOnBlock) return null;
+    // Keep the space reserved
+    return (
+      <div
+        className={className}
+        style={{ minHeight: height, height }}
+        aria-hidden
+      />
+    );
+  }
 
   const isSmall = height === 90;
 
