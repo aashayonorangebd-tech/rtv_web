@@ -175,6 +175,7 @@ export interface StoryDetailsResponse {
   timelineStories: StoryModel[];
   readMoreStories: StoryModel[];
   attachments: Attachment[];
+  relatedStories?: StoryModel[];
 }
 
 export interface StoryExtraResponse {
