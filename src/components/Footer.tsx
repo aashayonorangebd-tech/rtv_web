@@ -83,10 +83,8 @@ export default async function Footer() {
   return (
     <footer className="w-full dark:bg-inherit dark:text-white mt-8">
       {/* ── Top: footer navigation links ─────────────────────────────── */}
-      <div className="-mx-[85px]">
-        <div>
-          <hr className="border-gray-300 dark:border-gray-600" />
-        </div>
+      <div>
+        <hr className="border-gray-300 dark:border-gray-600" />
         <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-center gap-x-5 text-[1rem] font-normal py-1 flex-wrap">
           {sortedLinks.map((link) => (
             <a
@@ -206,7 +204,7 @@ export default async function Footer() {
       </div>
 
       {/* ── Bottom: copyright ──────────────────────────────────────────── */}
-      <div className="-mx-[85px] bg-[#2c4b9d]">
+      <div className="bg-[#2c4b9d]">
         <div className="text-white text-center h-7 flex items-center justify-center">
           <p className="font-light text-[15px]">© স্বত্বাধিকার সংরক্ষিত ২০১৬-২০২৬ | RTV Online |</p>
         </div>
