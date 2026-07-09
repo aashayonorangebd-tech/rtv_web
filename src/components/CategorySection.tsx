@@ -109,7 +109,7 @@ export default function CategorySection({
                 className="flex flex-row items-start gap-2 group border-b dark:border-gray-700 pb-3 last:border-b-0 last:pb-0"
               >
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm leading-[18px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-3">
+                  <p className="text-base leading-[22px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-5">
                     {story.mainTitle}
                   </p>
                 </div>
