@@ -52,18 +52,18 @@ export default function ThemeProvider({
 }) {
   const [theme, setThemeState] = useState<Theme>("system");
   const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
-  const [mounted, setMounted] = useState(false);
 
   // On mount: read localStorage + apply
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    const initial: Theme = stored || "system";
-    setThemeState(initial);
+    queueMicrotask(() => {
+      const stored = localStorage.getItem("theme") as Theme | null;
+      const initial: Theme = stored || "system";
+      setThemeState(initial);
 
-    const resolved = initial === "system" ? getSystemTheme() : initial;
-    setResolvedTheme(resolved);
-    applyTheme(resolved);
-    setMounted(true);
+      const resolved = initial === "system" ? getSystemTheme() : initial;
+      setResolvedTheme(resolved);
+      applyTheme(resolved);
+    });
   }, []);
 
   // Listen for system theme changes

@@ -36,7 +36,7 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
         )}
       </div>
 
-<h3 className="font-semibold text-black dark:text-white group-hover:text-blue-500 hover:cursor-pointer pt-2 pb-3 text-[25px] leading-[30px] transition-colors line-clamp-3">
+<h3 className="font-bold text-[#121212] dark:text-white group-hover:text-[#0d6efd] hover:cursor-pointer pt-2 pb-3 text-[25px] leading-[30px] transition-colors line-clamp-3">
   {story.mainTitle}
 </h3>
 
@@ -71,7 +71,7 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
         )}
       </div>
 
-      <h3 className="font-bold text-[18px] md:text-[15px] lg:text-[15px] leading-[20px] md:leading-[20px] lg:leading-[20px] h-[40px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+      <h3 className="font-bold text-[18px] md:text-[15px] lg:text-[15px] leading-[20px] md:leading-[20px] lg:leading-[20px] h-[40px] text-[#121212] dark:text-white group-hover:text-[#0d6efd] dark:group-hover:text-blue-300 transition-colors line-clamp-2">
         {story.mainTitle}
       </h3>
     </a>
@@ -98,7 +98,7 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
         )}
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
-        <h3 className="text-[16px] md:text-[17px] font-semibold leading-[25px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-3">
+        <h3 className="text-[16px] md:text-[17px] font-bold leading-[25px] text-[#121212] dark:text-white group-hover:text-[#0d6efd] dark:group-hover:text-blue-300 transition-colors line-clamp-3">
           {story.mainTitle}
         </h3>
         <span className="mt-1.5 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
@@ -123,7 +123,7 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
         />
       </div>
       <div className="flex-1 min-w-0 flex flex-col justify-center">
-        <h3 className="text-[16px] font-medium leading-[24px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+        <h3 className="text-[16px] font-medium leading-[24px] text-[#121212] dark:text-white group-hover:text-[#0d6efd] dark:group-hover:text-blue-300 transition-colors line-clamp-2">
           {story.mainTitle}
         </h3>
         <span className="mt-1 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
@@ -137,7 +137,7 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
 export function StoryCardText({ story }: { story: StoryModel }) {
   return (
     <a href={story.canonicalUrl} className="group block py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
-      <h3 className="text-[16px] font-medium leading-[25px] text-black dark:text-white group-hover:text-[#0055a5] dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+      <h3 className="text-[16px] font-medium leading-[25px] text-[#121212] dark:text-white group-hover:text-[#0d6efd] dark:group-hover:text-blue-300 transition-colors line-clamp-2">
         {story.mainTitle}
       </h3>
       <span className="mt-1.5 block text-[12px] font-medium text-[#888888] dark:text-gray-500">

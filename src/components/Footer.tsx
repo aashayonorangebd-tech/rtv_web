@@ -19,6 +19,7 @@
 //   The nav links inside use max-w-[1350px] mx-auto to stay aligned with content.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import Link from "next/link";
 import type { FooterItem } from "@/lib/types";
 
 async function getFooterLinks(): Promise<FooterItem[]> {
@@ -107,13 +108,13 @@ export default async function Footer() {
           {/* ── Column 1: Logo + Privacy links ─────────────────────────── */}
           <div className="mt-1 flex flex-col justify-between items-start">
             <div className="h-auto w-1/5 max-sm:w-[120px]">
-              <a href="https://rtvonline.com">
+              <Link href="/">
                 <img
                   alt="RTV Logo"
                   src="/rtv-logo.svg"
                   className="w-full h-auto"
                 />
-              </a>
+              </Link>
             </div>
             <div className="flex flex-wrap items-center justify-start gap-x-2 text-[1rem] mt-2.5 font-[400] text-gray-800 dark:text-white">
               <a href="https://rtvonline.com/privacy">

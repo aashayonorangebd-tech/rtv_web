@@ -51,11 +51,11 @@ export default function SubHeroGrid({
               12-COL GRID — IDENTICAL to HeroSection (gap-2.5)
               md:border-t-[1px] pt-5 → horizontal separator from lead
               ═══════════════════════════════════════════════════════════ */}
-          <div className="grid grid-cols-1 gap-2.5 md:grid-cols-12 md:border-t md:border-slate-300 pt-5 dark:text-white">
+          <div className="grid grid-cols-1 gap-2.5 md:grid-cols-12 md:border-t md:border-[#e2e2e2] pt-5 dark:text-white">
 
             {/* ─── 9-COL LEFT CONTENT (border-r separates from sidebar) ───
                 Inner 3-col grid with gap-2.5 for the 9 story cards       */}
-            <div className="col-span-full md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-2.5 md:border-r md:border-slate-300 md:pr-2.5 dark:border-gray-700 justify-start">
+            <div className="col-span-full md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-2.5 md:border-r md:border-[#e2e2e2] md:pr-2.5 dark:border-gray-700 justify-start">
               {stories.slice(0, 9).map((story, index) => {
                 // Remove border-r on every 3rd card (3rd, 6th, 9th)
                 const isThirdCol = (index + 1) % 3 === 0;
@@ -63,7 +63,7 @@ export default function SubHeroGrid({
                   <div
                     key={story.storyId}
                     className={`md:pr-3 ${
-                       !isThirdCol ? "md:border-r md:border-slate-300 dark:border-gray-700" : ""
+                       !isThirdCol ? "md:border-r md:border-[#e2e2e2] dark:border-gray-700" : ""
                     }`}
                   >
                     <a
@@ -87,13 +87,13 @@ export default function SubHeroGrid({
                       {/* Title — fixed h-20 to keep all card heights uniform
                           1.2rem (≈19px), 23px line-height, bold */}
                       <div className="pt-2 h-20">
-                        <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-blue-500">
+                        <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">
                           {story.mainTitle}
                         </h3>
                       </div>
                     </a>
                     {/* Horizontal rule below EVERY card — 9 cards = 9 hrs */}
-                    <hr className="border-slate-300 dark:border-gray-700" />
+                    <hr className="border-[#e2e2e2] dark:border-gray-700" />
                   </div>
                 );
               })}

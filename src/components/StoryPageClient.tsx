@@ -61,7 +61,7 @@ export default function StoryPageClient({
             <div className="flex flex-col justify-between gap-1 mt-0">
               <div className="w-full px-2 sm:px-0">
                 {story.categories?.[0] && (
-                  <div className="font-semibold text-2xl text-blue-600 inline-block mb-2">
+                  <div className="font-bold text-2xl text-[#2c4b9c] inline-block mb-2">
                     <a href={`/category/${story.categories[0].slug}`}>
                       <span>{story.categories[0].displayTitle}</span>
                     </a>

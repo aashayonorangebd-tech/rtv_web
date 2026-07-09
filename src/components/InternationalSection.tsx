@@ -37,7 +37,7 @@ export default function InternationalSection({
 
         <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b dark:border-gray-700 items-stretch">
           {/* ─── 6-col LEFT: 1 big card (idx 0) — border-r ───────────── */}
-          <div className="col-span-6 md:pr-3 md:border-r border-slate-300 dark:border-gray-700">
+          <div className="col-span-6 md:pr-3 md:border-r border-[#e2e2e2] dark:border-gray-700">
             <a className="flex flex-col w-full group h-full" href={storyPath(bigCard)}>
               <div className="relative flex-1 min-h-[250px]">
                 <img
@@ -48,7 +48,7 @@ export default function InternationalSection({
                 />
               </div>
               <div className="pt-2 my-2.5">
-                <h3 className="dark:text-white text-[1.5rem] leading-[28px] font-bold group-hover:text-blue-500">
+                <h3 className="dark:text-white text-[1.5rem] leading-[28px] font-bold group-hover:text-[#0d6efd]">
                   {bigCard.mainTitle}
                 </h3>
               </div>
@@ -61,7 +61,7 @@ export default function InternationalSection({
           </div>
 
           {/* ─── 2-col MIDDLE: 2 small cards (idx 1,2) — border-r ──────── */}
-          <div className="col-span-2 md:pr-3 md:border-r border-slate-300 dark:border-gray-700">
+          <div className="col-span-2 md:pr-3 md:border-r border-[#e2e2e2] dark:border-gray-700">
             <div className="flex flex-col gap-2.5 h-full">
               {col2.map((story, i) => (
                 <a
@@ -78,11 +78,11 @@ export default function InternationalSection({
                     />
                   </div>
                   <div className="pt-2 min-h-[60px]">
-                    <h3 className="dark:text-white text-[0.95rem] leading-[20px] font-bold group-hover:text-blue-500 line-clamp-3">
+                    <h3 className="dark:text-white text-[0.95rem] leading-[20px] font-bold group-hover:text-[#0d6efd] line-clamp-3">
                       {story.mainTitle}
                     </h3>
                   </div>
-                  {i === 0 && <hr className="border-slate-300 dark:border-gray-700" />}
+                  {i === 0 && <hr className="border-[#e2e2e2] dark:border-gray-700" />}
                 </a>
               ))}
             </div>
@@ -92,13 +92,13 @@ export default function InternationalSection({
           <div className="col-span-4">
             <div className="flex flex-col gap-2.5 h-full">
               {col3.map((story) => (
-                <div key={story.storyId} className="pb-3 mb-2 border-b border-slate-300 dark:border-gray-700 last:border-b-0 last:pb-0 last:mb-0">
+                <div key={story.storyId} className="pb-3 mb-2 border-b border-[#e2e2e2] dark:border-gray-700 last:border-b-0 last:pb-0 last:mb-0">
                   <a
                     href={storyPath(story)}
                     className="flex flex-row items-start gap-2 group"
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="text-base leading-[22px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-5">
+                      <p className="text-base leading-[22px] text-[#555] dark:text-slate-300 group-hover:text-[#0d6efd] dark:hover:text-blue-300 font-normal line-clamp-5">
                         {story.mainTitle}
                       </p>
                     </div>
