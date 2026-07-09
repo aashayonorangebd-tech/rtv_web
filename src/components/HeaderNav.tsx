@@ -27,7 +27,7 @@ export default function HeaderNav({
       <div className="px-[85px]">
         <div className="max-w-[1350px] mx-auto h-[33px] md:h-[35px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6">
         <nav className="flex-1 overflow-x-auto disable-scrollbars h-full">
-          <ul className="flex items-center h-full whitespace-nowrap">
+          <ul className="flex items-center h-full w-full justify-between">
             {[...menuItems]
               .sort((a, b) => a.sequenceNumber - b.sequenceNumber)
               .slice(0, 9)
@@ -36,7 +36,7 @@ export default function HeaderNav({
                 <li className="h-full flex items-center">
                   <a
                     href={`/category/${getSlug(item.clientUrl)}`}
-                    className="text-white text-[15px] md:text-[16px] font-bold hover:text-[#a3bffa] transition-colors px-3 md:px-5 tracking-wide"
+                    className="text-white text-[18px] font-bold hover:text-[#a3bffa] transition-colors px-3 md:px-5 tracking-wide"
                   >
                     {item.displayTitle}
                   </a>
@@ -49,7 +49,7 @@ export default function HeaderNav({
           </ul>
         </nav>
 
-        <div className="flex items-center gap-5 text-white ml-4 pl-5 border-l border-white/20 h-full">
+        <div className="flex items-center gap-5 text-white ml-8 pl-6 border-l-2 border-white/20 h-full">
           <button className="hover:text-[#a3bffa] transition-colors">
             <Menu size={22} />
           </button>
