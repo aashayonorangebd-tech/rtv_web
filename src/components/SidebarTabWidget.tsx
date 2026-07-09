@@ -34,9 +34,11 @@ const TABS = [
 export default function SidebarTabWidget({
   latestStories,
   popularStories,
+  showBottomAd = true,
 }: {
   latestStories: StoryModel[];
   popularStories: StoryModel[];
+  showBottomAd?: boolean;
 }) {
   const [activeTab, setActiveTab] = useState("popular");
   const stories = activeTab === "latest" ? latestStories : popularStories;
@@ -104,9 +106,11 @@ export default function SidebarTabWidget({
       </a>
 
       {/* ── AD PLACEHOLDER (300×250) below the tab content ─────────────── */}
-      <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400 mt-4">
-        বিজ্ঞাপন — 300×250
-      </div>
+      {showBottomAd && (
+        <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400 mt-4">
+          বিজ্ঞাপন — 300×250
+        </div>
+      )}
     </div>
   );
 }
