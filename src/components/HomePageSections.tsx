@@ -12,6 +12,7 @@ import type { StoryModel } from "@/lib/types";
 import AdBanner from "@/components/AdBanner";
 import SpecialReportCarousel from "@/components/SpecialReportCarousel";
 import CategorySection from "@/components/CategorySection";
+import EntertainmentSection from "@/components/EntertainmentSection";
 
 // ── Section config — one per templateComponent after s1/s2 ────────────
 export interface SectionConfig {
@@ -100,11 +101,19 @@ export default function HomePageSections({
           <div className="my-6">
             <AdBanner height={90} />
           </div>
-          <CategorySection
-            title={sec.title}
-            href={sec.slug}
-            stories={sec.stories}
-          />
+          {sec.title === "বিনোদন" ? (
+            <EntertainmentSection
+              title={sec.title}
+              href={sec.slug}
+              stories={sec.stories}
+            />
+          ) : (
+            <CategorySection
+              title={sec.title}
+              href={sec.slug}
+              stories={sec.stories}
+            />
+          )}
         </div>
       ))}
     </>
