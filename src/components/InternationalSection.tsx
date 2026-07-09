@@ -60,8 +60,8 @@ export default function InternationalSection({
             </a>
           </div>
 
-          {/* ─── 3-col MIDDLE: 2 small cards (idx 1,2) — border-r ──────── */}
-          <div className="col-span-3 md:pr-3 md:border-r border-slate-300 dark:border-gray-700">
+          {/* ─── 2-col MIDDLE: 2 small cards (idx 1,2) — border-r ──────── */}
+          <div className="col-span-2 md:pr-3 md:border-r border-slate-300 dark:border-gray-700">
             <div className="flex flex-col gap-2.5 h-full">
               {col2.map((story) => (
                 <a
@@ -77,8 +77,8 @@ export default function InternationalSection({
                       loading="lazy"
                     />
                   </div>
-                  <div className="pt-2 h-20">
-                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-blue-500">
+                  <div className="pt-2 min-h-[60px]">
+                    <h3 className="dark:text-white text-[0.95rem] leading-[20px] font-bold group-hover:text-blue-500 line-clamp-3">
                       {story.mainTitle}
                     </h3>
                   </div>
@@ -88,8 +88,8 @@ export default function InternationalSection({
             </div>
           </div>
 
-          {/* ─── 3-col RIGHT: 2 horizontal cards (text left, img right) ────── */}
-          <div className="col-span-3">
+          {/* ─── 4-col RIGHT: 4 horizontal cards (text left, img right) ────── */}
+          <div className="col-span-4">
             <div className="flex flex-col gap-2.5 h-full">
               {col3.map((story) => (
                 <a
