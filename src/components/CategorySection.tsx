@@ -19,6 +19,7 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 import type { StoryModel } from "@/lib/types";
+import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
 
 export default function CategorySection({
@@ -52,7 +53,7 @@ export default function CategorySection({
                   <a
                     key={story.storyId}
                     className="flex flex-col w-full group mb-5 last:mb-0"
-                    href={story.canonicalUrl}
+                    href={storyPath(story)}
                   >
                     <div className="relative">
                       <img
@@ -75,7 +76,7 @@ export default function CategorySection({
               <div className="col-span-8">
                 <a
                   className="flex flex-col w-full group"
-                  href={featured.canonicalUrl}
+                  href={storyPath(featured)}
                 >
                   <div className="relative">
                     <img

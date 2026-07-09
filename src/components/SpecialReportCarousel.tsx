@@ -16,6 +16,7 @@
 
 import { useState } from "react";
 import type { StoryModel } from "@/lib/types";
+import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
 
 // ── Fallback placeholder data ──────────────────────────────────────────
@@ -60,7 +61,7 @@ export default function SpecialReportCarousel({
                   className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
                 >
                   <a
-                    href={item.canonicalUrl}
+                    href={storyPath(item)}
                     className="flex flex-wrap justify-between gap-x-5 gap-y-2.5 content-start text-[#2F343F] aspect-video group sm:px-2.5"
                   >
                     <div className="w-full relative max-w-full overflow-hidden max-sm:rounded-md">

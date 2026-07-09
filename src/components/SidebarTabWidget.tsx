@@ -24,6 +24,7 @@
 
 import { useState } from "react";
 import type { StoryModel } from "@/lib/types";
+import { storyPath } from "@/lib/api";
 
 const TABS = [
   { key: "popular", label: "পাঠক প্রিয়" },
@@ -81,7 +82,7 @@ export default function SidebarTabWidget({
               key={story.storyId || idx}
               className="flex flex-col items-start justify-center py-2.5 border-b border-[#dddddd] dark:border-gray-700 last:border-b-0"
             >
-              <a href={story.canonicalUrl} className="w-full">
+              <a href={storyPath(story)} className="w-full">
                 <p className="px-[5px] text-black dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px]">
                   {story.mainTitle}
                 </p>

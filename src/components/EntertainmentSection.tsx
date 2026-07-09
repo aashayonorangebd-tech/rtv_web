@@ -6,6 +6,7 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 import type { StoryModel } from "@/lib/types";
+import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
 
 export default function EntertainmentSection({
@@ -30,7 +31,7 @@ export default function EntertainmentSection({
         <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b dark:border-gray-700">
           {/* ─── Left: featured big card ──────────────────────────────── */}
           <div className="col-span-full md:col-span-6 lg:col-span-6 md:border-r border-slate-300 md:pr-4 dark:border-gray-700">
-            <a className="flex flex-col w-full group" href={featured.canonicalUrl}>
+            <a className="flex flex-col w-full group"                 href={storyPath(featured)}>
               <div className="relative">
                 <img
                   src={featured.fileName}
@@ -57,7 +58,7 @@ export default function EntertainmentSection({
             {sideStories.slice(0, 4).map((story) => (
               <a
                 key={story.storyId}
-                href={story.canonicalUrl}
+                href={storyPath(story)}
                 className="flex flex-row items-start gap-3 group border-b dark:border-gray-700 pb-4 last:border-b-0 last:pb-0"
               >
                 <div className="flex-1 min-w-0">

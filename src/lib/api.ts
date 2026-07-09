@@ -63,3 +63,7 @@ export function toStoryModel(
     canonicalUrl: item.canonicalUrl,
   };
 }
+
+export function storyPath(story: { storyId: number }): string {
+  return `/story/${story.storyId}`;
+}

@@ -27,6 +27,7 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 import type { StoryModel } from "@/lib/types";
+import { storyPath } from "@/lib/api";
 import SidebarTabWidget from "@/components/SidebarTabWidget";
 
 export default function SubHeroGrid({
@@ -67,7 +68,7 @@ export default function SubHeroGrid({
                   >
                     <a
                       className="flex flex-col w-full group"
-                      href={story.canonicalUrl}
+                      href={storyPath(story)}
                     >
                       {/* Image — 16:9 aspect ratio with object-cover */}
                       <div className="relative">

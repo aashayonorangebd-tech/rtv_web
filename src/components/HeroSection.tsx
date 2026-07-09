@@ -2,6 +2,7 @@
 
 import type { StoryModel } from "@/lib/types";
 import AdBanner from "@/components/AdBanner";
+import { storyPath } from "@/lib/api";
 
 // ─── HeroSection ─────────────────────────────────────────────────────────
 // 12-column responsive hero grid for the homepage lead stories + ad sidebar.
@@ -49,7 +50,7 @@ export default function HeroSection({
             <div className="md:col-span-8">
               <a
                 className="flex flex-col group w-full"
-                href={lead.canonicalUrl}
+                href={storyPath(lead)}
               >
                 {/* Image — 16:9 aspect ratio, 650×365 bounds */}
                 <div className="relative">
@@ -88,7 +89,7 @@ export default function HeroSection({
                   {/* Story card */}
                   <a
                     className="flex flex-col group w-full"
-                    href={story.canonicalUrl}
+                    href={storyPath(story)}
                   >
                     {/* Image — 16:9, same dimensions as lead */}
                     <div className="relative">

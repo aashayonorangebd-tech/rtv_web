@@ -12,10 +12,11 @@
 
 import Image from "next/image";
 import type { StoryModel } from "@/lib/types";
+import { storyPath } from "@/lib/api";
 
 export function StoryCardLarge({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group block">
+    <a href={storyPath(story)} className="group block">
       <div className="relative w-full max-w-full aspect-video overflow-hidden rounded-[2px] mb-3 bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
@@ -51,7 +52,7 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
 export function StoryCardMedium({ story }: { story: StoryModel }) {
   return (
     <a
-      href={story.canonicalUrl}
+      href={storyPath(story)}
       className="group block pb-3 mb-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0"
     >
       <div className="relative w-full aspect-video overflow-hidden rounded-[2px] mb-2 bg-gray-100 dark:bg-slate-800">
