@@ -98,8 +98,10 @@ export default function HomePageSections({
       {/* ── Remaining Category Sections with ad banners between ─────── */}
       {resolved.map((sec, i) => (
         <div key={i}>
-          <div className="my-6">
-            <AdBanner height={90} />
+          <div className="sm:container mt-4 sm:px-4 mx-auto dark:text-white sm:my-5">
+            <div className="flex justify-center items-center dark:bg-inherit overflow-hidden">
+              <AdBanner height={90} />
+            </div>
           </div>
           {sec.title === "বিনোদন" ? (
             <EntertainmentSection

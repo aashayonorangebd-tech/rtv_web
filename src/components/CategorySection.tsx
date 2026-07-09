@@ -18,6 +18,7 @@
 //             remaining stories feed the sidebar headline list
 // ─────────────────────────────────────────────────────────────────────────
 
+import React from "react";
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
@@ -102,27 +103,31 @@ export default function CategorySection({
           </div>
 
           {/* ─── 3-COL SIDEBAR — small horizontal cards ────────────── */}
-          <div className="col-span-full md:col-span-12 lg:col-span-3 flex flex-col gap-3">
+          <div className="col-span-full md:col-span-12 lg:col-span-3 flex flex-col gap-y-2.5">
             {sidebarStories.slice(0, 4).map((story) => (
-              <a
-                key={story.storyId}
-                href={story.canonicalUrl}
-                className="flex flex-row items-start gap-2 group border-b dark:border-gray-700 pb-3 last:border-b-0 last:pb-0"
-              >
-                <div className="flex-1 min-w-0">
-                  <p className="text-base leading-[22px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-5">
-                    {story.mainTitle}
-                  </p>
-                </div>
-                <div className="w-28 h-[70px] shrink-0 overflow-hidden rounded">
-                  <img
-                    src={story.fileName}
-                    alt={story.mainTitle}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </a>
+              <React.Fragment key={story.storyId}>
+                <a
+                  href={storyPath(story)}
+                  className="grid grid-cols-12 gap-2 items-center group"
+                >
+                  <div className="md:order-last lg:order-none col-span-7">
+                    <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-500 hover:cursor-pointer text-lg leading-snug">
+                      {story.mainTitle}
+                    </h3>
+                  </div>
+                  <div className="col-span-5">
+                    <div className="relative">
+                      <img
+                        src={story.fileName}
+                        alt={story.mainTitle}
+                        className="object-cover object-center max-w-full aspect-video"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </a>
+                <hr className="border-slate-300 dark:border-gray-700 last:hidden" />
+              </React.Fragment>
             ))}
           </div>
         </div>
