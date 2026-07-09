@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import type { StoryDetailsResponse, StoryModel } from "@/lib/types";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
 import AdBanner from "@/components/AdBanner";
-import SectionHeader from "@/components/SectionHeader";
 import RelatedStoriesSidebar from "@/components/RelatedStoriesSidebar";
 import ReadMoreGrid from "@/components/ReadMoreGrid";
 
@@ -28,9 +27,6 @@ export default function StoryPageClient({ story }: Props) {
     if (!raw) return "";
     return sanitizeHtml(raw);
   }, [story.details]);
-
-  const attachments: StoryDetailsResponse["attachments"] =
-    Array.isArray(story.attachments) ? story.attachments : [];
 
   return (
     <div className="sm:mt-5">
