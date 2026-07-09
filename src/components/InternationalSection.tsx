@@ -63,7 +63,7 @@ export default function InternationalSection({
           {/* ─── 2-col MIDDLE: 2 small cards (idx 1,2) — border-r ──────── */}
           <div className="col-span-2 md:pr-3 md:border-r border-slate-300 dark:border-gray-700">
             <div className="flex flex-col gap-2.5 h-full">
-              {col2.map((story) => (
+              {col2.map((story, i) => (
                 <a
                   key={story.storyId}
                   className="flex flex-col w-full group"
@@ -82,7 +82,7 @@ export default function InternationalSection({
                       {story.mainTitle}
                     </h3>
                   </div>
-                  <hr className="border-slate-300 dark:border-gray-700" />
+                  {i === 0 && <hr className="border-slate-300 dark:border-gray-700" />}
                 </a>
               ))}
             </div>
@@ -92,25 +92,26 @@ export default function InternationalSection({
           <div className="col-span-4">
             <div className="flex flex-col gap-2.5 h-full">
               {col3.map((story) => (
-                <a
-                  key={story.storyId}
-                  href={storyPath(story)}
-                  className="flex flex-row items-start gap-2 group"
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="text-base leading-[22px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-5">
-                      {story.mainTitle}
-                    </p>
-                  </div>
-                  <div className="w-28 h-[70px] shrink-0 overflow-hidden rounded">
-                    <img
-                      src={story.fileName}
-                      alt={story.mainTitle}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                </a>
+                <div key={story.storyId} className="pb-3 mb-2 border-b border-slate-300 dark:border-gray-700 last:border-b-0 last:pb-0 last:mb-0">
+                  <a
+                    href={storyPath(story)}
+                    className="flex flex-row items-start gap-2 group"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-base leading-[22px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-5">
+                        {story.mainTitle}
+                      </p>
+                    </div>
+                    <div className="w-28 h-[70px] shrink-0 overflow-hidden rounded">
+                      <img
+                        src={story.fileName}
+                        alt={story.mainTitle}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  </a>
+                </div>
               ))}
             </div>
           </div>
