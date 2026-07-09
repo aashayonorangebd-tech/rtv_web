@@ -64,6 +64,8 @@ export function toStoryModel(
   };
 }
 
-export function storyPath(story: { storyId: number }): string {
-  return `/story/${story.storyId}`;
+export function storyPath(story: { storyId?: number; id?: number }): string {
+  const id = story.storyId ?? story.id;
+  if (!id) return "#";
+  return `/story/${id}`;
 }
