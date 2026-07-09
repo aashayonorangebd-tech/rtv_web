@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { React, useMemo } from "react";
 import type { StoryDetailsResponse, StoryModel } from "@/lib/types";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
 import AdBanner from "@/components/AdBanner";
@@ -25,6 +25,24 @@ export default function StoryPageClient({
     typeof story.passedTime === "string" && story.passedTime.trim()
       ? story.passedTime
       : "বৃহস্পতিবার, ০৯ জুলাই ২০২৬ , ১০:২২ এএম";
+
+  const bodyHtml = useMemo(() => {
+    const raw = (story.details ?? [])
+      .map((d) => d.body)
+      .join("")
+      .trim();
+    if (!raw) return "";
+    return sanitizeHtml(raw);
+  }, [story.details]);
+
+  const rewrittenHtml = useMemo(() => {
+    if (!bodyHtml) return "";
+    const base = (process.env.NEXT_PUBLIC_SITE_URL || "").replace(/\/$/, "");
+    return bodyHtml.replace(
+      /https?:\/\/(?:www\.)?(?:api\.)?rtvonline\.com\/[^\s"'<>]*\/(\d+)/g,
+      (_, id) => `${base}/story/${id}`
+    );
+  }, [bodyHtml]);
 
   return (
     <div className="sm:mt-5">
@@ -99,20 +117,9 @@ export default function StoryPageClient({
 
               {/* Article Body */}
               <article className="storyDetailFont custom-a-tag pTagGap dark:text-white mx-2 sm:mx-24 text-left">
-                {story.details?.map((detail, index) => (
-                  <React.Fragment key={index}>
-                    <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(detail.body) }} />
-                    {index < story.details.length - 1 && (
-                      <div className="my- no-print">
-                        <div className="grid content-between w-full mx-auto my-5">
-                          <div className="grid place-content-center">
-                            <AdBanner height={250} />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </React.Fragment>
-                ))}
+                {rewrittenHtml && (
+                  <div dangerouslySetInnerHTML={{ __html: rewrittenHtml }} />
+                )}
               </article>
 
               {/* App Store Links */}
