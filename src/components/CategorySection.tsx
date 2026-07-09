@@ -100,26 +100,29 @@ export default function CategorySection({
             </div>
           </div>
 
-          {/* ─── 3-COL SIDEBAR — headline list + "সব খবর" ──────────── */}
-          <div className="col-span-full md:col-span-12 lg:col-span-3 flex flex-col">
-            {sidebarStories.map((story) => (
-              <div
+          {/* ─── 3-COL SIDEBAR — small horizontal cards ────────────── */}
+          <div className="col-span-full md:col-span-12 lg:col-span-3 flex flex-col gap-3">
+            {sidebarStories.slice(0, 4).map((story) => (
+              <a
                 key={story.storyId}
-                className="flex flex-col items-start justify-center py-2.5 border-b dark:border-gray-700 last:border-b-0"
+                href={story.canonicalUrl}
+                className="flex flex-row items-start gap-2 group border-b dark:border-gray-700 pb-3 last:border-b-0 last:pb-0"
               >
-                <a href={story.canonicalUrl}>
-                  <p className="px-[5px] text-black dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-300 flex items-center text-sm">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm leading-[18px] text-black dark:text-slate-300 group-hover:text-blue-500 dark:hover:text-blue-300 font-normal line-clamp-3">
                     {story.mainTitle}
                   </p>
-                </a>
-              </div>
+                </div>
+                <div className="w-28 h-[70px] shrink-0 overflow-hidden rounded">
+                  <img
+                    src={story.fileName}
+                    alt={story.mainTitle}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
             ))}
-
-            <a href={href} className="block mt-3">
-              <div className="mx-auto py-0.5 bg-[#2c4b9c]/80 text-center rounded w-full cursor-pointer hover:bg-[#2c4b9c] transition-colors">
-                <p className="text-base text-white">সব খবর</p>
-              </div>
-            </a>
           </div>
         </div>
       </div>
