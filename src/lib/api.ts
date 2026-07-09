@@ -27,6 +27,7 @@ export const ENDPOINTS = {
     all: "/api/category/view/all",
     stories: (id: number) => `/api/category/view/${id}/stories`,
     header: (slug: string) => `/api/category/view/header/${slug}`,
+    popular: (id: number) => `/api/category/view/category/${id}/popular-stories`,
   },
 
   tag: {

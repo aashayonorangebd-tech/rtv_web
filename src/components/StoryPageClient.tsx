@@ -7,17 +7,22 @@ import AdBanner from "@/components/AdBanner";
 import RelatedStoriesSidebar from "@/components/RelatedStoriesSidebar";
 import ReadMoreGrid from "@/components/ReadMoreGrid";
 import SidebarTabWidget from "@/components/SidebarTabWidget";
+import CategoryPopularSidebar from "@/components/CategoryPopularSidebar";
 
 type Props = {
   story: StoryDetailsResponse;
   popularStories: StoryModel[];
   latestStories: StoryModel[];
+  categoryPopularStories: StoryModel[];
+  categoryName: string;
 };
 
 export default function StoryPageClient({
   story,
   popularStories,
   latestStories,
+  categoryPopularStories,
+  categoryName,
 }: Props) {
   const readMoreStories: StoryModel[] = story.readMoreStories || [];
 
@@ -192,6 +197,15 @@ export default function StoryPageClient({
               latestStories={latestStories}
               popularStories={popularStories}
               showBottomAd={false}
+            />
+
+            {/* Sidebar Ad Placeholder 3 */}
+            <AdBanner height={250} />
+
+            {/* Category Popular Stories */}
+            <CategoryPopularSidebar
+              categoryName={categoryName}
+              stories={categoryPopularStories}
             />
 
           </div>
