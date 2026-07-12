@@ -2,11 +2,19 @@
 // Bottom navigation bar with API-driven category links, sorted by sequenceNumber.
 // First 9 items are shown; each item links to the slug extracted from clientUrl.
 // Right side: hamburger menu + search buttons.
+//
+// The currently active category is highlighted with a red background. The active
+// slug is derived from the URL on /category/{slug} pages, or set explicitly via
+// ActiveCategoryProvider on story details pages (URL is /story/{id} there).
 // ─────────────────────────────────────────────────────────────────────────────
 
+"use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 import { Menu, Search } from "lucide-react";
 import type { MenuItem } from "@/lib/types";
+import { useActiveCategory } from "@/components/ActiveCategoryProvider";
 
 function getSlug(clientUrl: string): string {
   try {
@@ -22,6 +30,19 @@ export default function HeaderNav({
 }: {
   menuItems: MenuItem[];
 }) {
+  const pathname = usePathname();
+  const { activeSlug } = useActiveCategory();
+
+  // On /category/{slug} use the URL segment. On /story/{id} use the slug set
+  // by the story details page (the URL itself has no category). Any other page
+  // has no active category, so the highlight is cleared.
+  let currentSlug: string | null = null;
+  if (pathname?.startsWith("/category/")) {
+    currentSlug = decodeURIComponent(pathname.split("/")[2] || "");
+  } else if (pathname?.startsWith("/story/")) {
+    currentSlug = activeSlug;
+  }
+
   return (
     <div className="w-[calc(100%+170px)] -ml-[85px] -mr-[85px] bg-[#304a8c] border-t border-white/10 shadow-md relative z-40">
       <div className="px-[85px]">
@@ -31,12 +52,20 @@ export default function HeaderNav({
             {[...menuItems]
               .sort((a, b) => a.sequenceNumber - b.sequenceNumber)
               .slice(0, 9)
-              .map((item, index, arr) => (
+              .map((item, index, arr) => {
+              const slug = getSlug(item.clientUrl);
+              const isActive = currentSlug != null && slug === currentSlug;
+              return (
               <React.Fragment key={item.id}>
                 <li className="h-full flex items-center">
                   <a
-                    href={`/category/${getSlug(item.clientUrl)}`}
-                    className="text-white text-[15px] md:text-[16px] font-bold hover:text-[#a3bffa] transition-colors px-3 md:px-5 tracking-wide"
+                    href={`/category/${slug}`}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`text-[15px] md:text-[16px] font-bold transition-colors px-3 md:px-5 tracking-wide ${
+                      isActive
+                        ? "bg-red-600 text-white rounded-[4px] mx-3"
+                        : "text-white hover:text-[#a3bffa]"
+                    }`}
                   >
                     {item.displayTitle}
                   </a>
@@ -45,7 +74,8 @@ export default function HeaderNav({
                   <li className="text-white/40 select-none text-sm font-bold flex items-center h-full">|</li>
                 )}
               </React.Fragment>
-            ))}
+              );
+            })}
           </ul>
         </nav>
 

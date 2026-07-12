@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import type { StoryDetailsResponse, StoryModel } from "@/lib/types";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
 import AdBanner from "@/components/AdBanner";
@@ -8,6 +8,7 @@ import RelatedStoriesSidebar from "@/components/RelatedStoriesSidebar";
 import ReadMoreGrid from "@/components/ReadMoreGrid";
 import SidebarTabWidget from "@/components/SidebarTabWidget";
 import CategoryPopularSidebar from "@/components/CategoryPopularSidebar";
+import { useActiveCategory } from "@/components/ActiveCategoryProvider";
 
 type Props = {
   story: StoryDetailsResponse;
@@ -25,6 +26,13 @@ export default function StoryPageClient({
   categoryName,
 }: Props) {
   const readMoreStories: StoryModel[] = story.readMoreStories || [];
+
+  // Highlight this story's category in the header nav.
+  const { setActiveSlug } = useActiveCategory();
+  useEffect(() => {
+    const slug = story.categories?.[0]?.slug;
+    setActiveSlug(slug ?? null);
+  }, [story.categories, setActiveSlug]);
 
   const publishDate =
     typeof story.passedTime === "string" && story.passedTime.trim()

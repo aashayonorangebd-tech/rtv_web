@@ -114,6 +114,42 @@ export interface CategoryWithStoriesResponse extends CategoryItem {
   children: CategoryWithStoriesResponse[];
 }
 
+// Raw story shape returned by /api/category/view/header/{slug} and
+// /api/category/view/{id}/stories. Field names differ from StoryModel
+// (id vs storyId, isLive/isVideo are booleans), so normalise via
+// toCategoryStoryModel() before feeding components.
+export interface CategoryApiStory {
+  id: number;
+  mainTitle: string;
+  subTitle: string;
+  fileName: string;
+  alt: string;
+  caption: string;
+  authorAlias: string;
+  datePublished: string;
+  passedTime: string;
+  banglaDate: string;
+  canonicalUrl: string;
+  ampUrl: string;
+  isLive: boolean;
+  isVideo: boolean;
+}
+
+export interface CategoryHeaderResponse {
+  id: number;
+  name: string;
+  displayTitle: string;
+  stories: {
+    model: CategoryApiStory[];
+    totalPages: number;
+    currentPage: number;
+    totalElements: number;
+  };
+  canonicalUrl: string;
+  ampUrl: string;
+  parentUrl: string;
+}
+
 // Story details
 export interface StoryDetail {
   id: number;

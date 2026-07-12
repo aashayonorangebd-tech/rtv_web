@@ -8,7 +8,12 @@
 //   toStoryModel() — normalises PopularApiItem | LatestApiItem → StoryModel
 // ─────────────────────────────────────────────────────────────────────────────
 
-import type { StoryModel, PopularApiItem, LatestApiItem } from "@/lib/types";
+import type {
+  StoryModel,
+  PopularApiItem,
+  LatestApiItem,
+  CategoryApiStory,
+} from "@/lib/types";
 
 export const API_CONFIG = {
   dev: "https://beta-api.rtvonline.com",
@@ -69,4 +74,19 @@ export function storyPath(story: { storyId?: number; id?: number }): string {
   const id = story.storyId ?? story.id;
   if (!id) return "#";
   return `/story/${id}`;
+}
+
+// Normalise a raw category story (id/storyId, isLive/isVideo booleans)
+// into the StoryModel shape the UI components expect.
+export function toCategoryStoryModel(item: CategoryApiStory): StoryModel {
+  return {
+    storyId: item.id,
+    mainTitle: item.mainTitle,
+    subTitle: item.subTitle ?? "",
+    fileName: item.fileName ?? "",
+    passedTime: item.passedTime ?? "",
+    isLive: item.isLive ? 1 : 0,
+    isVideo: item.isVideo ? 1 : 0,
+    canonicalUrl: item.canonicalUrl ?? "",
+  };
 }

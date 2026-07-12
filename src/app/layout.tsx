@@ -6,6 +6,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import ThemeProvider from "@/components/ThemeProvider";
+import { ActiveCategoryProvider } from "@/components/ActiveCategoryProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -33,11 +34,13 @@ export default function RootLayout({
           {`(function(){try{var t=localStorage.getItem("theme")||"system",r=t==="system"?(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"):t;document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add(r),document.documentElement.style.colorScheme=r}catch(e){}})()`}
         </Script>
         <ThemeProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <ScrollToTop />
-          <AnchorAd />
+          <ActiveCategoryProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <ScrollToTop />
+            <AnchorAd />
+          </ActiveCategoryProvider>
         </ThemeProvider>
       </body>
     </html>
