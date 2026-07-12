@@ -160,6 +160,25 @@ body {
   font-family: "SolaimanLipi", sans-serif;
 }
 
+/* ── Category feed list (vertical items, mirrors rtvonline.com) ── */
+.subTitlePost {
+  font-size: 0.95rem;
+  color: #555;
+}
+.dark .subTitlePost {
+  color: #cbd5e1;
+}
+.textColor {
+  color: #555;
+}
+.lineclamped-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .main-title-post {
   font-size: 1.2rem;
   line-height: 23px;
