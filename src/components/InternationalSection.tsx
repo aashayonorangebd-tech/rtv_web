@@ -48,7 +48,7 @@ export default function InternationalSection({
                 />
               </div>
               <div className="pt-2 my-2.5">
-                <h3 className="dark:text-white text-[1.5rem] leading-[28px] font-bold group-hover:text-[#0d6efd]">
+                <h3 className="dark:text-white text-[1.5rem] leading-[28px] font-bold group-hover:text-rtv-blue-text-hover">
                   {bigCard.mainTitle}
                 </h3>
               </div>
@@ -78,7 +78,7 @@ export default function InternationalSection({
                     />
                   </div>
                   <div className="pt-2 min-h-[60px]">
-                    <h3 className="dark:text-white text-[0.95rem] leading-[20px] font-bold group-hover:text-[#0d6efd] line-clamp-3">
+                    <h3 className="dark:text-white text-[0.95rem] leading-[20px] font-bold group-hover:text-rtv-blue-text-hover line-clamp-3">
                       {story.mainTitle}
                     </h3>
                   </div>
@@ -98,7 +98,7 @@ export default function InternationalSection({
                     className="flex flex-row items-start gap-2 group"
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="text-base leading-[22px] text-[#555] dark:text-slate-300 group-hover:text-[#0d6efd] dark:hover:text-blue-300 font-normal line-clamp-5">
+                      <p className="text-base leading-[22px] text-[#555] dark:text-slate-300 group-hover:text-rtv-blue-text-hover dark:hover:text-blue-300 font-normal line-clamp-5">
                         {story.mainTitle}
                       </p>
                     </div>

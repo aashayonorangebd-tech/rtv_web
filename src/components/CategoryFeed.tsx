@@ -87,7 +87,7 @@ function HorizontalCard({ story }: { story: StoryModel }) {
     >
       <div className="relative">{img(story.fileName, story.mainTitle, "")}</div>
       <div className="pt-2">
-        <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-[#0d6efd] line-clamp-2">
+        <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover line-clamp-2">
           {story.mainTitle}
         </h3>
       </div>

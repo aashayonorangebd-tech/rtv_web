@@ -87,7 +87,7 @@ export default function SubHeroGrid({
                       {/* Title — fixed h-20 to keep all card heights uniform
                           1.2rem (≈19px), 23px line-height, bold */}
                       <div className="pt-2 h-20">
-                        <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">
+                        <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">
                           {story.mainTitle}
                         </h3>
                       </div>

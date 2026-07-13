@@ -64,7 +64,7 @@ export default function CategorySection({
                       />
                     </div>
                     <div className="pt-2">
-                      <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">
+                      <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">
                         {story.mainTitle}
                       </h3>
                     </div>
@@ -87,7 +87,7 @@ export default function CategorySection({
                     />
                   </div>
                   <div className="pt-2 my-2.5">
-                    <h3 className="dark:text-white text-[1.5rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">
+                    <h3 className="dark:text-white text-[1.5rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">
                       {featured.mainTitle}
                     </h3>
                   </div>
@@ -110,7 +110,7 @@ export default function CategorySection({
                 className="flex flex-row items-start gap-2 group border-b dark:border-gray-700 pb-3 last:border-b-0 last:pb-0"
               >
                 <div className="flex-1 min-w-0">
-                  <p className="text-base leading-[22px] text-[#555] dark:text-slate-300 group-hover:text-[#0d6efd] dark:hover:text-blue-300 font-normal line-clamp-5">
+                  <p className="text-base leading-[22px] text-[#555] dark:text-slate-300 group-hover:text-rtv-blue-text-hover dark:hover:text-blue-300 font-normal line-clamp-5">
                     {story.mainTitle}
                   </p>
                 </div>

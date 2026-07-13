@@ -40,7 +40,7 @@ export default function CountrySection({
                     <img src={story.fileName} alt={story.mainTitle} className="object-cover object-center max-w-full aspect-video" loading="lazy" />
                   </div>
                   <div className="pt-2 h-20">
-                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">{story.mainTitle}</h3>
+                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">{story.mainTitle}</h3>
                   </div>
                   <hr className="border-[#e2e2e2] dark:border-gray-700" />
                 </a>
@@ -57,7 +57,7 @@ export default function CountrySection({
                     <img src={story.fileName} alt={story.mainTitle} className="object-cover object-center max-w-full aspect-video" loading="lazy" />
                   </div>
                   <div className="pt-2 h-20">
-                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-[#0d6efd]">{story.mainTitle}</h3>
+                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">{story.mainTitle}</h3>
                   </div>
                   <hr className="border-[#e2e2e2] dark:border-gray-700" />
                 </a>
@@ -73,7 +73,7 @@ export default function CountrySection({
                   <img src={col3.fileName} alt={col3.mainTitle} className="object-cover object-center w-full h-full absolute inset-0" loading="lazy" />
                 </div>
                 <div className="pt-2 my-2.5">
-                  <h3 className="dark:text-white text-[1.5rem] leading-[28px] font-bold group-hover:text-[#0d6efd]">{col3.mainTitle}</h3>
+                  <h3 className="dark:text-white text-[1.5rem] leading-[28px] font-bold group-hover:text-rtv-blue-text-hover">{col3.mainTitle}</h3>
                 </div>
                 {col3.subTitle && <p className="text-base text-[#555] dark:text-slate-300">{col3.subTitle}</p>}
               </a>

@@ -66,7 +66,7 @@ export default function HeroSection({
                 </div>
 
                 {/* Headline — text-3xl ≈ 30px, dark on light / white on dark */}
-                <h3 className="font-bold text-[#121212] dark:text-white group-hover:text-[#0d6efd] hover:cursor-pointer pt-2 text-3xl pb-3 leading-[1.3] transition-colors">
+                <h3 className="font-bold text-[#121212] dark:text-white group-hover:text-rtv-blue-text-hover hover:cursor-pointer pt-2 text-3xl pb-3 leading-[1.3] transition-colors">
                   {lead.mainTitle}
                 </h3>
 
@@ -105,7 +105,7 @@ export default function HeroSection({
                     </div>
 
                     {/* Headline — text-xl ≈ 20px, pl-1 for slight indent */}
-                    <h3 className="font-bold text-[#121212] dark:text-white group-hover:text-[#0d6efd] hover:cursor-pointer pt-2 text-xl pl-1 pb-2 leading-[1.3] transition-colors">
+                    <h3 className="font-bold text-[#121212] dark:text-white group-hover:text-rtv-blue-text-hover hover:cursor-pointer pt-2 text-xl pl-1 pb-2 leading-[1.3] transition-colors">
                       {story.mainTitle}
                     </h3>
                   </a>
