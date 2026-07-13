@@ -9,6 +9,7 @@ import LifestyleSection from "@/components/LifestyleSection";
 import ProbashSection from "@/components/ProbashSection";
 import VideoPhotoSection from "@/components/VideoPhotoSection";
 import DualCategorySection from "@/components/DualCategorySection";
+import QuadCategorySection from "@/components/QuadCategorySection";
 
 export interface SectionConfig {
   componentId: string;
@@ -16,6 +17,8 @@ export interface SectionConfig {
   slug: string | null;
   stories: StoryModel[];
 }
+
+const QUAD_TITLES = ["চাকরি", "সোশ্যাল মিডিয়া", "শিক্ষা", "তথ্যপ্রযুক্তি"] as const;
 
 export default function HomePageSections({
   specialReportStories,
@@ -28,6 +31,23 @@ export default function HomePageSections({
 
   if (resolved.length === 0) return null;
 
+  function isQuadStart(idx: number): boolean {
+    return (
+      resolved[idx]?.displayTitle === QUAD_TITLES[0] &&
+      resolved[idx + 1]?.displayTitle === QUAD_TITLES[1] &&
+      resolved[idx + 2]?.displayTitle === QUAD_TITLES[2] &&
+      resolved[idx + 3]?.displayTitle === QUAD_TITLES[3] &&
+      [idx, idx + 1, idx + 2, idx + 3].every((j) => resolved[j].stories.length >= 4)
+    );
+  }
+
+  function isQuadContinuation(idx: number): boolean {
+    for (let j = Math.max(0, idx - 3); j < idx; j++) {
+      if (isQuadStart(j)) return true;
+    }
+    return false;
+  }
+
   return (
     <>
       <SpecialReportCarousel stories={specialReportStories} />
@@ -35,7 +55,8 @@ export default function HomePageSections({
       {resolved.map((sec, i) => {
         if (
           (sec.displayTitle === "ছবি" && resolved[i - 1]?.displayTitle === "ভিডিও") ||
-          (sec.displayTitle === "অর্থনীতি" && resolved[i - 1]?.displayTitle === "রাজনীতি")
+          (sec.displayTitle === "অর্থনীতি" && resolved[i - 1]?.displayTitle === "রাজনীতি") ||
+          isQuadContinuation(i)
         ) {
           return null;
         }
@@ -47,6 +68,8 @@ export default function HomePageSections({
         const isDualCategory =
           sec.displayTitle === "রাজনীতি" &&
           resolved[i + 1]?.displayTitle === "অর্থনীতি";
+
+        const isQuad = isQuadStart(i);
 
         const commonProps = {
           title: sec.displayTitle || "",
@@ -63,6 +86,14 @@ export default function HomePageSections({
             </div>
             {isVideoPhoto ? (
               <VideoPhotoSection />
+            ) : isQuad ? (
+              <QuadCategorySection
+                sections={[0, 1, 2, 3].map((offset) => ({
+                  title: resolved[i + offset].displayTitle || "",
+                  href: resolved[i + offset].slug ? `/${resolved[i + offset].slug}` : "#",
+                  stories: resolved[i + offset].stories,
+                }))}
+              />
             ) : isDualCategory ? (
               <DualCategorySection
                 left={{ title: sec.displayTitle || "", href: sec.slug ? `/${sec.slug}` : "#", stories: sec.stories }}
