@@ -18,6 +18,7 @@
 //             remaining stories feed the sidebar headline list
 // ─────────────────────────────────────────────────────────────────────────
 
+import React from "react";
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
@@ -101,28 +102,33 @@ export default function CategorySection({
             </div>
           </div>
 
-          {/* ─── 3-COL SIDEBAR — small horizontal cards ────────────── */}
-          <div className="col-span-full md:col-span-12 lg:col-span-3 flex flex-col gap-3">
-            {sidebarStories.slice(0, 4).map((story) => (
-              <a
-                key={story.storyId}
-                href={`/story/${story.storyId}`}
-                className="flex flex-row items-start gap-2 group border-b dark:border-gray-700 pb-3 last:border-b-0 last:pb-0"
-              >
-                <div className="flex-1 min-w-0">
-                  <p className="text-base leading-[22px] text-[#555] dark:text-slate-300 group-hover:text-rtv-blue-text-hover dark:hover:text-blue-300 font-normal line-clamp-5">
-                    {story.mainTitle}
-                  </p>
-                </div>
-                <div className="w-28 h-[70px] shrink-0 overflow-hidden rounded">
-                  <img
-                    src={story.fileName}
-                    alt={story.mainTitle}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </a>
+          {/* ─── 3-COL SIDEBAR — image-left, text-right cards ─────── */}
+          <div className="col-span-full md:col-span-12 lg:col-span-3 flex flex-col gap-y-2.5 justify-between">
+            {sidebarStories.slice(0, 4).map((story, i) => (
+              <React.Fragment key={story.storyId}>
+                <a
+                  href={storyPath(story)}
+                  className="grid grid-cols-12 md:grid-cols-12 gap-2 items-center group"
+                >
+                  <div className="md:order-last lg:order-none col-span-7">
+                    <h3 className="font-semibold group-hover:text-rtv-blue-text-hover hover:cursor-pointer text-lg dark:text-white">
+                      {story.mainTitle}
+                    </h3>
+                  </div>
+                  <div className="col-span-5">
+                    <div className="relative">
+                      <img
+                        src={story.fileName}
+                        alt={story.mainTitle}
+                        className="object-cover object-center max-w-full aspect-video"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                    </div>
+                  </div>
+                </a>
+                {i < 3 && <hr className="border-[#e2e2e2] dark:border-gray-700" />}
+              </React.Fragment>
             ))}
           </div>
         </div>
