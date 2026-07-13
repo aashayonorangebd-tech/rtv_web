@@ -53,6 +53,12 @@ export const ENDPOINTS = {
     cities: (country: string) => `/api/utils/${country}/cities`,
     prayerTimes: "/api/utils/prayer-time",
   },
+
+  location: {
+    divisions: "/api/get-area-serach",
+    districts: (divisionId: number) => `/api/get-district-value?divisionId=${divisionId}`,
+    subDistricts: (districtId: number) => `/api/get-subdistrict-value?districtId=${districtId}`,
+  },
 } as const;
 
 export function toStoryModel(

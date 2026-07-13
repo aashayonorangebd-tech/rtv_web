@@ -280,3 +280,28 @@ export interface LatestApiItem {
 export interface LatestResponse {
   model: LatestApiItem[];
 }
+
+// ── Location filter types ─────────────────────────────────────────────────
+export interface Division {
+  id: number;
+  name: string;
+  displayName: string;
+  countryName: string;
+  countryId: number;
+}
+
+export interface District {
+  id: number;
+  name: string;
+  displayName: string;
+  divisionName: string;
+  divisionId: number;
+}
+
+export interface SubDistrict {
+  id: number;
+  name: string;
+  displayName: string;
+  districtName: string;
+  districtId: number;
+}
