@@ -46,6 +46,7 @@ yarn-error.log*
 # design system (generated, not source)
 DESIGN_SYSTEM.md
 interview.md
+APPLICATIONCSS.md
 
 # typescript
 *.tsbuildinfo

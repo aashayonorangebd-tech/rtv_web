@@ -12,7 +12,7 @@
 
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import type { MenuItem } from "@/lib/types";
 import { useActiveCategory } from "@/components/ActiveCategoryProvider";
 import HeaderDrawer from "@/components/HeaderDrawer";
@@ -88,7 +88,7 @@ export default function HeaderNav({
             className="hover:text-[#a3bffa] transition-colors"
             onClick={() => setDrawerOpen((p) => !p)}
           >
-            <Menu size={22} />
+            {drawerOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
           <button className="hover:text-[#a3bffa] transition-colors">
             <Search size={20} />
