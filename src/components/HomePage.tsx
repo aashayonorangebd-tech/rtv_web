@@ -87,23 +87,6 @@ async function getLatestStories(): Promise<StoryModel[]> {
   }
 }
 
-// ── Helpers ──────────────────────────────────────────────────────────────
-
-/** Extract stories + title from a template component's collection data. */
-function toSectionConfig(
-  comp: TemplateComponent,
-  collection: Record<string, CollectionItem>,
-): SectionConfig {
-  const col = collection[comp.collectionId];
-  const group = col?.storyList?.[0];
-  return {
-    componentId: comp.componentId,
-    displayTitle: group?.displayTitle ?? null,
-    slug: group?.slug ?? null,
-    stories: group?.stories ?? [],
-  };
-}
-
 // ── Component ────────────────────────────────────────────────────────────
 
 export default async function HomePage() {
@@ -179,7 +162,16 @@ export default async function HomePage() {
   // ── Build configs for remaining sections (skip s1, s2) ───────────────
   const allSections = sortedComps
     .filter((c) => c.componentId !== "s1_comp4" && c.componentId !== "s2_comp1")
-    .map((c) => toSectionConfig(c, data.collection));
+    .flatMap((c) => {
+      const col = data.collection[c.collectionId];
+      if (!col?.storyList) return [];
+      return col.storyList.map((group) => ({
+        componentId: c.componentId,
+        displayTitle: group.displayTitle ?? null,
+        slug: group.slug ?? null,
+        stories: group.stories ?? [],
+      }));
+    });
 
   // The first remaining section (coll 13, seq 4) is the special report
   const specialReportSection = allSections.length > 0 ? allSections[0] : undefined;

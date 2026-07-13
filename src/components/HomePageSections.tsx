@@ -7,6 +7,7 @@ import CountrySection from "@/components/CountrySection";
 import InternationalSection from "@/components/InternationalSection";
 import LifestyleSection from "@/components/LifestyleSection";
 import ProbashSection from "@/components/ProbashSection";
+import VideoPhotoSection from "@/components/VideoPhotoSection";
 
 export interface SectionConfig {
   componentId: string;
@@ -30,52 +31,46 @@ export default function HomePageSections({
     <>
       <SpecialReportCarousel stories={specialReportStories} />
 
-      {resolved.map((sec, i) => (
-        <div key={i}>
-          <div className="sm:container mt-4 sm:px-4 mx-auto dark:text-white sm:my-5">
-            <div className="flex justify-center items-center dark:bg-inherit overflow-hidden">
-              <AdBanner height={90} />
+      {resolved.map((sec, i) => {
+        if (sec.displayTitle === "ছবি" && resolved[i - 1]?.displayTitle === "ভিডিও") {
+          return null;
+        }
+
+        const isVideoPhoto =
+          sec.displayTitle === "ভিডিও" &&
+          resolved[i + 1]?.displayTitle === "ছবি";
+
+        const commonProps = {
+          title: sec.displayTitle || "",
+          href: sec.slug ? `/${sec.slug}` : "#",
+          stories: sec.stories,
+        };
+
+        return (
+          <div key={i}>
+            <div className="sm:container mt-4 sm:px-4 mx-auto dark:text-white sm:my-5">
+              <div className="flex justify-center items-center dark:bg-inherit overflow-hidden">
+                <AdBanner height={90} />
+              </div>
             </div>
+            {isVideoPhoto ? (
+              <VideoPhotoSection />
+            ) : sec.displayTitle === "বিনোদন" ? (
+              <EntertainmentSection {...commonProps} />
+            ) : sec.displayTitle === "দেশজুড়ে" ? (
+              <CountrySection {...commonProps} />
+            ) : sec.displayTitle === "আন্তর্জাতিক" ? (
+              <InternationalSection {...commonProps} />
+            ) : sec.displayTitle === "লাইফস্টাইল" ? (
+              <LifestyleSection {...commonProps} />
+            ) : sec.displayTitle === "প্রবাস" ? (
+              <ProbashSection {...commonProps} />
+            ) : (
+              <CategorySection {...commonProps} />
+            )}
           </div>
-          {sec.displayTitle === "বিনোদন" ? (
-            <EntertainmentSection
-              title={sec.displayTitle || ""}
-              href={sec.slug ? `/${sec.slug}` : "#"}
-              stories={sec.stories}
-            />
-          ) : sec.displayTitle === "দেশজুড়ে" ? (
-            <CountrySection
-              title={sec.displayTitle || ""}
-              href={sec.slug ? `/${sec.slug}` : "#"}
-              stories={sec.stories}
-            />
-          ) : sec.displayTitle === "আন্তর্জাতিক" ? (
-            <InternationalSection
-              title={sec.displayTitle || ""}
-              href={sec.slug ? `/${sec.slug}` : "#"}
-              stories={sec.stories}
-            />
-          ) : sec.displayTitle === "লাইফস্টাইল" ? (
-            <LifestyleSection
-              title={sec.displayTitle || ""}
-              href={sec.slug ? `/${sec.slug}` : "#"}
-              stories={sec.stories}
-            />
-          ) : sec.displayTitle === "প্রবাস" ? (
-            <ProbashSection
-              title={sec.displayTitle || ""}
-              href={sec.slug ? `/${sec.slug}` : "#"}
-              stories={sec.stories}
-            />
-          ) : (
-            <CategorySection
-              title={sec.displayTitle || ""}
-              href={sec.slug ? `/${sec.slug}` : "#"}
-              stories={sec.stories}
-            />
-          )}
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 }

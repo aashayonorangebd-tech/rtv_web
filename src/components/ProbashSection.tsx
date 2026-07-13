@@ -15,19 +15,20 @@
 //   └───────────────────────────────────────────┴──────────────────────┘
 // ─────────────────────────────────────────────────────────────────────────
 
-import React, { useState } from "react";
-import type { StoryModel } from "@/lib/types";
-import { storyPath } from "@/lib/api";
+import React, { useState, useEffect } from "react";
+import type { StoryModel, PrayerTimeResponse } from "@/lib/types";
+import { ENDPOINTS, storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
 
-// ── Prayer Time Widget ─────────────────────────────────────────────────
-const PRAYER_TIMES = [
-  { name: "ফজর", time: "০৪:১২ AM" },
-  { name: "জোহর", time: "১২:০০ PM" },
-  { name: "আছর", time: "০৪:০০ PM" },
-  { name: "মাগরিব", time: "০৬:৪৫ PM" },
-  { name: "ইশা", time: "০৮:১৫ PM" },
-];
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.rtvonline.com";
+
+const PRAYER_NAMES_BN: Record<string, string> = {
+  fajr: "ফজর",
+  dhuhr: "জোহর",
+  asr: "আছর",
+  maghrib: "মাগরিব",
+  isha: "ইশা",
+};
 
 const MONTHS_BN = [
   "জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন",
@@ -36,7 +37,27 @@ const MONTHS_BN = [
 
 const DAYS_BN = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহ", "শুক্র", "শনি"];
 
+function toBanglaTime(time: string): string {
+  const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+  return time.replace(/\d/g, (d) => bnDigits[parseInt(d)]);
+}
+
 function PrayerTimeWidget() {
+  const [prayerData, setPrayerData] = useState<PrayerTimeResponse["data"][number] | null>(null);
+
+  useEffect(() => {
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    fetch(`${API_BASE}${ENDPOINTS.utils.prayerTimes}?address=&isBangladesh=true&month=${month}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: PrayerTimeResponse | null) => {
+        if (data?.data?.length) {
+          setPrayerData(data.data[0]);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="text-center border border-[#e2e2e2] dark:border-gray-700 shadow-md rounded">
       <div className="flex items-center justify-center py-2.5">
@@ -53,17 +74,28 @@ function PrayerTimeWidget() {
           <div className="mx-auto max-sm:mt-2">
             <div className="pr-2.5">
               <div className="text-center mt-5">
-                <p className="text-[15px] font-bold dark:text-slate-300">জোহর</p>
-                <p className="text-[15px] dark:text-slate-300">ওয়াক্তের সময় বাকি</p>
-                <p className="text-[15px] dark:text-slate-300 font-bold">০০ ঘন্টা ০০ মিনিট</p>
+                <p className="text-[15px] font-bold dark:text-slate-300">
+                  {prayerData?.hijriDate || ""}
+                </p>
+                <p className="text-sm dark:text-slate-300 mt-1">
+                  {prayerData?.currentDate || ""}
+                </p>
               </div>
               <div className="flex gap-x-2.5 mr-1 max-sm:flex-col pt-5">
-                <div>
-                  <p className="text-[15px] whitespace-nowrap dark:text-slate-300">সেহেরি শেষ</p>
-                </div>
-                <div>
-                  <p className="text-[15px] whitespace-nowrap dark:text-slate-300">ইফতার শুরু</p>
-                </div>
+                {prayerData && (
+                  <>
+                    <div>
+                      <p className="text-[15px] whitespace-nowrap dark:text-slate-300">
+                        সেহেরি শেষ {toBanglaTime(prayerData.sehr)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[15px] whitespace-nowrap dark:text-slate-300">
+                        ইফতার শুরু {toBanglaTime(prayerData.iftar)}
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -71,19 +103,22 @@ function PrayerTimeWidget() {
 
         <div className="max-sm:w-full max-lg:w-1/2">
           <div className="flex flex-col ml-1 mt-4 gap-1 max-sm:gap-1">
-            {PRAYER_TIMES.map((pt) => (
-              <div
-                key={pt.name}
-                className="grid grid-flow-col items-center grid-cols-2 text-left pr-3 px-2"
-              >
-                <p className="col-span-1 text-[15px] dark:text-slate-300 mr-5 my-1">
-                  {pt.name}
-                </p>
-                <p className="col-span-1 text-[15px] dark:text-slate-300 whitespace-nowrap">
-                  {pt.time}
-                </p>
-              </div>
-            ))}
+            {["fajr", "dhuhr", "asr", "maghrib", "isha"].map((key) => {
+              const time = prayerData?.[key as keyof typeof prayerData];
+              return (
+                <div
+                  key={key}
+                  className="grid grid-flow-col items-center grid-cols-2 text-left pr-3 px-2"
+                >
+                  <p className="col-span-1 text-[15px] dark:text-slate-300 mr-5 my-1">
+                    {PRAYER_NAMES_BN[key]}
+                  </p>
+                  <p className="col-span-1 text-[15px] dark:text-slate-300 whitespace-nowrap">
+                    {time ? toBanglaTime(time as string) : ""}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -168,7 +203,7 @@ function CalendarWidget() {
   return (
     <div className="border border-[#e2e2e2] dark:border-gray-700 shadow-md p-5 w-full grid items-center justify-center rounded">
       <div className="p-2 flex flex-col justify-center items-center gap-2">
-        <p className="text-lg font-bold text-rtv-bg-blue dark:text-slate-300">আর্কাইভ</p>
+        <a href={`/api/story/view/archive?page=0&size=15`} className="text-lg font-bold text-rtv-bg-blue dark:text-slate-300 hover:text-rtv-blue-text-hover">আর্কাইভ</a>
         <div className="p-2 flex justify-between items-center gap-2">
           <button
             onClick={prevMonth}
