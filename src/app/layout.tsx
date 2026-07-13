@@ -36,7 +36,7 @@ export default function RootLayout({
         <ThemeProvider>
           <ActiveCategoryProvider>
             <Header />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 px-5 sm:px-0 mt-4 overflow-hidden">{children}</main>
             <Footer />
             <ScrollToTop />
             <AnchorAd />
