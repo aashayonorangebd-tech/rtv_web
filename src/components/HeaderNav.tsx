@@ -97,7 +97,7 @@ export default function HeaderNav({
 
         {/* ── Drawer dropdown ─────────────────────────────────────────── */}
         <HeaderDrawer
-          items={sortedItems}
+          items={sortedItems.slice(9)}
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
         />
