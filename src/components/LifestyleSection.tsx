@@ -109,7 +109,9 @@ function OnlinePollCard() {
               className="object-cover object-center max-w-full aspect-video"
               loading="lazy"
             />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] text-black text-2xl font-bold whitespace-nowrap pointer-events-none select-none">
+              Not Getting End Point Yet
+            </div>
           </div>
         </a>
 
