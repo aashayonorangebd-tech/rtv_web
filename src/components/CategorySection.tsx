@@ -106,7 +106,7 @@ export default function CategorySection({
             {sidebarStories.slice(0, 4).map((story) => (
               <a
                 key={story.storyId}
-                href={story.canonicalUrl}
+                href={`/story/${story.storyId}`}
                 className="flex flex-row items-start gap-2 group border-b dark:border-gray-700 pb-3 last:border-b-0 last:pb-0"
               >
                 <div className="flex-1 min-w-0">

@@ -64,7 +64,6 @@ export interface StoryModel {
   passedTime: string;
   isLive: number;
   isVideo: number;
-  canonicalUrl: string;
   langVersion?: string;
 }
 

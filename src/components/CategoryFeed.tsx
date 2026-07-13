@@ -45,7 +45,7 @@ function img(src: string, alt: string, className: string) {
 function LeadCard({ story }: { story: StoryModel }) {
   return (
     <a
-      href={story.canonicalUrl || `/story/${story.storyId}`}
+      href={`/story/${story.storyId}`}
       className="group block"
     >
       <div className="relative overflow-hidden">{img(story.fileName, story.mainTitle, "")}</div>
@@ -59,7 +59,7 @@ function LeadCard({ story }: { story: StoryModel }) {
 function SecondCard({ story }: { story: StoryModel }) {
   return (
     <a
-      href={story.canonicalUrl || `/story/${story.storyId}`}
+      href={`/story/${story.storyId}`}
       className="flex flex-col gap-y-2 group"
     >
       <div className="aspect-video w-full relative overflow-hidden">
@@ -82,7 +82,7 @@ function SecondCard({ story }: { story: StoryModel }) {
 function HorizontalCard({ story }: { story: StoryModel }) {
   return (
     <a
-      href={story.canonicalUrl || `/story/${story.storyId}`}
+      href={`/story/${story.storyId}`}
       className="flex flex-col w-full pl-2 group flex-1 min-w-0"
     >
       <div className="relative">{img(story.fileName, story.mainTitle, "")}</div>
@@ -98,7 +98,7 @@ function HorizontalCard({ story }: { story: StoryModel }) {
 function VerticalItem({ story }: { story: StoryModel }) {
   return (
     <a
-      href={story.canonicalUrl || `/story/${story.storyId}`}
+      href={`/story/${story.storyId}`}
       className="group block py-4"
     >
       <div className="grid grid-cols-12 gap-4 items-start">

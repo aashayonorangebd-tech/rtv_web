@@ -1,17 +1,3 @@
-// ─── SpecialReportCarousel ────────────────────────────────────────────────
-// Client-side horizontal carousel for "বিশেষ প্রতিবেদন" section.
-// Accepts optional stories from API; falls back to hardcoded placeholders.
-//
-// Features:
-//   - Shows 4 items on lg, 3 on md, 2 on sm, 1 on mobile
-//   - Left/right nav arrows (disabled at boundaries)
-//   - translateX sliding animation (300ms ease-in-out)
-//   - Play-button SVG overlay on each thumbnail
-//
-// Props:
-//   stories : StoryModel[] — optional API stories (uses placeholders if empty)
-// ─────────────────────────────────────────────────────────────────────────
-
 "use client";
 
 import { useState } from "react";
@@ -19,28 +5,15 @@ import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
 
-// ── Fallback placeholder data ──────────────────────────────────────────
-const FALLBACK_ITEMS: StoryModel[] = [
-  { storyId: 1, mainTitle: "শয়তানের সাগর! যেখানে ঢুকলে আর ফিরে আসে না কেউ!", subTitle: "", fileName: "https://picsum.photos/seed/car1/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 2, mainTitle: "কোলে গন্ধগোকুল, পেছনে সজারু কে এই বাস্তবের 'ডিজনি প্রিন্সেস'?", subTitle: "", fileName: "https://picsum.photos/seed/car2/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 3, mainTitle: "ইসরায়েলিদের চোখে যুদ্ধে 'জয়ী' হয়েছে ইরান!", subTitle: "", fileName: "https://picsum.photos/seed/car3/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 4, mainTitle: "বাংলাদেশি শ্রমিকদের জন্য খুলল মালয়েশিয়ার শ্রমবাজার", subTitle: "", fileName: "https://picsum.photos/seed/car4/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 5, mainTitle: "সেনাবাহিনীর গ্রীষ্মকালীন মহড়া আকস্মিক পরিদর্শন করলেন প্রধানমন্ত্রী", subTitle: "", fileName: "https://picsum.photos/seed/car5/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 6, mainTitle: "১৬ জেলায় বন্যার শঙ্কা, এইচএসসি পরীক্ষার্থীদের যে বার্তা দিলো আন্তঃশিক্ষা বোর্ড", subTitle: "", fileName: "https://picsum.photos/seed/car6/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 7, mainTitle: "জয়পুরহাটে ট্রাক-ইজিবাইকের সংঘর্ষে ২ জনের মৃত্যু", subTitle: "", fileName: "https://picsum.photos/seed/car7/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 8, mainTitle: "বিশ্ববাজারে আরও কমল সোনার দাম", subTitle: "", fileName: "https://picsum.photos/seed/car8/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 9, mainTitle: "তুরস্কে ন্যাটো শীর্ষ সম্মেলন শুরু, ৩ বিষয়ে অগ্রাধিকার", subTitle: "", fileName: "https://picsum.photos/seed/car9/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-  { storyId: 10, mainTitle: "আরও কমলো জেট ফুয়েলের দাম", subTitle: "", fileName: "https://picsum.photos/seed/car10/550/309", canonicalUrl: "#", isVideo: 1, isLive: 0, passedTime: "" },
-];
-
 export default function SpecialReportCarousel({
   stories,
 }: {
   stories?: StoryModel[];
 }) {
-  const items = stories && stories.length > 0 ? stories : FALLBACK_ITEMS;
+  if (!stories || stories.length === 0) return null;
+
   const [activeIndex, setActiveIndex] = useState(0);
-  const totalItems = items.length;
+  const totalItems = stories.length;
   const visibleCount = 4;
   const maxIndex = Math.max(0, totalItems - visibleCount);
 
@@ -55,7 +28,7 @@ export default function SpecialReportCarousel({
               className="flex transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${activeIndex * (100 / visibleCount)}%)` }}
             >
-              {items.map((item) => (
+              {stories.map((item) => (
                 <div
                   key={item.storyId}
                   className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
@@ -72,7 +45,6 @@ export default function SpecialReportCarousel({
                           className="object-cover object-center max-w-full aspect-video"
                           loading="lazy"
                         />
-                        {/* Play button overlay — always shown */}
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +79,6 @@ export default function SpecialReportCarousel({
             </div>
           </div>
 
-          {/* Left arrow */}
           <button
             disabled={activeIndex === 0}
             className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#f7f7f7] hover:bg-opacity-100 rounded-full p-3 text-black ${
@@ -123,7 +94,6 @@ export default function SpecialReportCarousel({
             </svg>
           </button>
 
-          {/* Right arrow */}
           <button
             disabled={activeIndex >= maxIndex}
             className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#f7f7f7] hover:bg-opacity-100 rounded-full p-3 text-black ${

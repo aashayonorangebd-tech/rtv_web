@@ -81,7 +81,7 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
 
 export function StoryCardSmall({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group flex gap-3.5 mb-5 last:mb-0">
+    <a href={`/story/${story.storyId}`} className="group flex gap-3.5 mb-5 last:mb-0">
       <div className="relative w-[130px] md:w-[120px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
@@ -111,7 +111,7 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
 
 export function StoryCardListItem({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group flex gap-3 py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
+    <a href={`/story/${story.storyId}`} className="group flex gap-3 py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
       <div className="relative w-[110px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-slate-800">
         <Image
           src={story.fileName}
@@ -136,7 +136,7 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
 
 export function StoryCardText({ story }: { story: StoryModel }) {
   return (
-    <a href={story.canonicalUrl} className="group block py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
+    <a href={`/story/${story.storyId}`} className="group block py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
       <h3 className="text-[16px] font-medium leading-[25px] text-[#121212] dark:text-white group-hover:text-[#0d6efd] dark:group-hover:text-blue-300 transition-colors line-clamp-2">
         {story.mainTitle}
       </h3>

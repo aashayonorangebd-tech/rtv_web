@@ -66,7 +66,6 @@ export function toStoryModel(
     passedTime: "passedTime" in item ? (item as LatestApiItem).passedTime : "",
     isLive: item.isLive,
     isVideo: item.hasVideo ? 1 : 0,
-    canonicalUrl: item.canonicalUrl,
   };
 }
 
@@ -87,6 +86,5 @@ export function toCategoryStoryModel(item: CategoryApiStory): StoryModel {
     passedTime: item.passedTime ?? "",
     isLive: item.isLive ? 1 : 0,
     isVideo: item.isVideo ? 1 : 0,
-    canonicalUrl: item.canonicalUrl ?? "",
   };
 }

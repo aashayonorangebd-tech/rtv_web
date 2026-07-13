@@ -97,7 +97,7 @@ export default function SidebarTabWidget({
       {/* ── "সব খবর" BUTTON ────────────────────────────────────────────
           Full-width blue button at 80% opacity, linking to all news     */}
       <a
-        href="https://rtvonline.com/all-news/all-most-viewed-news"
+        href="/all-news"
         className="block mt-4"
       >
         <div className="mx-auto py-0.5 bg-[#2c4b9c]/80 hover:bg-[#2c4b9c] text-center rounded transition-colors cursor-pointer">
