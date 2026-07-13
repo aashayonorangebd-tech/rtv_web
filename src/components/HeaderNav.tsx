@@ -10,9 +10,10 @@
 
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
+import Link from "next/link";
 import type { MenuItem } from "@/lib/types";
 import { useActiveCategory } from "@/components/ActiveCategoryProvider";
 
@@ -43,16 +44,19 @@ export default function HeaderNav({
     currentSlug = activeSlug;
   }
 
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const sortedItems = [...menuItems].sort(
+    (a, b) => a.sequenceNumber - b.sequenceNumber
+  );
+
   return (
-    <div className="w-[calc(100%+170px)] -ml-[85px] -mr-[85px] bg-[#304a8c] border-t border-white/10 shadow-md relative z-40">
+    <div className="w-[calc(100%+170px)] -ml-[85px] -mr-[85px] bg-[#304a8c] border-t border-white/10 shadow-md z-40">
       <div className="px-[85px]">
-        <div className="max-w-[1350px] mx-auto h-[33px] md:h-[35px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6">
+        <div className="max-w-[1350px] mx-auto h-[33px] md:h-[35px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6 relative">
         <nav className="flex-1 overflow-x-auto disable-scrollbars h-full">
           <ul className="flex items-center h-full whitespace-nowrap">
-            {[...menuItems]
-              .sort((a, b) => a.sequenceNumber - b.sequenceNumber)
-              .slice(0, 9)
-              .map((item, index, arr) => {
+            {sortedItems.slice(0, 9).map((item, index, arr) => {
               const slug = getSlug(item.clientUrl);
               const isActive = currentSlug != null && slug === currentSlug;
               return (
@@ -80,15 +84,68 @@ export default function HeaderNav({
         </nav>
 
         <div className="flex items-center gap-5 text-white ml-4 pl-5 border-l border-white/20 h-full">
-          <button className="hover:text-[#a3bffa] transition-colors">
+          <button
+            className="hover:text-[#a3bffa] transition-colors"
+            onClick={() => setDrawerOpen((p) => !p)}
+          >
             <Menu size={22} />
           </button>
           <button className="hover:text-[#a3bffa] transition-colors">
             <Search size={20} />
           </button>
         </div>
-        </div>
+
+        {/* ── Drawer dropdown ─────────────────────────────────────────── */}
+        {drawerOpen && (
+          <div className="absolute w-[97.5%] ml-4 left-0 top-full bg-[#f4fff9] dark:bg-slate-700 z-50 shadow-lg rounded-b">
+            {/* Close button */}
+            <div className="flex justify-end pr-4 pt-2">
+              <button
+                onClick={() => setDrawerOpen(false)}
+                className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
+              >
+                <X size={18} className="text-gray-500 dark:text-gray-300" />
+              </button>
+            </div>
+
+            {/* Category grid */}
+            <div className="grid grid-cols-6 gap-1.5 pt-3">
+              {sortedItems.map((item) => {
+                const slug = getSlug(item.clientUrl);
+                return (
+                  <Link
+                    key={item.id}
+                    href={`/category/${slug}`}
+                    onClick={() => setDrawerOpen(false)}
+                    className="text-[1.125rem] font-medium cursor-pointer text-black dark:text-white hover:text-[#D12026] dark:hover:text-red-400 transition-colors"
+                  >
+                    <div className="flex items-center gap-[12px] ml-[30px]">
+                      <span className="py-0.5">{item.displayTitle}</span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="pb-2">
+              <hr className="border-gray-300 dark:border-gray-600" />
+            </div>
+
+            {/* Bottom utility links */}
+            <div className="text-black dark:text-white flex items-center justify-center gap-x-5 pb-4 flex-wrap">
+              <Link href="/converter" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">বাংলা কনভার্টার</Link>
+              <Link href="/live" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">লাইভ টিভি</Link>
+              <Link href="/video-gallery" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">ভিডিও</Link>
+              <Link href="/photo-gallery" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">ছবি</Link>
+              <Link href="https://play.google.com/store/apps/details?id=com.mcc.RTV&pli=1" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">অ্যান্ড্রয়েড</Link>
+              <Link href="https://apps.apple.com/us/app/rtv/id734250822" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">আইফোন</Link>
+              <Link href="/archive" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">আর্কাইভ</Link>
+              <Link href="https://rtvplus.tv/" onClick={() => setDrawerOpen(false)} className="text-[1rem] hover:text-[#D12026] transition-colors">আরটিভি প্লাস</Link>
+            </div>
+          </div>
+        )}
       </div>
     </div>
+  </div>
   );
 }
