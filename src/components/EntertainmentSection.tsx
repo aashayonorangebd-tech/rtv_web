@@ -62,7 +62,7 @@ export default function EntertainmentSection({
                 className="flex flex-row items-start gap-3 group border-b dark:border-gray-700 pb-4 last:border-b-0 last:pb-0"
               >
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-base font-bold leading-[20px] text-[#121212] dark:text-white group-hover:text-rtv-blue-text-hover line-clamp-2">
+                  <h4 className="text-base font-bold leading-[20px] text-rtv-text-dark dark:text-white group-hover:text-rtv-blue-text-hover line-clamp-2">
                     {story.mainTitle}
                   </h4>
                   {story.subTitle && (
