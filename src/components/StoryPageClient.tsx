@@ -143,7 +143,9 @@ export default function StoryPageClient({
                 <a href="https://news.google.com/publications/CAAqBwgKMPuE0QswuqDoAw?ceid=BD:bn&oc=3" target="_blank" rel="noreferrer">
                   <div className="flex justify-center items-center gap-x-3 border w-[92%] sm:w-[460px] mx-auto rounded px-2 py-1.5 group hover:border-blue-700">
                     <div className="w-10 sm:w-12 shrink-0">
-                      <Image src="https://lh3.googleusercontent.com//J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=rj-w300-h300-l95-c0xffffff" alt="Google News" width={48} height={48} className="my-auto w-full h-auto" />
+                      <div className="relative aspect-square">
+                        <Image src="https://lh3.googleusercontent.com//J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=rj-w300-h300-l95-c0xffffff" alt="Google News" fill className="object-contain" sizes="48px" />
+                      </div>
                     </div>
                     <div className="no-print">
                       <p className="text-sm sm:text-base leading-snug group-hover:text-blue-700">আরটিভি খবর পেতে গুগল নিউজ চ্যানেল ফলো করুন</p>
@@ -155,10 +157,14 @@ export default function StoryPageClient({
               {/* App Store Links */}
               <div className="w-full my-4 flex justify-center items-center gap-x-3 sm:gap-x-4 mx-auto">
                 <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal" target="_blank" rel="noreferrer">
-                  <Image src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fandriod.webp&w=256&q=75" alt="Android App" width={125} height={37} />
+                  <div className="relative w-[125px] h-[37px]">
+                    <Image src="/rtvIcon/store_icon/andriod.webp" alt="Android App" fill className="object-contain" sizes="125px" />
+                  </div>
                 </a>
                 <a href="https://apps.apple.com/us/app/rtv-news/id6753746064" target="_blank" rel="noreferrer">
-                  <Image src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fapple.webp&w=256&q=75" alt="Apple App" width={125} height={37} />
+                  <div className="relative w-[125px] h-[37px]">
+                    <Image src="/rtvIcon/store_icon/apple.webp" alt="Apple App" fill className="object-contain" sizes="125px" />
+                  </div>
                 </a>
               </div>
 

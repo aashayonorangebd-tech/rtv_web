@@ -16,9 +16,7 @@ import type {
   HomeTemplateResponse,
   CollectionItem,
   StoryModel,
-  TemplateComponent,
 } from "@/lib/types";
-import type { SectionConfig } from "@/components/HomePageSections";
 import { toStoryModel } from "@/lib/api";
 import HeroSection from "@/components/HeroSection";
 import SubHeroGrid from "@/components/SubHeroGrid";

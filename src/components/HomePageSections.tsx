@@ -27,7 +27,10 @@ export default function HomePageSections({
   specialReportStories?: StoryModel[];
   categorySections?: SectionConfig[];
 }) {
-  const resolved = categorySections.filter((sec) => sec.stories.length >= 3);
+  const excludedTitles = new Set(["ফ্যাশন"]);
+  const resolved = categorySections.filter(
+    (sec) => sec.stories.length >= 3 && !excludedTitles.has(sec.displayTitle ?? ""),
+  );
 
   if (resolved.length === 0) return null;
 

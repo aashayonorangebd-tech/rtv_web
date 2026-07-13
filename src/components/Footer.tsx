@@ -165,20 +165,26 @@ export default async function Footer() {
             </p>
             <div className="flex items-center justify-center ">
               <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal">
-                <Image
-                  alt="logo_apps"
-                  src="/rtvIcon/store_icon/andriod.webp"
-                  width={128}
-                  height={40}
-                />
+                <div className="relative w-[128px] h-[40px]">
+                  <Image
+                    alt="logo_apps"
+                    src="/rtvIcon/store_icon/andriod.webp"
+                    fill
+                    className="object-contain"
+                    sizes="128px"
+                  />
+                </div>
               </a>
               <a href="https://apps.apple.com/us/app/rtv-news/id6753746064">
-                <Image
-                  alt="logo_apps"
-                  src="/rtvIcon/store_icon/apple.webp"
-                  width={128}
-                  height={40}
-                />
+                <div className="relative w-[128px] h-[40px]">
+                  <Image
+                    alt="logo_apps"
+                    src="/rtvIcon/store_icon/apple.webp"
+                    fill
+                    className="object-contain"
+                    sizes="128px"
+                  />
+                </div>
               </a>
             </div>
             <p className="text-[1rem] font-bold mt-2.5 text-gray-800 dark:text-white">

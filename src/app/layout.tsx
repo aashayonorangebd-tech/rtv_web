@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
-import Script from "next/script";
+
 import ThemeProvider from "@/components/ThemeProvider";
 import { ActiveCategoryProvider } from "@/components/ActiveCategoryProvider";
 import Header from "@/components/Header";
@@ -30,9 +30,6 @@ export default function RootLayout({
     <html lang="bn" suppressHydrationWarning className="h-full">
       <body className="min-h-full flex flex-col">
 
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{var t=localStorage.getItem("theme")||"system",r=t==="system"?(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"):t;document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add(r),document.documentElement.style.colorScheme=r}catch(e){}})()`}
-        </Script>
         <ThemeProvider>
           <ActiveCategoryProvider>
             <Header />

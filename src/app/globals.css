@@ -35,6 +35,17 @@
   --color-scheme: light;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --background: #0f172a;
+    --foreground: #cbd5e1;
+    --primary: #2c4b9c;
+    --surface: #1e293b;
+    --border: #334155;
+    --color-scheme: dark;
+  }
+}
+
 .dark {
   --background: #0f172a;
   --foreground: #cbd5e1;
