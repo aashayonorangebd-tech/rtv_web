@@ -1,8 +1,9 @@
 // ─── CountrySection ────────────────────────────────────────────────────
 // দেশজুড়ে section on homepage.
-// Small cards match sub-hero grid (aspect-video, h-20 title, hr).
-// Space divided: small cards = 3+3 cols, big card = 6 cols.
-// Border-right only on col2; same padding on col1/col2 for equal images.
+// Layout:
+//   - Filter bar (division/district/upazila selects + search button)
+//   - Left 6-col: 2×2 grid of small cards (image + 1.2rem title)
+//   - Right 6-col: 1 featured card (image + 1.2rem title + subtitle)
 // ─────────────────────────────────────────────────────────────────────────
 
 import React from "react";
@@ -21,62 +22,100 @@ export default function CountrySection({
 }) {
   if (stories.length < 5) return null;
 
-  const col1 = [stories[1], stories[3]];
-  const col2 = [stories[2], stories[4]];
-  const col3 = stories[5];
+  const leftStories = stories.slice(0, 4);
+  const rightStory = stories[4];
 
   return (
     <section className="section-padding">
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b dark:border-gray-700 items-stretch">
-          {/* ─── 3-col LEFT: 2 small cards (idx 1,3) — same padding as col2 ──── */}
-          <div className="col-span-3 md:pr-3">
-            <div className="flex flex-col gap-2.5 h-full">
-              {col1.map((story) => (
-                <a key={story.storyId} className="flex flex-col w-full group" href={storyPath(story)}>
-                  <div className="relative">
-                    <img src={story.fileName} alt={story.mainTitle} className="object-cover object-center max-w-full aspect-video" loading="lazy" />
-                  </div>
-                  <div className="pt-2 h-20">
-                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">{story.mainTitle}</h3>
-                  </div>
-                  <hr className="border-[#e2e2e2] dark:border-gray-700" />
-                </a>
-              ))}
+        {/* ─── Filter bar: division/district/upazila selects ──────────── */}
+        <div className="bg-[#F4F4F4] dark:bg-slate-700 my-5 max-sm:my-0">
+          <form className="w-full py-3">
+            <div className="grid grid-cols-4 max-sm:grid-cols-1 gap-x-5">
+              <div className="w-full md:w-full px-3 mb-3 md:mb-0">
+                <div className="relative">
+                  <select className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-white text-gray-700 py-3 pr-8 rounded focus:outline-none focus:bg-white focus:border-gray-500 cursor-pointer">
+                    <option value="" disabled selected>বিভাগ</option>
+                  </select>
+                </div>
+              </div>
+              <div className="w-full md:w-full px-3 mb-3 md:mb-0">
+                <div className="relative">
+                  <select className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-white text-gray-700 py-3 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer">
+                    <option value="" disabled selected>জেলা</option>
+                  </select>
+                </div>
+              </div>
+              <div className="w-full md:w-full px-3 mb-3 md:mb-0">
+                <div className="relative">
+                  <select className="text-[1.2rem] block appearance-none w-full bg-white border border-white text-gray-700 py-3 max-sm:py-2 max-sm:text-[1.2rem] pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer">
+                    <option value="" disabled selected>উপজেলা</option>
+                  </select>
+                </div>
+              </div>
+              <div className="px-2.5">
+                <button type="submit" disabled className="text-[1.5rem] text-white bg-hover-text-color w-full border-none font-medium rounded-lg px-20 py-3 text-center max-sm:text-[1.2rem] disabled:opacity-25 disabled:cursor-not-allowed">
+                  খুঁজুন
+                </button>
+              </div>
             </div>
+          </form>
+        </div>
+
+        {/* ─── Content: 6-col left (2×2 grid) + 6-col right (1 big card) ──── */}
+        <div className="grid grid-cols-12 gap-2.5 border-b py-2.5">
+          {/* ─── Left: 2×2 grid of 4 small cards ────────────────────────── */}
+          <div className="col-span-full md:col-span-6 grid grid-cols-2 gap-5 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+            {leftStories.map((story) => (
+              <div key={story.storyId}>
+                <a className="flex flex-col w-full group" href={storyPath(story)}>
+                  <div className="relative">
+                    <img
+                      src={story.fileName}
+                      alt={story.mainTitle}
+                      className="object-cover object-center max-w-full aspect-video"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                  </div>
+                  <div className="pt-2">
+                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">
+                      {story.mainTitle}
+                    </h3>
+                  </div>
+                </a>
+              </div>
+            ))}
           </div>
 
-          {/* ─── 3-col MIDDLE: 2 small cards (idx 2,4) — border-r + same padding ──── */}
-          <div className="col-span-3 md:pr-3 md:border-r border-[#e2e2e2] dark:border-gray-700">
-            <div className="flex flex-col gap-2.5 h-full">
-              {col2.map((story) => (
-                <a key={story.storyId} className="flex flex-col w-full group" href={storyPath(story)}>
+          {/* ─── Right: 1 featured card ────────────────────────────────── */}
+          <div className="col-span-full md:col-span-6">
+            {rightStory && (
+              <div>
+                <a className="flex flex-col w-full group" href={storyPath(rightStory)}>
                   <div className="relative">
-                    <img src={story.fileName} alt={story.mainTitle} className="object-cover object-center max-w-full aspect-video" loading="lazy" />
+                    <img
+                      src={rightStory.fileName}
+                      alt={rightStory.mainTitle}
+                      className="object-cover object-center max-w-full aspect-video"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
-                  <div className="pt-2 h-20">
-                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">{story.mainTitle}</h3>
+                  <div className="pt-2 my-2.5">
+                    <h3 className="dark:text-white text-[1.2rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">
+                      {rightStory.mainTitle}
+                    </h3>
                   </div>
-                  <hr className="border-[#e2e2e2] dark:border-gray-700" />
+                  {rightStory.subTitle && (
+                    <p className="text-base text-[#555] dark:text-slate-300">
+                      {rightStory.subTitle}
+                    </p>
+                  )}
                 </a>
-              ))}
-            </div>
-          </div>
-
-          {/* ─── 6-col RIGHT: 1 big card (idx 5) ────────────── */}
-          <div className="col-span-6">
-            {col3 && (
-              <a className="flex flex-col w-full group h-full" href={storyPath(col3)}>
-                <div className="relative flex-1 min-h-[250px]">
-                  <img src={col3.fileName} alt={col3.mainTitle} className="object-cover object-center w-full h-full absolute inset-0" loading="lazy" />
-                </div>
-                <div className="pt-2 my-2.5">
-                  <h3 className="dark:text-white text-[1.5rem] leading-[28px] font-bold group-hover:text-rtv-blue-text-hover">{col3.mainTitle}</h3>
-                </div>
-                {col3.subTitle && <p className="text-base text-[#555] dark:text-slate-300">{col3.subTitle}</p>}
-              </a>
+              </div>
             )}
           </div>
         </div>
