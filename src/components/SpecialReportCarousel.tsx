@@ -19,7 +19,7 @@ export default function SpecialReportCarousel({
 
   return (
     <section className="section-padding">
-      <div className="main-container sm:border-2 sm:py-5 shadow-sm rounded dark:border-gray-700 sm:px-4">
+      <div className="main-container sm:border-2 sm:border-[#e5e7eb] sm:py-5 shadow-sm rounded dark:sm:border-gray-700">
         <SectionHeader title="বিশেষ প্রতিবেদন" href="/special-report" />
 
         <div className="mt-5 relative">
