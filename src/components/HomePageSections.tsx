@@ -5,6 +5,7 @@ import CategorySection from "@/components/CategorySection";
 import EntertainmentSection from "@/components/EntertainmentSection";
 import CountrySection from "@/components/CountrySection";
 import InternationalSection from "@/components/InternationalSection";
+import LifestyleSection from "@/components/LifestyleSection";
 
 export interface SectionConfig {
   componentId: string;
@@ -49,6 +50,12 @@ export default function HomePageSections({
             />
           ) : sec.displayTitle === "আন্তর্জাতিক" ? (
             <InternationalSection
+              title={sec.displayTitle || ""}
+              href={sec.slug ? `/${sec.slug}` : "#"}
+              stories={sec.stories}
+            />
+          ) : sec.displayTitle === "লাইফস্টাইল" ? (
+            <LifestyleSection
               title={sec.displayTitle || ""}
               href={sec.slug ? `/${sec.slug}` : "#"}
               stories={sec.stories}
