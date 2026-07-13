@@ -8,6 +8,7 @@ import InternationalSection from "@/components/InternationalSection";
 import LifestyleSection from "@/components/LifestyleSection";
 import ProbashSection from "@/components/ProbashSection";
 import VideoPhotoSection from "@/components/VideoPhotoSection";
+import DualCategorySection from "@/components/DualCategorySection";
 
 export interface SectionConfig {
   componentId: string;
@@ -32,13 +33,20 @@ export default function HomePageSections({
       <SpecialReportCarousel stories={specialReportStories} />
 
       {resolved.map((sec, i) => {
-        if (sec.displayTitle === "ছবি" && resolved[i - 1]?.displayTitle === "ভিডিও") {
+        if (
+          (sec.displayTitle === "ছবি" && resolved[i - 1]?.displayTitle === "ভিডিও") ||
+          (sec.displayTitle === "অর্থনীতি" && resolved[i - 1]?.displayTitle === "রাজনীতি")
+        ) {
           return null;
         }
 
         const isVideoPhoto =
           sec.displayTitle === "ভিডিও" &&
           resolved[i + 1]?.displayTitle === "ছবি";
+
+        const isDualCategory =
+          sec.displayTitle === "রাজনীতি" &&
+          resolved[i + 1]?.displayTitle === "অর্থনীতি";
 
         const commonProps = {
           title: sec.displayTitle || "",
@@ -55,6 +63,11 @@ export default function HomePageSections({
             </div>
             {isVideoPhoto ? (
               <VideoPhotoSection />
+            ) : isDualCategory ? (
+              <DualCategorySection
+                left={{ title: sec.displayTitle || "", href: sec.slug ? `/${sec.slug}` : "#", stories: sec.stories }}
+                right={{ title: resolved[i + 1].displayTitle || "", href: resolved[i + 1].slug ? `/${resolved[i + 1].slug}` : "#", stories: resolved[i + 1].stories }}
+              />
             ) : sec.displayTitle === "বিনোদন" ? (
               <EntertainmentSection {...commonProps} />
             ) : sec.displayTitle === "দেশজুড়ে" ? (
