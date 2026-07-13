@@ -67,8 +67,8 @@ export default function HeaderNav({
                     aria-current={isActive ? "page" : undefined}
                     className={`text-[15px] md:text-[16px] font-bold transition-colors px-3 md:px-5 tracking-wide ${
                       isActive
-                        ? "bg-red-600 text-white rounded-[4px] mx-3"
-                        : "text-white hover:text-[#a3bffa]"
+                        ? "bg-red-600 text-white rounded-[4px]"
+                        : "text-white hover:bg-red-600 hover:text-white rounded-[4px]"
                     }`}
                   >
                     {item.displayTitle}
@@ -85,12 +85,12 @@ export default function HeaderNav({
 
         <div className="flex items-center gap-5 text-white ml-4 pl-5 border-l border-white/20 h-full">
           <button
-            className="hover:text-[#a3bffa] transition-colors"
+            className="hover:text-red-600 transition-colors"
             onClick={() => setDrawerOpen((p) => !p)}
           >
             {drawerOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
-          <button className="hover:text-[#a3bffa] transition-colors">
+          <button className="hover:text-red-600 transition-colors">
             <Search size={20} />
           </button>
         </div>

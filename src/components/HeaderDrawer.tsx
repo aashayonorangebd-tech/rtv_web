@@ -40,7 +40,7 @@ export default function HeaderDrawer({
               <Link
                 href={`/category/${slug}`}
                 onClick={onClose}
-                className="w-full hover:text-[#D12026] dark:text-black"
+                className="w-full hover:text-red-600 dark:text-black"
               >
                 <div className="flex items-center gap-[12px] ml-[30px]">
                   <span className="py-0.5">{item.displayTitle}</span>
