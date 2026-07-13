@@ -20,6 +20,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Link from "next/link";
+import Image from "next/image";
 import type { FooterItem } from "@/lib/types";
 
 async function getFooterLinks(): Promise<FooterItem[]> {
@@ -109,9 +110,11 @@ export default async function Footer() {
           <div className="mt-1 flex flex-col justify-between items-start">
             <div className="h-auto w-1/5 max-sm:w-[120px]">
               <Link href="/">
-                <img
+                <Image
                   alt="RTV Logo"
                   src="/rtv-logo.svg"
+                  width={180}
+                  height={50}
                   className="w-full h-auto"
                 />
               </Link>
@@ -162,27 +165,19 @@ export default async function Footer() {
             </p>
             <div className="flex items-center justify-center ">
               <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal">
-                <img
+                <Image
                   alt="logo_apps"
                   src="/rtvIcon/store_icon/andriod.webp"
-                  width={100}
-                  height={100}
-                  decoding="async"
-                  data-nimg="1"
-                  loading="lazy"
-                  style={{ color: "transparent", width: 128, height: "auto" }}
+                  width={128}
+                  height={40}
                 />
               </a>
               <a href="https://apps.apple.com/us/app/rtv-news/id6753746064">
-                <img
+                <Image
                   alt="logo_apps"
                   src="/rtvIcon/store_icon/apple.webp"
-                  width={100}
-                  height={100}
-                  decoding="async"
-                  data-nimg="1"
-                  loading="lazy"
-                  style={{ color: "transparent", width: 128, height: "auto" }}
+                  width={128}
+                  height={40}
                 />
               </a>
             </div>

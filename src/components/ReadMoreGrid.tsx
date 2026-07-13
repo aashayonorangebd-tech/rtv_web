@@ -1,5 +1,6 @@
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
+import Image from "next/image";
 
 type Props = {
   title?: string;
@@ -28,11 +29,15 @@ export default function ReadMoreGrid({ title = "আরও পড়ুন", stories
               href={storyPath(rmStory)}
               className="flex flex-col h-full gap-3 items-start pb-3 transition group"
             >
-              <img
-                src={rmStory.fileName}
-                alt={rmStory.mainTitle}
-                className="aspect-video object-cover rounded-md flex-shrink-0 w-full"
-              />
+              <div className="relative aspect-video overflow-hidden rounded-md">
+                <Image
+                  src={rmStory.fileName}
+                  alt={rmStory.mainTitle}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
 
               {/* FIX: flex-grow ensures the content stretches to push the date to the bottom */}
               <div className="flex flex-col flex-grow w-full">

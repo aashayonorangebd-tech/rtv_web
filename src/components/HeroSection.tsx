@@ -3,6 +3,7 @@
 import type { StoryModel } from "@/lib/types";
 import AdBanner from "@/components/AdBanner";
 import { storyPath } from "@/lib/api";
+import Image from "next/image";
 
 // ─── HeroSection ─────────────────────────────────────────────────────────
 // 12-column responsive hero grid for the homepage lead stories + ad sidebar.
@@ -53,15 +54,13 @@ export default function HeroSection({
                 href={storyPath(lead)}
               >
                 {/* Image — 16:9 aspect ratio, 650×365 bounds */}
-                <div className="relative">
-                  <img
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
                     alt={lead.mainTitle}
                     src={lead.fileName}
-                    width={650}
-                    height={365}
-                    decoding="async"
-                    className="object-cover object-center max-w-full aspect-video"
-                    loading="lazy"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
 
@@ -92,15 +91,13 @@ export default function HeroSection({
                     href={storyPath(story)}
                   >
                     {/* Image — 16:9, same dimensions as lead */}
-                    <div className="relative">
-                      <img
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
                         alt={story.mainTitle}
                         src={story.fileName}
-                        width={650}
-                        height={365}
-                        decoding="async"
-                        className="object-cover object-center max-w-full aspect-video"
-                        loading="lazy"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
 

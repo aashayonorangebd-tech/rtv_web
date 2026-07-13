@@ -2,6 +2,7 @@ import React from "react";
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 export default function QuadCategorySection({
   sections,
@@ -30,12 +31,13 @@ export default function QuadCategorySection({
                     className="group"
                   >
                     <div className="aspect-video rounded relative max-w-full overflow-hidden bg-cover bg-no-repeat">
-                      <div className="relative">
-                        <img
+                      <div className="relative aspect-video overflow-hidden">
+                        <Image
                           src={featured.fileName}
                           alt={featured.mainTitle}
-                          className="object-cover object-center max-w-full aspect-video"
-                          loading="lazy"
+                          fill
+                          className="object-cover object-center"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                       </div>

@@ -14,6 +14,7 @@ import React from "react";
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 export default function InternationalSection({
   title,
@@ -39,12 +40,13 @@ export default function InternationalSection({
           {/* ─── 6-col LEFT: 1 featured card ──────────────────────────── */}
           <div className="col-span-6 md:col-span-6 lg:col-span-6 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
             <a className="flex flex-col w-full group" href={storyPath(bigCard)}>
-              <div className="relative">
-                <img
+              <div className="relative aspect-video overflow-hidden">
+                <Image
                   src={bigCard.fileName}
                   alt={bigCard.mainTitle}
-                  className="object-cover object-center max-w-full aspect-video"
-                  loading="lazy"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
@@ -66,12 +68,13 @@ export default function InternationalSection({
             {middleCards.map((story, i) => (
               <React.Fragment key={story.storyId}>
                 <a className="flex flex-col w-full group" href={storyPath(story)}>
-                  <div className="relative">
-                    <img
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
                       src={story.fileName}
                       alt={story.mainTitle}
-                      className="object-cover object-center max-w-full aspect-video"
-                      loading="lazy"
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
@@ -100,12 +103,13 @@ export default function InternationalSection({
                     </h3>
                   </div>
                   <div className="col-span-5">
-                    <div className="relative">
-                      <img
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
                         src={story.fileName}
                         alt={story.mainTitle}
-                        className="object-cover object-center max-w-full aspect-video"
-                        loading="lazy"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                     </div>

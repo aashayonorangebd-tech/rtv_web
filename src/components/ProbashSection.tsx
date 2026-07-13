@@ -19,6 +19,7 @@ import React, { useState, useEffect } from "react";
 import type { StoryModel, PrayerTimeResponse } from "@/lib/types";
 import { ENDPOINTS, storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.rtvonline.com";
 
@@ -306,12 +307,13 @@ export default function ProbashSection({
                   {/* Left: featured card */}
                   <div className="col-span-1 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
                     <a className="flex flex-col w-full group" href={storyPath(featured)}>
-                      <div className="relative">
-                        <img
+                      <div className="relative aspect-video overflow-hidden">
+                        <Image
                           src={featured.fileName}
                           alt={featured.mainTitle}
-                          className="object-cover object-center max-w-full aspect-video"
-                          loading="lazy"
+                          fill
+                          className="object-cover object-center"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                       </div>
@@ -342,12 +344,13 @@ export default function ProbashSection({
                             </h3>
                           </div>
                           <div className="col-span-5">
-                            <div className="relative">
-                              <img
+                            <div className="relative aspect-video overflow-hidden">
+                              <Image
                                 src={story.fileName}
                                 alt={story.mainTitle}
-                                className="object-cover object-center max-w-full aspect-video"
-                                loading="lazy"
+                                fill
+                                className="object-cover object-center"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               />
                               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                             </div>
@@ -381,12 +384,13 @@ export default function ProbashSection({
                           )}
                         </div>
                         <div className="col-span-3">
-                          <div className="relative">
-                            <img
+                          <div className="relative aspect-video overflow-hidden">
+                            <Image
                               src={story.fileName}
                               alt={story.mainTitle}
-                              className="object-cover object-center max-w-full aspect-video"
-                              loading="lazy"
+                              fill
+                              className="object-cover object-center"
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             />
                             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                           </div>
@@ -415,12 +419,13 @@ export default function ProbashSection({
                           )}
                         </div>
                         <div className="col-span-3">
-                          <div className="relative">
-                            <img
+                          <div className="relative aspect-video overflow-hidden">
+                            <Image
                               src={story.fileName}
                               alt={story.mainTitle}
-                              className="object-cover object-center max-w-full aspect-video"
-                              loading="lazy"
+                              fill
+                              className="object-cover object-center"
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             />
                             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                           </div>

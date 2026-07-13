@@ -1,6 +1,7 @@
 import React from "react";
 import { ENDPOINTS, toCategoryStoryModel, storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 const API_BASE = process.env.API_BASE_URL || "https://api.rtvonline.com";
 
@@ -46,12 +47,13 @@ export default async function VideoPhotoSection() {
                 className="flex flex-col w-full group"
                 href={storyPath(videoFeatured)}
               >
-                <div className="relative">
-                  <img
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
                     src={videoFeatured.fileName}
                     alt={videoFeatured.mainTitle}
-                    className="object-cover object-center max-w-full aspect-video"
-                    loading="lazy"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <svg
@@ -91,12 +93,13 @@ export default async function VideoPhotoSection() {
                       className="flex flex-col w-full group"
                       href={storyPath(story)}
                     >
-                      <div className="relative">
-                        <img
+                      <div className="relative aspect-video overflow-hidden">
+                        <Image
                           src={story.fileName}
                           alt={story.mainTitle}
-                          className="object-cover object-center max-w-full aspect-video"
-                          loading="lazy"
+                          fill
+                          className="object-cover object-center"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                           <svg
@@ -143,12 +146,13 @@ export default async function VideoPhotoSection() {
                 className="flex flex-col w-full group"
                 href={storyPath(photoFeatured)}
               >
-                <div className="relative">
-                  <img
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
                     src={photoFeatured.fileName}
                     alt={photoFeatured.mainTitle}
-                    className="object-cover object-center max-w-full aspect-video"
-                    loading="lazy"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                   <div className="absolute right-0 top-0">
@@ -182,12 +186,13 @@ export default async function VideoPhotoSection() {
                       className="flex flex-col w-full group"
                       href={storyPath(story)}
                     >
-                      <div className="relative">
-                        <img
+                      <div className="relative aspect-video overflow-hidden">
+                        <Image
                           src={story.fileName}
                           alt={story.mainTitle}
-                          className="object-cover object-center max-w-full aspect-video"
-                          loading="lazy"
+                          fill
+                          className="object-cover object-center"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                         <div className="absolute right-0 top-0">

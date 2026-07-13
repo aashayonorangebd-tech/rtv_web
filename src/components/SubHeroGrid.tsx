@@ -29,6 +29,7 @@
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SidebarTabWidget from "@/components/SidebarTabWidget";
+import Image from "next/image";
 
 export default function SubHeroGrid({
   stories,
@@ -71,15 +72,13 @@ export default function SubHeroGrid({
                       href={storyPath(story)}
                     >
                       {/* Image — 16:9 aspect ratio with object-cover */}
-                      <div className="relative">
-                        <img
+                      <div className="relative aspect-video overflow-hidden">
+                        <Image
                           src={story.fileName}
                           alt={story.mainTitle}
-                          width={650}
-                          height={365}
-                          decoding="async"
-                          className="object-cover object-center max-w-full aspect-video"
-                          loading="lazy"
+                          fill
+                          className="object-cover object-center"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         {/* Empty overlay div for future play button etc. */}
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />

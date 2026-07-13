@@ -22,6 +22,7 @@ import React from "react";
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 export default function CategorySection({
   title,
@@ -56,12 +57,13 @@ export default function CategorySection({
                     className="flex flex-col w-full group mb-5 last:mb-0"
                     href={storyPath(story)}
                   >
-                    <div className="relative">
-                      <img
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
                         src={story.fileName}
                         alt={story.mainTitle}
-                        className="object-cover object-center max-w-full aspect-video"
-                        loading="lazy"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
                     <div className="pt-2">
@@ -79,14 +81,15 @@ export default function CategorySection({
                   className="flex flex-col w-full group"
                   href={storyPath(featured)}
                 >
-                  <div className="relative">
-                    <img
-                      src={featured.fileName}
-                      alt={featured.mainTitle}
-                      className="object-cover object-center max-w-full aspect-video"
-                      loading="lazy"
-                    />
-                  </div>
+                  <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={featured.fileName}
+                        alt={featured.mainTitle}
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
                   <div className="pt-2 my-2.5">
                     <h3 className="dark:text-white text-[1.5rem] leading-[23px] font-bold group-hover:text-rtv-blue-text-hover">
                       {featured.mainTitle}
@@ -116,12 +119,13 @@ export default function CategorySection({
                     </h3>
                   </div>
                   <div className="col-span-5">
-                    <div className="relative">
-                      <img
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
                         src={story.fileName}
                         alt={story.mainTitle}
-                        className="object-cover object-center max-w-full aspect-video"
-                        loading="lazy"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                     </div>

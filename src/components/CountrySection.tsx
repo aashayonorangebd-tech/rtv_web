@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import type { StoryModel, Division, District, SubDistrict } from "@/lib/types";
 import { ENDPOINTS, storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 export default function CountrySection({
   title,
@@ -33,11 +34,10 @@ export default function CountrySection({
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedSubDistrict, setSelectedSubDistrict] = useState("");
 
-  const [loading, setLoading] = useState({ divisions: false, districts: false, subDistricts: false });
+  const [loading, setLoading] = useState({ divisions: true, districts: false, subDistricts: false });
 
   // ── Fetch divisions on mount ──────────────────────────────────────────
   useEffect(() => {
-    setLoading((prev) => ({ ...prev, divisions: true }));
     fetch(ENDPOINTS.location.divisions)
       .then((res) => res.json())
       .then((data: unknown) => {
@@ -49,18 +49,7 @@ export default function CountrySection({
 
   // ── Fetch districts when division changes ─────────────────────────────
   useEffect(() => {
-    if (!selectedDivision) {
-      setDistricts([]);
-      setSelectedDistrict("");
-      setSelectedSubDistrict("");
-      setSubDistricts([]);
-      return;
-    }
-
-    setLoading((prev) => ({ ...prev, districts: true }));
-    setSelectedDistrict("");
-    setSelectedSubDistrict("");
-    setSubDistricts([]);
+    if (!selectedDivision) return;
 
     fetch(ENDPOINTS.location.districts(Number(selectedDivision)))
       .then((res) => res.json())
@@ -73,14 +62,7 @@ export default function CountrySection({
 
   // ── Fetch sub-districts when district changes ─────────────────────────
   useEffect(() => {
-    if (!selectedDistrict) {
-      setSubDistricts([]);
-      setSelectedSubDistrict("");
-      return;
-    }
-
-    setLoading((prev) => ({ ...prev, subDistricts: true }));
-    setSelectedSubDistrict("");
+    if (!selectedDistrict) return;
 
     fetch(ENDPOINTS.location.subDistricts(Number(selectedDistrict)))
       .then((res) => res.json())
@@ -128,7 +110,13 @@ export default function CountrySection({
                   <select
                     className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-rtv-border-clr text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-gray-500 cursor-pointer"
                     value={selectedDivision}
-                    onChange={(e) => setSelectedDivision(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedDivision(e.target.value);
+                      setSelectedDistrict("");
+                      setSelectedSubDistrict("");
+                      setSubDistricts([]);
+                      setLoading((prev) => ({ ...prev, districts: true }));
+                    }}
                   >
                     <option value="" disabled>বিভাগ</option>
                     {divisions.map((d) => (
@@ -142,7 +130,12 @@ export default function CountrySection({
                   <select
                     className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-rtv-border-clr text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
                     value={selectedDistrict}
-                    onChange={(e) => setSelectedDistrict(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedDistrict(e.target.value);
+                      setSelectedSubDistrict("");
+                      setSubDistricts([]);
+                      setLoading((prev) => ({ ...prev, subDistricts: true }));
+                    }}
                     disabled={!selectedDivision || loading.districts}
                   >
                     <option value="" disabled>জেলা</option>
@@ -187,12 +180,13 @@ export default function CountrySection({
             {leftStories.map((story) => (
               <div key={story.storyId}>
                 <a className="flex flex-col w-full group" href={storyPath(story)}>
-                  <div className="relative">
-                    <img
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
                       src={story.fileName}
                       alt={story.mainTitle}
-                      className="object-cover object-center max-w-full aspect-video"
-                      loading="lazy"
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
@@ -211,12 +205,13 @@ export default function CountrySection({
             {rightStory && (
               <div>
                 <a className="flex flex-col w-full group" href={storyPath(rightStory)}>
-                  <div className="relative">
-                    <img
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
                       src={rightStory.fileName}
                       alt={rightStory.mainTitle}
-                      className="object-cover object-center max-w-full aspect-video"
-                      loading="lazy"
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                   </div>

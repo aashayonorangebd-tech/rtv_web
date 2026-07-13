@@ -1,6 +1,7 @@
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 type Props = {
   title?: string;
@@ -37,11 +38,13 @@ export default function RelatedStoriesSidebar({
                   </h3>
                 </div>
                 <div className="col-span-5">
-                  <div className="relative">
-                    <img
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
                       src={relStory.fileName}
                       alt={relStory.mainTitle}
-                      className="object-cover object-center max-w-full aspect-video"
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                 </div>

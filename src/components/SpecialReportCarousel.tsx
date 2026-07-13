@@ -4,15 +4,16 @@ import { useState } from "react";
 import type { StoryModel } from "@/lib/types";
 import { storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 
 export default function SpecialReportCarousel({
   stories,
 }: {
   stories?: StoryModel[];
 }) {
-  if (!stories || stories.length === 0) return null;
-
   const [activeIndex, setActiveIndex] = useState(0);
+
+  if (!stories || stories.length === 0) return null;
   const totalItems = stories.length;
   const visibleCount = 4;
   const maxIndex = Math.max(0, totalItems - visibleCount);
@@ -38,12 +39,13 @@ export default function SpecialReportCarousel({
                     className="flex flex-wrap justify-between gap-x-5 gap-y-2.5 content-start text-[#2F343F] aspect-video group sm:px-2.5"
                   >
                     <div className="w-full relative max-w-full overflow-hidden max-sm:rounded-md">
-                      <div className="relative">
-                        <img
+                      <div className="relative aspect-video overflow-hidden">
+                        <Image
                           src={item.fileName}
                           alt={item.mainTitle}
-                          className="object-cover object-center max-w-full aspect-video"
-                          loading="lazy"
+                          fill
+                          className="object-cover object-center"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         />
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                           <svg

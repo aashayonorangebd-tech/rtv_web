@@ -9,6 +9,7 @@ import ReadMoreGrid from "@/components/ReadMoreGrid";
 import SidebarTabWidget from "@/components/SidebarTabWidget";
 import CategoryPopularSidebar from "@/components/CategoryPopularSidebar";
 import { useActiveCategory } from "@/components/ActiveCategoryProvider";
+import Image from "next/image";
 
 type Props = {
   story: StoryDetailsResponse;
@@ -118,11 +119,13 @@ export default function StoryPageClient({
             <div className="py-2 max-md:pt-0">
               <figure>
                 <div className="w-full aspect-video">
-                  <div className="relative aspect-video">
-                    <img
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
                       src={story.mainImageFileName || "/Images/rtv-logo.svg"}
                       alt={story.alt || story.mainTitle}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 66vw"
                     />
                   </div>
                 </div>
@@ -140,7 +143,7 @@ export default function StoryPageClient({
                 <a href="https://news.google.com/publications/CAAqBwgKMPuE0QswuqDoAw?ceid=BD:bn&oc=3" target="_blank" rel="noreferrer">
                   <div className="flex justify-center items-center gap-x-3 border w-[92%] sm:w-[460px] mx-auto rounded px-2 py-1.5 group hover:border-blue-700">
                     <div className="w-10 sm:w-12 shrink-0">
-                      <img src="https://lh3.googleusercontent.com//J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=rj-w300-h300-l95-c0xffffff" alt="Google News" className="my-auto w-full h-auto" />
+                      <Image src="https://lh3.googleusercontent.com//J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=rj-w300-h300-l95-c0xffffff" alt="Google News" width={48} height={48} className="my-auto w-full h-auto" />
                     </div>
                     <div className="no-print">
                       <p className="text-sm sm:text-base leading-snug group-hover:text-blue-700">আরটিভি খবর পেতে গুগল নিউজ চ্যানেল ফলো করুন</p>
@@ -152,10 +155,10 @@ export default function StoryPageClient({
               {/* App Store Links */}
               <div className="w-full my-4 flex justify-center items-center gap-x-3 sm:gap-x-4 mx-auto">
                 <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal" target="_blank" rel="noreferrer">
-                  <img src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fandriod.webp&w=256&q=75" alt="Android App" width="125" height="37" />
+                  <Image src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fandriod.webp&w=256&q=75" alt="Android App" width={125} height={37} />
                 </a>
                 <a href="https://apps.apple.com/us/app/rtv-news/id6753746064" target="_blank" rel="noreferrer">
-                  <img src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fapple.webp&w=256&q=75" alt="Apple App" width="125" height="37" />
+                  <Image src="/_next/image?url=%2FrtvIcon%2Fstore_icon%2Fapple.webp&w=256&q=75" alt="Apple App" width={125} height={37} />
                 </a>
               </div>
 
