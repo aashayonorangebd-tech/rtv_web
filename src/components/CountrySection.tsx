@@ -126,7 +126,7 @@ export default function CountrySection({
               <div className="w-full md:w-full px-3 mb-3 md:mb-0">
                 <div className="relative">
                   <select
-                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-[#e5e7eb] text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-gray-500 cursor-pointer"
+                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-rtv-border-clr text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-gray-500 cursor-pointer"
                     value={selectedDivision}
                     onChange={(e) => setSelectedDivision(e.target.value)}
                   >
@@ -140,7 +140,7 @@ export default function CountrySection({
               <div className="w-full md:w-full px-3 mb-3 md:mb-0">
                 <div className="relative">
                   <select
-                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-[#e5e7eb] text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
+                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-rtv-border-clr text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
                     value={selectedDistrict}
                     onChange={(e) => setSelectedDistrict(e.target.value)}
                     disabled={!selectedDivision || loading.districts}
@@ -155,7 +155,7 @@ export default function CountrySection({
               <div className="w-full md:w-full px-3 mb-3 md:mb-0">
                 <div className="relative">
                   <select
-                    className="text-[1.2rem] block appearance-none w-full bg-white border border-[#e5e7eb] text-gray-700 py-3 max-sm:py-2 max-sm:text-[1.2rem] pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
+                    className="text-[1.2rem] block appearance-none w-full bg-white border border-rtv-border-clr text-gray-700 py-3 max-sm:py-2 max-sm:text-[1.2rem] pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
                     value={selectedSubDistrict}
                     onChange={(e) => setSelectedSubDistrict(e.target.value)}
                     disabled={!selectedDistrict || loading.subDistricts}
@@ -181,7 +181,7 @@ export default function CountrySection({
         </div>
 
         {/* ─── Content: 6-col left (2×2 grid) + 6-col right (1 big card) ──── */}
-        <div className="grid grid-cols-12 gap-2.5 border-b border-[#e5e7eb] dark:border-gray-700 py-2.5">
+        <div className="grid grid-cols-12 gap-2.5 border-b border-rtv-border-clr dark:border-gray-700 py-2.5">
           {/* ─── Left: 2×2 grid of 4 small cards ────────────────────────── */}
           <div className="col-span-full md:col-span-6 grid grid-cols-2 gap-5 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
             {leftStories.map((story) => (

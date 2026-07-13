@@ -44,7 +44,7 @@ export default function CategorySection({
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-[#e5e7eb] dark:border-gray-700">
+        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-gray-700">
           {/* ─── 9-COL MAIN CONTENT (border-right) ──────────────────── */}
           <div className="col-span-full md:col-span-12 lg:col-span-9 border-r border-[#e2e2e2] md:pr-2.5 dark:border-gray-700">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5">

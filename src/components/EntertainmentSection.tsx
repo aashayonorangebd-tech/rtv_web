@@ -29,7 +29,7 @@ export default function EntertainmentSection({
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-[#e5e7eb] dark:border-gray-700">
+        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-gray-700">
           {/* ─── Left: featured card ──────────────────────────────────── */}
           <div className="col-span-6 md:col-span-6 lg:col-span-6 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
             <a className="flex flex-col w-full group" href={storyPath(featured)}>
