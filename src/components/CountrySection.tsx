@@ -126,7 +126,7 @@ export default function CountrySection({
               <div className="w-full md:w-full px-3 mb-3 md:mb-0">
                 <div className="relative">
                   <select
-                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-white text-gray-700 py-3 pr-8 rounded focus:outline-none focus:bg-white focus:border-gray-500 cursor-pointer"
+                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-[#e5e7eb] text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-gray-500 cursor-pointer"
                     value={selectedDivision}
                     onChange={(e) => setSelectedDivision(e.target.value)}
                   >
@@ -140,7 +140,7 @@ export default function CountrySection({
               <div className="w-full md:w-full px-3 mb-3 md:mb-0">
                 <div className="relative">
                   <select
-                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-white text-gray-700 py-3 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
+                    className="max-sm:py-2 text-[1.2rem] block appearance-none w-full bg-white border border-[#e5e7eb] text-gray-700 py-3 pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
                     value={selectedDistrict}
                     onChange={(e) => setSelectedDistrict(e.target.value)}
                     disabled={!selectedDivision || loading.districts}
@@ -155,7 +155,7 @@ export default function CountrySection({
               <div className="w-full md:w-full px-3 mb-3 md:mb-0">
                 <div className="relative">
                   <select
-                    className="text-[1.2rem] block appearance-none w-full bg-white border border-white text-gray-700 py-3 max-sm:py-2 max-sm:text-[1.2rem] pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
+                    className="text-[1.2rem] block appearance-none w-full bg-white border border-[#e5e7eb] text-gray-700 py-3 max-sm:py-2 max-sm:text-[1.2rem] pl-2.5 pr-8 rounded focus:outline-none focus:bg-white focus:border-hover-text-color cursor-pointer"
                     value={selectedSubDistrict}
                     onChange={(e) => setSelectedSubDistrict(e.target.value)}
                     disabled={!selectedDistrict || loading.subDistricts}
