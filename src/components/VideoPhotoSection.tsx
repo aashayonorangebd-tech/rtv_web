@@ -86,7 +86,7 @@ export default async function VideoPhotoSection() {
             {videoGrid.length > 0 && (
               <div className="flex gap-5 mt-5">
                 {videoGrid.map((story) => (
-                  <div key={story.storyId} className="flex-grow">
+                  <div key={story.storyId} className="flex-1 min-w-0">
                     <a
                       className="flex flex-col w-full group"
                       href={storyPath(story)}
@@ -177,7 +177,7 @@ export default async function VideoPhotoSection() {
             {photoGrid.length > 0 && (
               <div className="flex gap-5 mt-5">
                 {photoGrid.map((story) => (
-                  <div key={story.storyId} className="flex-grow">
+                  <div key={story.storyId} className="flex-1 min-w-0">
                     <a
                       className="flex flex-col w-full group"
                       href={storyPath(story)}
