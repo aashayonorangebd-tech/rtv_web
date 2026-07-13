@@ -181,7 +181,7 @@ export default function CountrySection({
         </div>
 
         {/* ─── Content: 6-col left (2×2 grid) + 6-col right (1 big card) ──── */}
-        <div className="grid grid-cols-12 gap-2.5 border-b py-2.5">
+        <div className="grid grid-cols-12 gap-2.5 border-b border-[#e5e7eb] dark:border-gray-700 py-2.5">
           {/* ─── Left: 2×2 grid of 4 small cards ────────────────────────── */}
           <div className="col-span-full md:col-span-6 grid grid-cols-2 gap-5 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
             {leftStories.map((story) => (

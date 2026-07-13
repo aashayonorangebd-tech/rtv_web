@@ -35,7 +35,7 @@ export default function InternationalSection({
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b dark:border-gray-700 items-stretch">
+        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-[#e5e7eb] dark:border-gray-700 items-stretch">
           {/* ─── 6-col LEFT: 1 big card (idx 0) — border-r ───────────── */}
           <div className="col-span-6 md:pr-3 md:border-r border-[#e2e2e2] dark:border-gray-700">
             <a className="flex flex-col w-full group h-full" href={storyPath(bigCard)}>
