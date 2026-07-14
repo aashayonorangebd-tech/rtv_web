@@ -131,6 +131,13 @@ body {
   margin-top: 0;
 }
 
+/* ── Article body "আরও পড়ুন" title (post-highlighter) ──
+   The API markup hardcodes inline `color: black`, so dark mode needs an
+   !important override to make the title readable (#cbd5e1). */
+.dark .storyDetailFont .post-highlighter-v2-title {
+  color: #cbd5e1 !important;
+}
+
 .story-title {
   margin-top: 0;
 }
