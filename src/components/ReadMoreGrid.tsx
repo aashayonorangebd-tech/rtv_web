@@ -29,7 +29,7 @@ export default function ReadMoreGrid({ title = "আরও পড়ুন", stories
               href={storyPath(rmStory)}
               className="flex flex-col h-full gap-3 items-start pb-3 transition group"
             >
-              <div className="relative aspect-video overflow-hidden rounded-md">
+              <div className="relative w-full aspect-video overflow-hidden rounded-md">
                 <Image
                   src={rmStory.fileName}
                   alt={rmStory.mainTitle}
