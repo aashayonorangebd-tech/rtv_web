@@ -1,7 +1,6 @@
 // ─── CategoryFeed ──────────────────────────────────────────────────────────
 // Client component that renders the category story list and loads more in
-// batches of 10 as the user scrolls (infinite scroll), replacing the old
-// numbered pagination.
+// batches of 10 as the user scrolls (infinite scroll).
 //
 // Layout mirrors rtvonline.com category view:
 //   • Red category title (h1) + blue underline
@@ -10,8 +9,9 @@
 //   • Vertical feed: image left, title + date + excerpt right (7th…, grows)
 //
 // Server-rendered initial batch (first 10) is passed in for fast first paint
-// and SEO; subsequent pages are fetched client-side from the API, which
-// next.config.ts rewrites /api/* → https://api.rtvonline.com/api/*.
+// and SEO; subsequent pages are fetched client-side from the stories endpoint
+// (`/api/category/view/{id}/stories`), which next.config.ts rewrites
+// /api/* → https://api.rtvonline.com/api/*.
 // ─────────────────────────────────────────────────────────────────────────────
 
 "use client";
@@ -25,6 +25,7 @@ const BATCH_SIZE = 10;
 
 type Props = {
   slug: string;
+  categoryId: number;
   displayTitle: string;
   initialStories: StoryModel[];
   totalPages: number;
@@ -138,6 +139,7 @@ function VerticalItem({ story }: { story: StoryModel }) {
 
 export default function CategoryFeed({
   slug,
+  categoryId,
   displayTitle,
   initialStories,
   totalPages,
@@ -147,6 +149,7 @@ export default function CategoryFeed({
   const [loading, setLoading] = useState(false);
   const loadingRef = useRef(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const requestedPagesRef = useRef<Set<number>>(new Set([0]));
 
   const hasMore = page < totalPages - 1;
 
@@ -154,29 +157,40 @@ export default function CategoryFeed({
     if (loadingRef.current) return;
     const next = page + 1;
     if (next >= totalPages) return;
+    if (requestedPagesRef.current.has(next)) return;
 
+    requestedPagesRef.current.add(next);
     loadingRef.current = true;
     setLoading(true);
     try {
       const res = await fetch(
-        `${ENDPOINTS.category.header(slug)}?page=${next}&size=${BATCH_SIZE}&lang=bn`,
+        `${ENDPOINTS.category.stories(categoryId)}?page=${next}&size=${BATCH_SIZE}&lang=bn`,
       );
-      if (!res.ok) return;
+      if (!res.ok) {
+        requestedPagesRef.current.delete(next);
+        return;
+      }
       const data = await res.json();
-      const mapped: StoryModel[] = (data?.stories?.model ?? []).map(
-        toCategoryStoryModel,
-      );
+      const raw = Array.isArray(data) ? data : data?.model ?? [];
+      const mapped: StoryModel[] = raw.map(toCategoryStoryModel);
       if (mapped.length > 0) {
-        setStories((prev) => [...prev, ...mapped]);
+        setStories((prev) => {
+          const existingIds = new Set(prev.map((s) => s.storyId));
+          const newStories = mapped.filter((s) => !existingIds.has(s.storyId));
+          return [...prev, ...newStories];
+        });
         setPage(next);
+      } else {
+        setPage(next);
+        requestedPagesRef.current.delete(next);
       }
     } catch {
-      // ignore — user can scroll again to retry
+      requestedPagesRef.current.delete(next);
     } finally {
       loadingRef.current = false;
       setLoading(false);
     }
-  }, [slug, page, totalPages]);
+  }, [categoryId, page, totalPages]);
 
   // Load more when the sentinel scrolls into view.
   useEffect(() => {
@@ -199,8 +213,7 @@ export default function CategoryFeed({
     if (!el) return;
     const rect = el.getBoundingClientRect();
     if (rect.top <= window.innerHeight + 400) loadMore();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stories, hasMore, loading]);
+  }, [loadMore, stories, hasMore, loading]);
 
   if (stories.length === 0) {
     return (

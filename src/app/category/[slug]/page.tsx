@@ -77,6 +77,7 @@ export default async function CategoryPage({
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6 dark:text-white">
       <CategoryFeed
         slug={slug}
+        categoryId={data.id}
         displayTitle={data.displayTitle}
         initialStories={initialStories}
         totalPages={data.stories.totalPages}
