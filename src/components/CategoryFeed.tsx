@@ -1,19 +1,3 @@
-// ─── CategoryFeed ──────────────────────────────────────────────────────────
-// Client component that renders the category story list and loads more in
-// batches of 10 as the user scrolls (infinite scroll).
-//
-// Layout mirrors rtvonline.com category view:
-//   • Red category title (h1) + blue underline
-//   • Lead story (big, 8-col)  + 2nd story (sidebar, 4-col) + ad
-//   • Row of 4 horizontal cards (3rd–6th)
-//   • Vertical feed: image left, title + date + excerpt right (7th…, grows)
-//
-// Server-rendered initial batch (first 10) is passed in for fast first paint
-// and SEO; subsequent pages are fetched client-side from the stories endpoint
-// (`/api/category/view/{id}/stories`), which next.config.ts rewrites
-// /api/* → https://api.rtvonline.com/api/*.
-// ─────────────────────────────────────────────────────────────────────────────
-
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -84,7 +68,7 @@ function HorizontalCard({ story }: { story: StoryModel }) {
   return (
     <a
       href={`/story/${story.storyId}`}
-      className="flex flex-col w-full pl-2 group flex-1 min-w-0"
+      className="flex flex-col w-full group"
     >
       <div className="relative">{img(story.fileName, story.mainTitle, "")}</div>
       <div className="pt-2">
@@ -103,7 +87,6 @@ function VerticalItem({ story }: { story: StoryModel }) {
       className="group block py-4"
     >
       <div className="grid grid-cols-12 gap-4 items-start">
-        {/* Image */}
         <div className="col-span-12 md:col-span-5 overflow-hidden rounded-md">
           <div className="relative overflow-hidden rounded-md">
             {img(
@@ -114,7 +97,6 @@ function VerticalItem({ story }: { story: StoryModel }) {
           </div>
         </div>
 
-        {/* Content */}
         <div className="col-span-12 md:col-span-7">
           <h2 className="text-[22px] font-bold leading-8 text-[#222] dark:text-white transition-colors duration-200 group-hover:text-[#D12026] line-clamp-2">
             {story.mainTitle}
@@ -192,7 +174,6 @@ export default function CategoryFeed({
     }
   }, [categoryId, page, totalPages]);
 
-  // Load more when the sentinel scrolls into view.
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el || !hasMore) return;
@@ -206,7 +187,6 @@ export default function CategoryFeed({
     return () => obs.disconnect();
   }, [loadMore, hasMore]);
 
-  // If the first batch is short and the sentinel is already on-screen, fill it.
   useEffect(() => {
     if (!hasMore || loading) return;
     const el = sentinelRef.current;
@@ -228,62 +208,74 @@ export default function CategoryFeed({
   const vertical = rest.slice(4);
 
   return (
-    <div className="grid grid-cols-12 gap-x-2.5">
-      <div className="col-span-12">
-        {/* ── Category title ─────────────────────────────── */}
-        <div className="flex flex-col gap-y-1">
-          <a href={`/category/${slug}`}>
-            <h1 className="text-3xl font-bold text-[#D12026]">{displayTitle}</h1>
-          </a>
-          <span className="block h-0.5 bg-blue-600 w-full" />
-        </div>
+      <div className="grid grid-cols-12 gap-x-2.5">
+        <div className="col-span-12">
 
-        {/* ── Lead (8) + 2nd news (4) ────────────────────── */}
-        <div className="flex flex-col sm:flex-row gap-x-2 mt-5">
-          <div className="mb-2.5 border-b pb-5">
-            <div className="grid grid-cols-12 gap-2.5">
-              <div className="col-span-12 lg:col-span-8 group border-r pr-2">
-                {lead && <LeadCard story={lead} />}
-              </div>
-              <div className="col-span-12 lg:col-span-4 border-r pr-2">
-                {second && <SecondCard story={second} />}
-                <div className="mt-4">
-                  <AdBanner height={250} />
+          {/* ── Category Title & Blue Underline ────────────────────────── */}
+          <div className="flex flex-col gap-y-1">
+            <a href={`/category/${slug}`}>
+              <h1 className="text-3xl font-bold text-[#D12026]">{displayTitle}</h1>
+            </a>
+            <span className="block h-0.5 bg-blue-600 w-full" />
+          </div>
+
+          {/* ── Top Section: Lead Story, Second Story, and Ad Banner ───── */}
+          <div className="flex flex-col lg:flex-row gap-x-4 mt-5">
+            <div className="mb-2.5 border-b pb-5 flex-1 min-w-0">
+              <div className="grid grid-cols-12 gap-4">
+
+                {/* ── Lead Story (Left side, 8 columns) ────────────────── */}
+                <div className="col-span-12 lg:col-span-8 group border-r border-gray-400 dark:border-gray-200 pr-4">
+                  {lead && <LeadCard story={lead} />}
                 </div>
+
+                {/* ── Second Story (Middle, 4 columns) ─────────────────── */}
+                <div className="col-span-12 lg:col-span-4 border-r border-gray-400 dark:border-gray-200 pr-4">
+                  {second && <SecondCard story={second} />}
+                </div>
+
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* ── Row of 4 horizontal cards ──────────────────── */}
-        {horizontal.length > 0 && (
-          <div className="flex flex-row flex-wrap lg:flex-nowrap gap-2 divide-x divide-[#e2e2e2] dark:divide-gray-700 border-b pb-2 mb-5">
-            {horizontal.map((story) => (
-              <HorizontalCard key={story.storyId} story={story} />
+            {/* ── Ad Banner (Right side, fixed 300px width) ────────────── */}
+            <div className="w-full lg:w-[300px] shrink-0 flex justify-center items-start pt-2 lg:pt-0">
+              <AdBanner height={250} />
+            </div>
+          </div>
+
+          {/* ── Horizontal Cards Row (4 items side-by-side) ────────────── */}
+          {horizontal.length > 0 && (
+            <div className="flex flex-row flex-wrap lg:flex-nowrap divide-x divide-gray-400 dark:divide-gray-200 border-b pb-4 mb-5">
+              {horizontal.map((story) => (
+                <div key={story.storyId} className="flex-1 min-w-0 px-3 first:pl-0 last:pr-0">
+                  <HorizontalCard story={story} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── Vertical Feed (List view: Image left, Text right) ──────── */}
+          <div className="col-span-full lg:mx-44 xl:mx-56">
+            {vertical.map((story, i) => (
+              <div key={story.storyId}>
+                <VerticalItem story={story} />
+
+                {/* ── Divider between vertical items ───────────────────── */}
+                {i < vertical.length - 1 && (
+                  <div className="h-px bg-gray-400 dark:bg-gray-200" />
+                )}
+              </div>
             ))}
           </div>
-        )}
 
-        {/* ── Vertical feed ──────────────────────────────── */}
-        <div className="col-span-full lg:mx-44 xl:mx-56">
-          {vertical.map((story, i) => (
-            <div key={story.storyId}>
-              <VerticalItem story={story} />
+          {/* ── Infinite Scroll Sentinel & Loading Status ──────────────── */}
+          <div ref={sentinelRef} className="h-px w-full" aria-hidden />
+          <div className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+            {loading && "লোড হচ্ছে…"}
+            {!hasMore && stories.length > 0 && "সব খবর দেখানো হয়েছে"}
+          </div>
 
-              {i < vertical.length - 1 && (
-                <div className="h-px bg-gray-200 dark:bg-gray-700" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* ── Sentinel + status ──────────────────────────── */}
-        <div ref={sentinelRef} className="h-px w-full" aria-hidden />
-        <div className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          {loading && "লোড হচ্ছে…"}
-          {!hasMore && stories.length > 0 && "সব খবর দেখানো হয়েছে"}
         </div>
       </div>
-    </div>
-  );
+    );
 }
