@@ -67,8 +67,8 @@ export default function HeaderNav({
                     aria-current={isActive ? "page" : undefined}
                     className={`text-[15px] md:text-[16px] font-bold transition-colors px-3 md:px-5 tracking-wide ${
                       isActive
-                        ? "bg-red-600 text-white rounded-[4px]"
-                        : "text-white hover:bg-red-600 hover:text-white rounded-[4px]"
+                        ? "bg-red-600 text-white rounded-[4px] mx-1"
+                        : "text-white hover:bg-red-600 mx-1 hover:text-white rounded-[4px]"
                     }`}
                   >
                     {item.displayTitle}
