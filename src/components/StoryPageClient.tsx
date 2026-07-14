@@ -129,6 +129,7 @@ export default function StoryPageClient({
                     />
                   </div>
                 </div>
+                <figcaption class="flex items-center justify-center gap-3 mt-1 mb-4"><small class=" opacity-[0.7]"><b>ছবি: সংগৃহীত</b></small></figcaption>
               </figure>
 
               {/* Article Body */}
