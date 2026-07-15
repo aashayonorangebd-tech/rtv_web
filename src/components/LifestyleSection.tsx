@@ -13,48 +13,97 @@
 //   └──────────────────────────────────────┴─────────────────────────┘
 // ─────────────────────────────────────────────────────────────────────────
 
-import React, { useState } from "react";
-import type { StoryModel } from "@/lib/types";
-import { storyPath } from "@/lib/api";
+import React, { useState, useEffect } from "react";
+import type { StoryModel, OpinionPoll, OpinionPollOption } from "@/lib/types";
+import { storyPath, ENDPOINTS } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
 import Image from "next/image";
 
-interface PollOption {
-  id: number;
-  label: string;
-  percentage: number;
-  votes: number;
-}
-
-interface PollData {
-  id: number;
-  question: string;
-  date: string;
-  imageUrl: string;
-  options: PollOption[];
-  totalVotes: number;
-}
-
-const POLL_DATA: PollData = {
-  id: 107,
-  question:
-    "বিদ্যুতের প্রিপেইড মিটারের মাসিক অতিরিক্ত চার্জ প্রত্যাহার করা হয়েছে। সরকারের এই সিদ্ধান্তকে যৌক্তিক বলে মনে করেন?",
-  date: "০৪ জুন ২০২৬, ১০:০২ এএম",
-  imageUrl:
-    "https://imrs.rtvonline.com/api/image-service/resize?w=650&h=365&q=75&cmp=RM&img=/media/opinion/0000.jpg",
-  options: [
-    { id: 1, label: "হ্যাঁ", percentage: 95.22, votes: 259 },
-    { id: 2, label: "না", percentage: 3.31, votes: 9 },
-    { id: 3, label: "মন্তব্য নেই", percentage: 1.47, votes: 4 },
-  ],
-  totalVotes: 272,
-};
-
 function OnlinePollCard() {
+  const [poll, setPoll] = useState<OpinionPoll | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
+  const [voted, setVoted] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  function normalizePoll(raw: Record<string, unknown>): OpinionPoll | null {
+    if (!raw || typeof raw !== "object") return null;
+    const data = raw as Record<string, unknown>;
+    const optionsObj = data.options as Record<string, string> | undefined;
+    const votesObj = data.votes as Record<string, number> | undefined;
+
+    if (!optionsObj || typeof optionsObj !== "object") return null;
+
+    const optionIds = Object.keys(optionsObj);
+    const totalVotes = (data.totalVotes as number) ?? 0;
+    const options: OpinionPollOption[] = optionIds.map((id) => {
+      const votes = votesObj?.[id] ?? 0;
+      const percentage = totalVotes > 0 ? (votes / totalVotes) * 100 : 0;
+      return {
+        id: Number(id),
+        label: optionsObj[id],
+        percentage,
+        votes,
+      };
+    });
+
+    const rawPhoto = (data.pollPhoto as string) ?? "";
+    const imgPath = rawPhoto.replace(/^https:\/\/cdn\.rtvonline\.com/, "");
+    const imageUrl = imgPath
+      ? `https://imrs.rtvonline.com/api/image-service/resize?w=650&h=365&q=75&cmp=RM&img=${imgPath}`
+      : rawPhoto;
+
+    return {
+      id: (data.id as number) ?? 0,
+      question: (data.pollCaption as string) ?? (data.questionerName as string) ?? "",
+      date: (data.publishTime as string) ?? "",
+      imageUrl,
+      options,
+      totalVotes,
+    };
+  }
+
+  useEffect(() => {
+    fetch(ENDPOINTS.publicOpinion.activeForHome, {
+      headers: { "lang": "bangla" },
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: Record<string, unknown> | null) => {
+        const normalized = normalizePoll(data ?? {});
+        if (normalized) setPoll(normalized);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const handleVote = async (optionId: number) => {
+    if (!poll || voted) return;
+
+    try {
+      const res = await fetch(
+        `${ENDPOINTS.publicOpinion.voteSubmit(poll.id)}?option=${optionId}`,
+        { headers: { "lang": "bangla" } }
+      );
+      if (res.ok) {
+        // Refetch updated poll data after vote
+        const fresh = await fetch(ENDPOINTS.publicOpinion.activeForHome, {
+          headers: { "lang": "bangla" },
+        });
+        if (fresh.ok) {
+          const data: Record<string, unknown> = await fresh.json();
+          const normalized = normalizePoll(data ?? {});
+          if (normalized) setPoll(normalized);
+        }
+        setVoted(true);
+      }
+    } catch {
+      // silently fail
+    }
+  };
+
+  if (loading || !poll) return null;
 
   return (
-    <div className="w-full border border-[#e2e2e2] dark:border-gray-700 rounded-md shadow-lg">
+    <div className="w-full border border-rtv-border-clr dark:border-gray-700 rounded-md shadow-lg">
       <div className="flex flex-col items-center mx-5">
         <a href="/opinion-poll" className="w-full pt-2">
           <div className="flex justify-between items-center">
@@ -98,64 +147,72 @@ function OnlinePollCard() {
             />
           </svg>
           <p className="text-sm text-slate-600 dark:text-slate-300">
-            {POLL_DATA.date}
+            {poll.date}
           </p>
         </div>
 
-        <a href={`/opinion-poll/${POLL_DATA.id}`} className="mt-3 mb-4">
-          <div className="relative aspect-video overflow-hidden">
+        <a href={`/opinion-poll/${poll.id}`} className="mt-3 mb-4 w-full">
+          <div className="relative">
             <Image
-              src={POLL_DATA.imageUrl}
+              src={poll.imageUrl}
               alt="banner_image"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              width={650}
+              height={365}
+              className="object-cover object-center max-w-full aspect-video"
             />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-30deg] text-black text-2xl font-bold whitespace-nowrap pointer-events-none select-none">
-              Not Getting End Point Yet
-            </div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
           </div>
         </a>
 
         <div className="w-full px-2">
-          <a href={`/opinion-poll/${POLL_DATA.id}`}>
+          <a href={`/opinion-poll/${poll.id}`}>
             <p className="text-base font-bold mb-4 text-justify">
-              {POLL_DATA.question}
+              {poll.question}
             </p>
           </a>
 
-          {POLL_DATA.options.map((option) => (
-            <div
-              key={option.id}
-              className="flex items-center mb-3 gap-x-2.5 relative"
-            >
-              <div className="inline-flex items-center">
-                <input
-                  className="h-5 w-5 text-blue-600 border-blue-600 border-2 rounded-full focus:ring-blue-500 cursor-pointer"
-                  type="radio"
-                  name="poll"
-                  value={option.id}
-                  checked={selected === option.id}
-                  onChange={() => setSelected(option.id)}
-                />
+          {poll.options.map((option: OpinionPollOption) => {
+            const isNotSelected = voted && selected !== option.id;
+            return (
+              <div
+                key={option.id}
+                className="flex items-center mb-3 gap-x-2.5 relative"
+              >
+                <div className="inline-flex items-center">
+                  <input
+                    className="h-5 w-5 text-blue-600 border-blue-600 border-2 rounded-full focus:ring-blue-500 cursor-pointer"
+                    type="radio"
+                    name="poll"
+                    value={option.id}
+                    checked={selected === option.id}
+                    onChange={() => {
+                      setSelected(option.id);
+                      handleVote(option.id);
+                    }}
+                    disabled={voted}
+                  />
+                </div>
+                <div className={`relative flex-1 mt-1 h-8 bg-gray-200 dark:bg-slate-600 rounded border border-black dark:border-slate-500 ${voted ? "opacity-50" : ""}`}>
+                  <div
+                    className="absolute top-0 left-0 h-full bg-blue-300 dark:bg-blue-500 rounded"
+                    style={{ width: `${option.percentage}%` }}
+                  />
+                  <p className="absolute inset-0 font-medium text-left pl-2 text-black dark:text-white text-xl flex flex-row justify-between items-center">
+                    <span className="text-sm font-bold">{option.label}</span>
+                    <span className="text-slate-600 dark:text-slate-300 font-semibold text-base pr-1">
+                      {option.percentage.toFixed(2)}%
+                    </span>
+                  </p>
+                  {isNotSelected && (
+                    <div className="absolute inset-0 bg-red-500/20 flex items-center justify-center text-red-500" />
+                  )}
+                </div>
               </div>
-              <div className="relative flex-1 mt-1 h-8 bg-gray-200 dark:bg-slate-600 rounded border border-black dark:border-slate-500">
-                <div
-                  className="absolute top-0 left-0 h-full bg-blue-300 dark:bg-blue-500 rounded"
-                  style={{ width: `${option.percentage}%` }}
-                />
-                <p className="absolute inset-0 font-medium text-left pl-2 text-black dark:text-white text-xl flex flex-row justify-between items-center">
-                  <span className="text-sm font-bold">{option.label}</span>
-                  <span className="text-slate-600 dark:text-slate-300 font-semibold text-base pr-1">
-                    {option.percentage.toFixed(2)}%
-                  </span>
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
 
           <p className="text-center text-base text-gray-600 dark:text-slate-300 my-4">
-            মোট ভোটদাতাঃ {POLL_DATA.totalVotes} জন
+            মোট ভোটদাতাঃ {poll.totalVotes} জন
           </p>
         </div>
       </div>

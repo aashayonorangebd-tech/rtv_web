@@ -44,19 +44,18 @@ export default function SubHeroGrid({
   if (!stories || stories.length === 0) return null;
 
   return (
-    // ── Outer wrapper — mt-2 for top gap, overflow-hidden ──
-    <div className="mt-2 overflow-hidden mx-2">
-      <section className="section-padding dark:text-white">
-        <div className="main-container">
-          {/* ═══════════════════════════════════════════════════════════════
-              12-COL GRID — IDENTICAL to HeroSection (gap-2.5)
-              md:border-t-[1px] pt-5 → horizontal separator from lead
-              ═══════════════════════════════════════════════════════════ */}
-          <div className="grid grid-cols-1 gap-2.5 md:grid-cols-12 md:border-t md:border-[#e2e2e2] pt-5 dark:text-white">
+    // ── Outer wrapper — mt-2 for top gap ──
+    <div className="mt-2">
+      <section className="dark:text-white">
+        {/* ═══════════════════════════════════════════════════════════════
+            12-COL GRID — IDENTICAL to HeroSection (gap-2.5)
+            md:border-t pt-5 → horizontal separator from lead
+            ═══════════════════════════════════════════════════════════ */}
+        <div className="grid grid-cols-1 gap-2.5 md:grid-cols-12 md:border-t md:border-rtv-border-clr pt-5 dark:text-white">
 
-            {/* ─── 9-COL LEFT CONTENT (border-r separates from sidebar) ───
-                Inner 3-col grid with gap-2.5 for the 9 story cards       */}
-            <div className="col-span-full md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-2.5 md:border-r md:border-[#e2e2e2] md:pr-2.5 dark:border-gray-700 justify-start">
+          {/* ─── 9-COL LEFT CONTENT (border-r separates from sidebar) ───
+              Inner 3-col grid with gap-2.5 for the 9 story cards       */}
+          <div className="col-span-full md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-2.5 md:border-r md:border-rtv-border-clr md:pr-2.5 dark:border-gray-700 justify-start">
               {stories.slice(0, 9).map((story, index) => {
                 // Remove border-r on every 3rd card (3rd, 6th, 9th)
                 const isThirdCol = (index + 1) % 3 === 0;
@@ -64,7 +63,7 @@ export default function SubHeroGrid({
                   <div
                     key={story.storyId}
                     className={`md:pr-3 ${
-                       !isThirdCol ? "md:border-r md:border-[#e2e2e2] dark:border-gray-700" : ""
+                        !isThirdCol ? "md:border-r md:border-rtv-border-clr dark:border-gray-700" : ""
                     }`}
                   >
                     <a
@@ -92,7 +91,7 @@ export default function SubHeroGrid({
                       </div>
                     </a>
                     {/* Horizontal rule below EVERY card — 9 cards = 9 hrs */}
-                    <hr className="border-[#e2e2e2] dark:border-gray-700" />
+                    <hr className="border-rtv-border-clr dark:border-gray-700" />
                   </div>
                 );
               })}
@@ -107,7 +106,6 @@ export default function SubHeroGrid({
             </div>
 
           </div>
-        </div>
       </section>
     </div>
   );

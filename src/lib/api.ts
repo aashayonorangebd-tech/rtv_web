@@ -54,6 +54,11 @@ export const ENDPOINTS = {
     prayerTimes: "/api/utils/prayer-time",
   },
 
+  publicOpinion: {
+    activeForHome: "/api/public-opinion/view/active-opinion-for-home",
+    voteSubmit: (id: number) => `/api/public-opinion/view/vote-submit/${id}`,
+  },
+
   location: {
     divisions: "/api/get-area-serach",
     districts: (divisionId: number) => `/api/get-district-value?divisionId=${divisionId}`,
