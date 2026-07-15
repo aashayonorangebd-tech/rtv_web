@@ -115,20 +115,38 @@ export default function StoryPageClient({
 
             <hr className="sm:my-2" />
 
-            {/* Main Image */}
+            {/* Main Media: Video Embed or Image */}
             <div className="py-2 max-md:pt-0">
               <figure>
-                <div className="w-full aspect-video">
-                  <div className="relative aspect-video overflow-hidden">
-                    <Image
-                      src={story.mainImageFileName || "/Images/rtv-logo.svg"}
-                      alt={story.alt || story.mainTitle}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 66vw"
+                {story.embeddedVideoLink && story.embeddedVideoType === "YOUTUBE" ? (
+                  <div className="relative w-full aspect-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${story.embeddedVideoLink}`}
+                      title={story.mainTitle}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen={true}
+                      className="w-full h-full"
                     />
+                    <span className="absolute top-2 left-2 bg-black/75 text-white text-xs px-2 py-1 rounded-[2px] flex items-center gap-1 z-10">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
+                        <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
+                      </svg>
+                      ভিডিও
+                    </span>
                   </div>
-                </div>
+                ) : (
+                  <div className="w-full aspect-video">
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={story.mainImageFileName || "/Images/rtv-logo.svg"}
+                        alt={story.alt || story.mainTitle}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 66vw"
+                      />
+                    </div>
+                  </div>
+                )}
                 <figcaption className="flex items-center justify-center gap-3 mt-1 mb-4"> <small className=" opacity-[0.7]"><b>ছবি: সংগৃহীত</b></small></figcaption>
               </figure>
 
