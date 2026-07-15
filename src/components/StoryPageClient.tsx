@@ -77,7 +77,16 @@ export default function StoryPageClient({
     }
   };
 
-  const hasVideo = story.embeddedVideoLink && story.embeddedVideoType === "YOUTUBE";
+  const hasVideo =
+    story.embeddedVideoLink &&
+    (story.embeddedVideoType === "YOUTUBE" || story.embeddedVideoType === "FACEBOOK");
+
+  const getYoutubeId = (raw: string) => raw.split("&")[0];
+
+  const youtubeId =
+    story.embeddedVideoType === "YOUTUBE" && story.embeddedVideoLink
+      ? getYoutubeId(story.embeddedVideoLink)
+      : null;
 
   return (
     <>
@@ -160,33 +169,55 @@ export default function StoryPageClient({
               <div className="py-2 max-md:pt-0">
                 <figure>
                   {hasVideo ? (
-                    <div className="player-wrapper aspect-video">
-                      <div className="player-inside no-print" style={{ width: "100%", height: "100%" }}>
-                        <div style={{ width: "100%", height: "100%", position: "relative" }}>
-                          <iframe
-                            id="widget2"
-                            ref={iframeRef}
-                            className=""
-                            title={story.mainTitle}
-                            width="100%"
-                            height="100%"
-                            src={`https://www.youtube.com/embed/${story.embeddedVideoLink}?autoplay=0&mute=0&controls=1&origin=${encodeURIComponent(process.env.NEXT_PUBLIC_SITE_URL || "https://rtvonline.com")}&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&fs=1&enablejsapi=1&widgetid=1&forigin=${encodeURIComponent(story.canonicalUrl || "")}&aoriginsup=1&gporigin=${encodeURIComponent((process.env.NEXT_PUBLIC_SITE_URL || "https://rtvonline.com").replace(/\/$/, "") + "/")}&vf=4`}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-                            allowFullScreen={true}
-                            referrerPolicy="strict-origin-when-cross-origin"
-                          />
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            width="800"
-                            height="500"
-                            src={`https://img.youtube.com/vi/${story.embeddedVideoLink}/0.jpg`}
-                            alt="YouTube Thumbnail"
-                            className="yt-thumb hidden"
-                          />
+                    story.embeddedVideoType === "FACEBOOK" ? (
+                      <div className="player-wrapper aspect-video">
+                        <div className="player-inside no-print" style={{ width: "100%", height: "100%" }}>
+                          <div style={{ width: "100%", height: "100%", position: "relative" }}>
+                            <iframe
+                              id="widget2"
+                              ref={iframeRef}
+                              title={story.mainTitle}
+                              width="100%"
+                              height="100%"
+                              src={`https://www.facebook.com/v3.3/plugins/video.php?href=${encodeURIComponent(`https://www.facebook.com/watch/?v=${story.embeddedVideoLink}`)}&show_text=false&width=1080&height=608`}
+                              frameBorder="0"
+                              allow="autoplay; encrypted-media"
+                              allowFullScreen={true}
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              style={{ width: "100%", height: "100%" }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="player-wrapper aspect-video">
+                        <div className="player-inside no-print" style={{ width: "100%", height: "100%" }}>
+                          <div style={{ width: "100%", height: "100%", position: "relative" }}>
+                            <iframe
+                              id="widget2"
+                              ref={iframeRef}
+                              className=""
+                              title={story.mainTitle}
+                              width="100%"
+                              height="100%"
+                              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&mute=0&controls=1&origin=${encodeURIComponent(process.env.NEXT_PUBLIC_SITE_URL || "https://rtvonline.com")}&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&fs=1&enablejsapi=1&widgetid=1&forigin=${encodeURIComponent(story.canonicalUrl || "")}&aoriginsup=1&gporigin=${encodeURIComponent((process.env.NEXT_PUBLIC_SITE_URL || "https://rtvonline.com").replace(/\/$/, "") + "/")}&vf=4`}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                              allowFullScreen={true}
+                              referrerPolicy="strict-origin-when-cross-origin"
+                            />
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              width="800"
+                              height="500"
+                              src={`https://img.youtube.com/vi/${youtubeId}/0.jpg`}
+                              alt="YouTube Thumbnail"
+                              className="yt-thumb hidden"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )
                   ) : (
                     <div className="w-full aspect-video">
                       <div className="relative aspect-video overflow-hidden">
