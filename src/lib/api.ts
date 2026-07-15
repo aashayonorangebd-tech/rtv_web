@@ -13,6 +13,9 @@ import type {
   PopularApiItem,
   LatestApiItem,
   CategoryApiStory,
+  LatestResponse,
+  ArchiveApiItem,
+  ArchiveResponse,
 } from "@/lib/types";
 
 export const API_CONFIG = {
@@ -67,16 +70,17 @@ export const ENDPOINTS = {
 } as const;
 
 export function toStoryModel(
-  item: PopularApiItem | LatestApiItem
+  item: PopularApiItem | LatestApiItem | ArchiveApiItem
 ): StoryModel {
   return {
     storyId: item.id,
     mainTitle: item.mainTitle,
-    subTitle: "subTitle" in item ? (item as PopularApiItem).subTitle : "",
+    subTitle: "subTitle" in item ? (item as PopularApiItem | ArchiveApiItem).subTitle : "",
     fileName: item.fileName ?? "",
-    passedTime: "passedTime" in item ? (item as LatestApiItem).passedTime : "",
+    passedTime: "passedTime" in item ? (item as LatestApiItem | ArchiveApiItem).passedTime ?? "" : "",
     isLive: item.isLive,
     isVideo: item.hasVideo ? 1 : 0,
+    banglaDate: "banglaDate" in item ? (item as ArchiveApiItem).banglaDate : undefined,
   };
 }
 
@@ -98,4 +102,44 @@ export function toCategoryStoryModel(item: CategoryApiStory): StoryModel {
     isLive: item.isLive ? 1 : 0,
     isVideo: item.isVideo ? 1 : 0,
   };
+}
+
+export async function getLatestStories(): Promise<StoryModel[]> {
+  try {
+    const res = await fetch(
+      `${process.env.API_BASE_URL || API_CONFIG.prod}${ENDPOINTS.story.latest}`,
+      { next: { revalidate: 30 } }
+    );
+    if (!res.ok) return [];
+    const data: LatestResponse = await res.json();
+    return (data.model || []).map(toStoryModel);
+  } catch {
+    return [];
+  }
+}
+
+export async function getArchiveStories(
+  page: number = 0,
+  size: number = 12
+): Promise<{ stories: StoryModel[]; totalPages: number; currentPage: number }> {
+  try {
+    const url = new URL(
+      `${process.env.API_BASE_URL || API_CONFIG.prod}${ENDPOINTS.story.archive}`
+    );
+    url.searchParams.set("page", String(page));
+    url.searchParams.set("size", String(size));
+    url.searchParams.set("mainTitle", "");
+    url.searchParams.set("lang", "bn");
+
+    const res = await fetch(url.toString(), { next: { revalidate: 30 } });
+    if (!res.ok) return { stories: [], totalPages: 0, currentPage: 0 };
+    const data: ArchiveResponse = await res.json();
+    return {
+      stories: (data.model || []).map(toStoryModel),
+      totalPages: data.totalPages || 0,
+      currentPage: data.currentPage || 0,
+    };
+  } catch {
+    return { stories: [], totalPages: 0, currentPage: 0 };
+  }
 }

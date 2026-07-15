@@ -65,6 +65,7 @@ export interface StoryModel {
   isLive: number;
   isVideo: number;
   langVersion?: string;
+  banglaDate?: string;
 }
 
 export interface StoryListGroup {
@@ -279,6 +280,28 @@ export interface LatestApiItem {
 
 export interface LatestResponse {
   model: LatestApiItem[];
+}
+
+export interface ArchiveApiItem {
+  id: number;
+  mainTitle: string;
+  subTitle: string;
+  fileName: string;
+  alt: string;
+  passedTime?: string;
+  banglaDate?: string;
+  hasVideo: boolean;
+  canonicalUrl: string;
+  isLive: number;
+  datePublish: string;
+  viewCount: number;
+}
+
+export interface ArchiveResponse {
+  model: ArchiveApiItem[];
+  totalPages: number;
+  currentPage: number;
+  totalElements: number;
 }
 
 // ── Opinion Poll types ────────────────────────────────────────────────────
