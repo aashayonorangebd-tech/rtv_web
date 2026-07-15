@@ -281,6 +281,23 @@ export interface LatestResponse {
   model: LatestApiItem[];
 }
 
+// ── Opinion Poll types ────────────────────────────────────────────────────
+export interface OpinionPollOption {
+  id: number;
+  label: string;
+  percentage: number;
+  votes: number;
+}
+
+export interface OpinionPoll {
+  id: number;
+  question: string;
+  date: string;
+  imageUrl: string;
+  options: OpinionPollOption[];
+  totalVotes: number;
+}
+
 // ── Location filter types ─────────────────────────────────────────────────
 export interface Division {
   id: number;
