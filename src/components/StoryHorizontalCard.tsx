@@ -28,7 +28,7 @@ export default function StoryHorizontalCard({ story }: Props) {
         </div>
       </div>
       <div className="col-span-2 flex flex-col justify-start">
-        <h3 className="main-title-post dark:text-white group-hover:text-blue-800 group-hover:dark:text-blue-300">
+        <h3 className="main-title-post dark:text-foreground group-hover:text-blue-800 group-hover:dark:text-blue-300">
           {story.mainTitle}
         </h3>
         <small className="text-[#807d7d]">{story.banglaDate || story.passedTime}</small>

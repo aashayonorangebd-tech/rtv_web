@@ -83,23 +83,23 @@ export default async function Footer() {
   );
 
   return (
-    <footer className="w-full dark:bg-inherit dark:text-white mt-8">
+    <footer className="w-full dark:bg-inherit dark:text-foreground mt-8">
       {/* ── Top: footer navigation links ─────────────────────────────── */}
       <div>
-        <hr className="border-gray-300 dark:border-gray-600" />
+        <hr className="border-gray-300 dark:border-border" />
         <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-center gap-x-5 text-[1rem] font-normal py-1 flex-wrap">
           {sortedLinks.map((link) => (
             <a
               key={link.id}
               href={link.clientUrl}
-              className="text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+              className="text-gray-800 dark:text-foreground hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
             >
               {link.displayTitle}
             </a>
           ))}
         </div>
         <div>
-          <hr className="border-gray-300 dark:border-gray-600" />
+          <hr className="border-gray-300 dark:border-border" />
         </div>
       </div>
 
@@ -119,7 +119,7 @@ export default async function Footer() {
                 />
               </Link>
             </div>
-            <div className="flex flex-wrap items-center justify-start gap-x-2 text-[1rem] mt-2.5 font-[400] text-gray-800 dark:text-white">
+            <div className="flex flex-wrap items-center justify-start gap-x-2 text-[1rem] mt-2.5 font-[400] text-gray-800 dark:text-foreground">
               <a href="https://rtvonline.com/privacy">
                 <span className="whitespace-nowrap hover:text-blue-600 dark:hover:text-blue-300 transition-colors">Privacy Policy</span>
               </a>
@@ -136,23 +136,23 @@ export default async function Footer() {
 
           {/* ── Column 2: Editor info, address, contact ────────────────── */}
           <div className="flex-1 max-sm:hidden">
-            <p className="text-[1.5rem] mt-2.5 font-[600] text-gray-800 dark:text-white">
+            <p className="text-[1.5rem] mt-2.5 font-[600] text-gray-800 dark:text-foreground">
               প্রধান সম্পাদক : সৈয়দ আশিক রহমান
             </p>
-            <p className="text-[0.975rem] mt-2.5 font-[400] leading-5 text-gray-600 dark:text-gray-300">
+            <p className="text-[0.975rem] mt-2.5 font-[400] leading-5 text-gray-600 dark:text-foreground">
               বেঙ্গল মিডিয়া করপোরেশন লিমিটেড,১০২ কাজী নজরুল ইসলাম এভিনিউ কারওয়ান বাজার, ঢাকা-১২১৫
             </p>
             <div className="mt-2.5">
-              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-gray-300">
+              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-foreground">
                 ফোন : +৮৮০-২-৫৫০১৩৫১১-১৫
               </p>
-              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-gray-300">
+              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-foreground">
                 নিউজ রুম : +৮৮০-১৮৭৮১৮৪৩৬৯-৭০
               </p>
-              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-gray-300">
+              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-foreground">
                 ই-মেইল : <a href="mailto:news@rtvbd.tv" className="text-blue-600 dark:text-blue-300 hover:underline">news@rtvbd.tv</a>
               </p>
-              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-gray-300">
+              <p className="text-[0.975rem] font-[400] leading-[22px] text-gray-600 dark:text-foreground">
                 বিজ্ঞাপন : <a href="mailto:rtvdigitalad@gmail.com" className="text-blue-600 dark:text-blue-300 hover:underline">rtvdigitalad@gmail.com</a>
               </p>
             </div>
@@ -160,7 +160,7 @@ export default async function Footer() {
 
           {/* ── Column 3: App downloads + Social media ──────────────────── */}
           <div className="flex-1 flex flex-col items-center justify-center max-lg:hidden">
-            <p className="text-[1.225rem] my-2.5 text-gray-800 dark:text-white">
+            <p className="text-[1.225rem] my-2.5 text-gray-800 dark:text-foreground">
               মোবাইল অ্যাপস ডাউনলোড করুন
             </p>
             <div className="flex items-center justify-center ">
@@ -187,7 +187,7 @@ export default async function Footer() {
                 </div>
               </a>
             </div>
-            <p className="text-[1rem] font-bold mt-2.5 text-gray-800 dark:text-white">
+            <p className="text-[1rem] font-bold mt-2.5 text-gray-800 dark:text-foreground">
               অনুসরণ করুন
             </p>
             <div className="flex gap-4 mt-2">

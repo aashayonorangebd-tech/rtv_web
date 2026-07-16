@@ -14,11 +14,11 @@ export default function AnchorAd() {
     <div className="w-full">
       {/* Ad content */}
       {!minimized && (
-        <div className="relative flex justify-center bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600">
+        <div className="relative flex justify-center bg-white dark:bg-background border-t border-gray-300 dark:border-border">
           {/* Minimize button — centered at top of ad */}
           <button
             onClick={() => setMinimized(true)}
-            className="absolute top-0 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-b px-3 py-0.5 shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-500 z-10"
+            className="absolute top-0 left-1/2 -translate-x-1/2 bg-white dark:bg-background border border-gray-300 dark:border-border rounded-b px-3 py-0.5 shadow-md hover:bg-gray-100 dark:hover:bg-surface transition-colors text-gray-500 z-10"
             aria-label="Hide ad"
           >
             <ChevronDown size={16} />
@@ -48,10 +48,10 @@ export default function AnchorAd() {
 
       {/* Restore button — only visible when minimized */}
       {minimized && (
-        <div className="flex justify-center bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600">
+        <div className="flex justify-center bg-white dark:bg-background border-t border-gray-300 dark:border-border">
           <button
             onClick={() => setMinimized(false)}
-            className="px-4 py-1 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="px-4 py-1 text-gray-500 hover:text-gray-700 dark:hover:text-foreground hover:bg-gray-100 dark:hover:bg-surface transition-colors"
             aria-label="Show ad"
           >
             <ChevronUp size={18} />

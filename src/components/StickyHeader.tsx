@@ -30,7 +30,7 @@ export default function StickyHeader({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className={`sticky top-0 z-50 bg-white dark:bg-slate-900 transition-transform duration-300 ${
+      className={`sticky top-0 z-50 bg-white dark:bg-background transition-transform duration-300 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >

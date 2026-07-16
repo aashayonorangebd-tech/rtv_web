@@ -37,9 +37,9 @@ export default async function VideoPhotoSection() {
   return (
     <section className="section-padding">
       <div className="main-container">
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-gray-700">
+        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-border">
           {/* ─── Video Column ─────────────────────────────────────────── */}
-          <div className="col-span-6 border-r border-rtv-border-clr pr-2.5 dark:border-gray-700">
+          <div className="col-span-6 border-r border-rtv-border-clr pr-2.5 dark:border-border">
             <SectionHeader title="ভিডিও" href="/video-gallery" />
 
             {videoFeatured && (
@@ -134,7 +134,7 @@ export default async function VideoPhotoSection() {
               </div>
             )}
 
-            <hr className="mt-5 border-rtv-border-clr dark:border-gray-700" />
+            <hr className="mt-5 border-rtv-border-clr dark:border-border" />
           </div>
 
           {/* ─── Photo Column ─────────────────────────────────────────── */}
@@ -221,7 +221,7 @@ export default async function VideoPhotoSection() {
               </div>
             )}
 
-            <hr className="mt-5 border-rtv-border-clr dark:border-gray-700" />
+            <hr className="mt-5 border-rtv-border-clr dark:border-border" />
           </div>
         </div>
       </div>

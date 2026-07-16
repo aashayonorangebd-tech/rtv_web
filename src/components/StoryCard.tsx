@@ -17,7 +17,7 @@ import { storyPath } from "@/lib/api";
 export function StoryCardLarge({ story }: { story: StoryModel }) {
   return (
     <a href={storyPath(story)} className="group block">
-      <div className="relative w-full max-w-full aspect-video overflow-hidden rounded-[2px] mb-3 bg-gray-100 dark:bg-slate-800">
+      <div className="relative w-full max-w-full aspect-video overflow-hidden rounded-[2px] mb-3 bg-gray-100 dark:bg-surface">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
@@ -41,7 +41,7 @@ export function StoryCardLarge({ story }: { story: StoryModel }) {
 </h3>
 
 
-      <p className="text-base text-[#555555] dark:text-slate-300 leading-[24px] lg:leading-[26px] line-clamp-3">
+      <p className="text-base text-[#555555] dark:text-foreground leading-[24px] lg:leading-[26px] line-clamp-3">
   {story.subTitle}
 </p>
 
@@ -53,9 +53,9 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
   return (
     <a
       href={storyPath(story)}
-      className="group block pb-3 mb-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0 last:pb-0 last:mb-0"
+      className="group block pb-3 mb-3 border-b border-[#dddddd] dark:border-border last:border-b-0 last:pb-0 last:mb-0"
     >
-      <div className="relative w-full aspect-video overflow-hidden rounded-[2px] mb-2 bg-gray-100 dark:bg-slate-800">
+      <div className="relative w-full aspect-video overflow-hidden rounded-[2px] mb-2 bg-gray-100 dark:bg-surface">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
@@ -82,7 +82,7 @@ export function StoryCardMedium({ story }: { story: StoryModel }) {
 export function StoryCardSmall({ story }: { story: StoryModel }) {
   return (
     <a href={`/story/${story.storyId}`} className="group flex gap-3.5 mb-5 last:mb-0">
-      <div className="relative w-[130px] md:w-[120px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-slate-800">
+      <div className="relative w-[130px] md:w-[120px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-surface">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
@@ -101,7 +101,7 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
         <h3 className="text-[16px] md:text-[17px] font-bold leading-[25px] text-rtv-text-dark dark:text-white group-hover:text-rtv-blue-text-hover dark:group-hover:text-blue-300 transition-colors line-clamp-3">
           {story.mainTitle}
         </h3>
-        <span className="mt-1.5 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
+        <span className="mt-1.5 block text-[11px] font-medium text-[#888888] dark:text-foreground">
           {story.passedTime}
         </span>
       </div>
@@ -111,8 +111,8 @@ export function StoryCardSmall({ story }: { story: StoryModel }) {
 
 export function StoryCardListItem({ story }: { story: StoryModel }) {
   return (
-    <a href={`/story/${story.storyId}`} className="group flex gap-3 py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
-      <div className="relative w-[110px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-slate-800">
+    <a href={`/story/${story.storyId}`} className="group flex gap-3 py-3 border-b border-[#dddddd] dark:border-border last:border-b-0">
+      <div className="relative w-[110px] aspect-[16/9] shrink-0 overflow-hidden rounded-[2px] bg-gray-100 dark:bg-surface">
         <Image
           src={story.fileName}
           alt={story.mainTitle}
@@ -126,7 +126,7 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
         <h3 className="text-[16px] font-medium leading-[24px] text-rtv-text-dark dark:text-white group-hover:text-rtv-blue-text-hover dark:group-hover:text-blue-300 transition-colors line-clamp-2">
           {story.mainTitle}
         </h3>
-        <span className="mt-1 block text-[11px] font-medium text-[#888888] dark:text-gray-500">
+        <span className="mt-1 block text-[11px] font-medium text-[#888888] dark:text-foreground">
           {story.passedTime}
         </span>
       </div>
@@ -136,11 +136,11 @@ export function StoryCardListItem({ story }: { story: StoryModel }) {
 
 export function StoryCardText({ story }: { story: StoryModel }) {
   return (
-    <a href={`/story/${story.storyId}`} className="group block py-3 border-b border-[#dddddd] dark:border-gray-800 last:border-b-0">
+    <a href={`/story/${story.storyId}`} className="group block py-3 border-b border-[#dddddd] dark:border-border last:border-b-0">
       <h3 className="text-[16px] font-medium leading-[25px] text-rtv-text-dark dark:text-white group-hover:text-rtv-blue-text-hover dark:group-hover:text-blue-300 transition-colors line-clamp-2">
         {story.mainTitle}
       </h3>
-      <span className="mt-1.5 block text-[12px] font-medium text-[#888888] dark:text-gray-500">
+      <span className="mt-1.5 block text-[12px] font-medium text-[#888888] dark:text-foreground">
         {story.passedTime}
       </span>
     </a>

@@ -28,7 +28,7 @@ export default function HeroSection({
   const rightColStories = rest.slice(0, 2);
 
   return (
-    <section className="dark:text-white">
+    <section className="dark:text-foreground">
 
       {/* ═══════════════════════════════════════════════════════════════════
           OUTER 12-COLUMN GRID  (gap-2.5)
@@ -41,7 +41,7 @@ export default function HeroSection({
             Wraps lead story (8 cols) + right column (4 cols).
             Border-right separates from the ad sidebar.
             If adblocker detected → spans full 12 cols.                */}
-        <div className="md:col-span-9 md:border-r md:border-[#e2e2e2] md:pr-2.5 dark:border-gray-700">
+        <div className="md:col-span-9 md:border-r md:border-[#e2e2e2] md:pr-2.5 dark:border-border">
 
           {/* ── Inner 12-col grid (gap-5) ──────────────────────────────── */}
           <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
@@ -72,7 +72,7 @@ export default function HeroSection({
 
                 {/* Summary — text-base ≈ 16px, muted gray (#555) */}
                 {lead.subTitle && (
-                  <p className="text-base text-[#555] dark:text-slate-300">
+                  <p className="text-base text-[#555] dark:text-foreground">
                     {lead.subTitle}
                   </p>
                 )}
@@ -110,7 +110,7 @@ export default function HeroSection({
 
                   {/* ── Divider <hr> between story 1 and story 2 ──────── */}
                   {index === 0 && (
-                    <hr className="border-[#e2e2e2] dark:border-gray-700" />
+                    <hr className="border-[#e2e2e2] dark:border-border" />
                   )}
                 </div>
               ))}

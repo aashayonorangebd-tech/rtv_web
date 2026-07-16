@@ -102,7 +102,7 @@ export default function CountrySection({
         <SectionHeader title={title} href={href} />
 
         {/* ─── Filter bar: division/district/upazila selects ──────────── */}
-        <div className="bg-[#F4F4F4] dark:bg-slate-700 my-5 max-sm:my-0">
+        <div className="bg-[#F4F4F4] dark:bg-surface my-5 max-sm:my-0">
           <form className="w-full py-3" onSubmit={handleSubmit}>
             <div className="grid grid-cols-4 max-sm:grid-cols-1 gap-x-5">
               <div className="w-full md:w-full px-3 mb-3 md:mb-0">
@@ -174,9 +174,9 @@ export default function CountrySection({
         </div>
 
         {/* ─── Content: 6-col left (2×2 grid) + 6-col right (1 big card) ──── */}
-        <div className="grid grid-cols-12 gap-2.5 border-b border-rtv-border-clr dark:border-gray-700 py-2.5">
+        <div className="grid grid-cols-12 gap-2.5 border-b border-rtv-border-clr dark:border-border py-2.5">
           {/* ─── Left: 2×2 grid of 4 small cards ────────────────────────── */}
-          <div className="col-span-full md:col-span-6 grid grid-cols-2 gap-5 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+          <div className="col-span-full md:col-span-6 grid grid-cols-2 gap-5 border-r border-[#e2e2e2] pr-2.5 dark:border-border">
             {leftStories.map((story) => (
               <div key={story.storyId}>
                 <a className="flex flex-col w-full group" href={storyPath(story)}>
@@ -221,7 +221,7 @@ export default function CountrySection({
                     </h3>
                   </div>
                   {rightStory.subTitle && (
-                    <p className="text-base text-[#555] dark:text-slate-300">
+                    <p className="text-base text-[#555] dark:text-foreground">
                       {rightStory.subTitle}
                     </p>
                   )}

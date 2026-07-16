@@ -30,9 +30,9 @@ export default function EntertainmentSection({
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-gray-700">
+        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-border">
           {/* ─── Left: featured card ──────────────────────────────────── */}
-          <div className="col-span-6 md:col-span-6 lg:col-span-6 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+          <div className="col-span-6 md:col-span-6 lg:col-span-6 border-r border-[#e2e2e2] pr-2.5 dark:border-border">
             <a className="flex flex-col w-full group" href={storyPath(featured)}>
               <div className="relative aspect-video overflow-hidden">
                 <Image
@@ -50,7 +50,7 @@ export default function EntertainmentSection({
                 </h3>
               </div>
               {featured.subTitle && (
-                <p className="text-base text-[#555] dark:text-slate-300">
+                <p className="text-base text-[#555] dark:text-foreground">
                   {featured.subTitle}
                 </p>
               )}
@@ -70,7 +70,7 @@ export default function EntertainmentSection({
                       {story.mainTitle}
                     </h3>
                     {story.subTitle && (
-                      <p className="text-base font-semibold text-slate-500 dark:text-slate-300">
+                      <p className="text-base font-semibold text-slate-500 dark:text-foreground">
                         {story.subTitle}
                       </p>
                     )}
@@ -88,7 +88,7 @@ export default function EntertainmentSection({
                     </div>
                   </div>
                 </a>
-                {i < 3 && <hr className="border-[#e2e2e2] dark:border-gray-700" />}
+                {i < 3 && <hr className="border-[#e2e2e2] dark:border-border" />}
               </React.Fragment>
             ))}
           </div>

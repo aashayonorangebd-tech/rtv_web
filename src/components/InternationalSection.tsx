@@ -36,9 +36,9 @@ export default function InternationalSection({
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-gray-700">
+        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-border">
           {/* ─── 6-col LEFT: 1 featured card ──────────────────────────── */}
-          <div className="col-span-6 md:col-span-6 lg:col-span-6 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+          <div className="col-span-6 md:col-span-6 lg:col-span-6 border-r border-[#e2e2e2] pr-2.5 dark:border-border">
             <a className="flex flex-col w-full group" href={storyPath(bigCard)}>
               <div className="relative aspect-video overflow-hidden">
                 <Image
@@ -56,7 +56,7 @@ export default function InternationalSection({
                 </h3>
               </div>
               {bigCard.subTitle && (
-                <p className="text-base text-[#555] dark:text-slate-300">
+                <p className="text-base text-[#555] dark:text-foreground">
                   {bigCard.subTitle}
                 </p>
               )}
@@ -64,7 +64,7 @@ export default function InternationalSection({
           </div>
 
           {/* ─── 2-col MIDDLE: 2 stacked small cards ──────────────────── */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-2 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+          <div className="col-span-2 md:col-span-2 lg:col-span-2 border-r border-[#e2e2e2] pr-2.5 dark:border-border">
             {middleCards.map((story, i) => (
               <React.Fragment key={story.storyId}>
                 <a className="flex flex-col w-full group" href={storyPath(story)}>
@@ -84,7 +84,7 @@ export default function InternationalSection({
                     </h3>
                   </div>
                 </a>
-                {i === 0 && <hr className="border-[#e2e2e2] dark:border-gray-700 pt-5" />}
+                {i === 0 && <hr className="border-[#e2e2e2] dark:border-border pt-5" />}
               </React.Fragment>
             ))}
           </div>
@@ -115,7 +115,7 @@ export default function InternationalSection({
                     </div>
                   </div>
                 </a>
-                {i < 3 && <hr className="border-[#e2e2e2] dark:border-gray-700" />}
+                {i < 3 && <hr className="border-[#e2e2e2] dark:border-border" />}
               </React.Fragment>
             ))}
           </div>

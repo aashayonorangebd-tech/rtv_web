@@ -53,7 +53,7 @@ export default function QuadCategorySection({
                       href={storyPath(story)}
                       className="group"
                     >
-                      <div className="h-[1px] w-full bg-gray-300 dark:bg-gray-600 flex items-center justify-start" />
+                      <div className="h-[1px] w-full bg-gray-300 dark:bg-border flex items-center justify-start" />
                       <div className="gap-x-2.5 my-2 max-w-xs transition duration-100 group ease-out hover:scale-105">
                         <div>
                           <h3 className="main-title-post dark:text-white group-hover:text-blue-800 group-hover:dark:text-blue-300">

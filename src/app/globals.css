@@ -32,25 +32,26 @@
   --primary: #2c4b9c;
   --accent-red: #b91c1c;
   --border: #e2e8f0;
+  --surface: #ffffff;
   --color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light):not(.dark) {
-    --background: #0f172a;
-    --foreground: #cbd5e1;
+    --background: #1e293b;
+    --foreground: #ffffff;
     --primary: #2c4b9c;
-    --surface: #1e293b;
+    --surface: #0f172a;
     --border: #334155;
     --color-scheme: dark;
   }
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #cbd5e1;
+  --background: #1e293b;
+  --foreground: #ffffff;
   --primary: #2c4b9c;
-  --surface: #1e293b;
+  --surface: #0f172a;
   --border: #334155;
   --color-scheme: dark;
 }
@@ -78,11 +79,10 @@ body {
   font-family: "SolaimanLipi", "TheWallStreetJournal", sans-serif !important;
   font-size: 18px;
   line-height: 26px;
-  background-color: rgba(47, 52, 63, 0.01);
 }
 
 :is(.dark) body {
-  color: #fff;
+  color: var(--foreground);
 }
 
 * {

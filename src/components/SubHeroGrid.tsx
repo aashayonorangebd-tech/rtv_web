@@ -46,16 +46,16 @@ export default function SubHeroGrid({
   return (
     // ── Outer wrapper — mt-2 for top gap ──
     <div className="mt-2">
-      <section className="dark:text-white">
+      <section className="dark:text-foreground">
         {/* ═══════════════════════════════════════════════════════════════
             12-COL GRID — IDENTICAL to HeroSection (gap-2.5)
             md:border-t pt-5 → horizontal separator from lead
             ═══════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 gap-2.5 md:grid-cols-12 md:border-t md:border-rtv-border-clr pt-5 dark:text-white">
+        <div className="grid grid-cols-1 gap-2.5 md:grid-cols-12 md:border-t md:border-rtv-border-clr pt-5 dark:text-foreground">
 
           {/* ─── 9-COL LEFT CONTENT (border-r separates from sidebar) ───
               Inner 3-col grid with gap-2.5 for the 9 story cards       */}
-          <div className="col-span-full md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-2.5 md:border-r md:border-rtv-border-clr md:pr-2.5 dark:border-gray-700 justify-start">
+          <div className="col-span-full md:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-2.5 md:border-r md:border-rtv-border-clr md:pr-2.5 dark:border-border justify-start">
               {stories.slice(0, 9).map((story, index) => {
                 // Remove border-r on every 3rd card (3rd, 6th, 9th)
                 const isThirdCol = (index + 1) % 3 === 0;
@@ -63,7 +63,7 @@ export default function SubHeroGrid({
                   <div
                     key={story.storyId}
                     className={`md:pr-3 ${
-                        !isThirdCol ? "md:border-r md:border-rtv-border-clr dark:border-gray-700" : ""
+                        !isThirdCol ? "md:border-r md:border-rtv-border-clr dark:border-border" : ""
                     }`}
                   >
                     <a
@@ -91,7 +91,7 @@ export default function SubHeroGrid({
                       </div>
                     </a>
                     {/* Horizontal rule below EVERY card — 9 cards = 9 hrs */}
-                    <hr className="border-rtv-border-clr dark:border-gray-700" />
+                    <hr className="border-rtv-border-clr dark:border-border" />
                   </div>
                 );
               })}

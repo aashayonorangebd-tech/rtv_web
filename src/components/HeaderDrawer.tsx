@@ -28,7 +28,7 @@ export default function HeaderDrawer({
   );
 
   return (
-    <div className="absolute w-[97.5%] ml-4 left-0 top-[40px] bg-[#f4fff9] z-50">
+    <div className="absolute w-[97.5%] ml-4 left-0 top-[40px] bg-[#f4fff9] dark:bg-surface z-50">
       <div className="grid grid-cols-6 gap-1.5 pt-3">
         {sortedItems.map((item) => {
           const slug = getSlug(item.clientUrl);
@@ -40,7 +40,7 @@ export default function HeaderDrawer({
               <Link
                 href={`/category/${slug}`}
                 onClick={onClose}
-                className="w-full hover:text-red-600 dark:text-black"
+                className="w-full hover:text-red-600 dark:text-white"
               >
                 <div className="flex items-center gap-[12px] ml-[30px]">
                   <span className="py-0.5">{item.displayTitle}</span>
@@ -70,7 +70,7 @@ export default function HeaderDrawer({
               <path d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" />
             </svg>
           </span>
-          <a href="/live" className="text-[1rem]">লাইভ টিভি</a>
+          <Link href="/live" className="text-[1rem]">লাইভ টিভি</Link>
         </div>
         <div className="flex items-center justify-center gap-x-2">
           <span className="w-4 h-4 flex items-center justify-center">
