@@ -1,15 +1,62 @@
 // ─── HeaderTopBar ────────────────────────────────────────────────────────────
-// Top bar with location, date, action links (নির্বাচন, সর্বশেষ, LIVE, video),
-// English link, and dark/light theme toggle.
-// Theme toggle uses the custom useTheme from ThemeProvider.
+// Top bar with location, current date, action links (নির্বাচন, সর্বশেষ, LIVE,
+// video), English link, and dark/light theme toggle.
+// The date is rendered client-side to stay in sync with the actual date.
 // ─────────────────────────────────────────────────────────────────────────────
 
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore, useMemo } from "react";
 import Image from "next/image";
 import { useTheme } from "@/components/ThemeProvider";
 import { MapPin, Calendar, Sun } from "lucide-react";
+
+const WEEKDAYS = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"];
+const MONTHS = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+
+function toBengaliNum(n: number): string {
+  return String(n).split("").map((d) => BN_DIGITS[parseInt(d)] || d).join("");
+}
+
+// Approximate Bangla date from Gregorian date
+function getBanglaDate(date: Date): { month: string; day: number; year: number } {
+  const y = date.getFullYear();
+  const m = date.getMonth(); // 0-indexed
+  const d = date.getDate();
+  const banglaYear = y - 593;
+
+  // Bangla month boundaries (approximate, day of month when each month starts)
+  // 1 Boishakh ≈ April 14
+  const monthStarts = [14, 15, 15, 16, 16, 15, 15, 16, 16, 15, 15, 14];
+  const banglaMonths = ["বৈশাখ", "জ্যৈষ্ঠ", "আষাঢ়", "শ্রাবণ", "ভাদ্র", "আশ্বিন", "কার্তিক", "অগ্রহায়ণ", "পৌষ", "মাঘ", "ফাল্গুন", "চৈত্র"];
+  const monthDays = [31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 30, 30];
+
+  let banglaMonthIdx = m;
+  let banglaDay = d - monthStarts[m] + 1;
+  if (banglaDay <= 0) {
+    banglaMonthIdx = (m - 1 + 12) % 12;
+    banglaDay = d + (monthDays[(m - 1 + 12) % 12] - monthStarts[m] + 1);
+  }
+  // Handle Bangla month overflow
+  if (banglaDay > monthDays[banglaMonthIdx]) {
+    banglaDay -= monthDays[banglaMonthIdx];
+    banglaMonthIdx = (banglaMonthIdx + 1) % 12;
+  }
+
+  return { month: banglaMonths[banglaMonthIdx], day: banglaDay, year: banglaYear };
+}
+
+function formatBanglaDate(date: Date): string {
+  const weekday = WEEKDAYS[date.getDay()];
+  const day = toBengaliNum(date.getDate());
+  const month = MONTHS[date.getMonth()];
+  const year = toBengaliNum(date.getFullYear());
+  const bangla = getBanglaDate(date);
+  const bDay = toBengaliNum(bangla.day);
+  const bYear = toBengaliNum(bangla.year);
+  return `${weekday}, ${day} ${month} ${year}, ${bDay} ${bangla.month} ${bYear}`;
+}
 
 export default function HeaderTopBar() {
   const { theme, setTheme } = useTheme();
@@ -18,6 +65,8 @@ export default function HeaderTopBar() {
     () => true,
     () => false,
   );
+
+  const dateStr = useMemo(() => mounted ? formatBanglaDate(new Date()) : "", [mounted]);
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
@@ -31,9 +80,7 @@ export default function HeaderTopBar() {
         </div>
         <div className="flex items-center gap-1.5">
           <Calendar size={16} className="text-gray-500 dark:text-gray-400" />
-          <span>
-            {mounted ? "বৃহস্পতিবার, ০২ জুলাই ২০২৬, ১৮ আষাঢ় ১৪৩৩" : ""}
-          </span>
+          <span>{dateStr}</span>
         </div>
       </div>
 
