@@ -1,6 +1,7 @@
 import React from "react";
 import { ENDPOINTS, toCategoryStoryModel, storyPath } from "@/lib/api";
 import SectionHeader from "@/components/SectionHeader";
+import Link from "next/link";
 import Image from "next/image";
 
 const API_BASE = process.env.API_BASE_URL || "https://api.rtvonline.com";
@@ -43,9 +44,9 @@ export default async function VideoPhotoSection() {
             <SectionHeader title="ভিডিও" href="/video-gallery" />
 
             {videoFeatured && (
-              <a
+              <Link
                 className="flex flex-col w-full group"
-                href={storyPath(videoFeatured)}
+                href={`${storyPath(videoFeatured)}?type=video`}
               >
                 <div className="relative aspect-video overflow-hidden">
                   <Image
@@ -82,16 +83,16 @@ export default async function VideoPhotoSection() {
                     {videoFeatured.mainTitle}
                   </h3>
                 </div>
-              </a>
+              </Link>
             )}
 
             {videoGrid.length > 0 && (
               <div className="flex gap-5 mt-5">
                 {videoGrid.map((story) => (
                   <div key={story.storyId} className="flex-1 min-w-0">
-                    <a
+                    <Link
                       className="flex flex-col w-full group"
-                      href={storyPath(story)}
+                      href={`${storyPath(story)}?type=video`}
                     >
                       <div className="relative aspect-video overflow-hidden">
                         <Image
@@ -128,7 +129,7 @@ export default async function VideoPhotoSection() {
                           {story.mainTitle}
                         </h3>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -142,7 +143,7 @@ export default async function VideoPhotoSection() {
             <SectionHeader title="ছবি" href="/photo-gallery" />
 
             {photoFeatured && (
-              <a
+              <Link
                 className="flex flex-col w-full group"
                 href={storyPath(photoFeatured)}
               >
@@ -175,14 +176,14 @@ export default async function VideoPhotoSection() {
                     {photoFeatured.mainTitle}
                   </h3>
                 </div>
-              </a>
+              </Link>
             )}
 
             {photoGrid.length > 0 && (
               <div className="flex gap-5 mt-5">
                 {photoGrid.map((story) => (
                   <div key={story.storyId} className="flex-1 min-w-0">
-                    <a
+                    <Link
                       className="flex flex-col w-full group"
                       href={storyPath(story)}
                     >
@@ -215,7 +216,7 @@ export default async function VideoPhotoSection() {
                           {story.mainTitle}
                         </h3>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 ))}
               </div>
