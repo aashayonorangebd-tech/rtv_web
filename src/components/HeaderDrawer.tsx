@@ -28,7 +28,7 @@ export default function HeaderDrawer({
   );
 
   return (
-    <div className="absolute w-[97.5%] ml-4 left-0 top-[40px] bg-[#f4fff9] dark:bg-surface z-50">
+    <div className="absolute w-[97.5%] ml-4 left-0 top-[40px] bg-[#f4fff9] dark:bg-[#ffffff] z-50">
       <div className="grid grid-cols-6 gap-1.5 pt-3">
         {sortedItems.map((item) => {
           const slug = getSlug(item.clientUrl);
@@ -40,7 +40,7 @@ export default function HeaderDrawer({
               <Link
                 href={`/category/${slug}`}
                 onClick={onClose}
-                className="w-full hover:text-red-600 dark:text-white"
+                className="w-full hover:text-red-600 text-black"
               >
                 <div className="flex items-center gap-[12px] ml-[30px]">
                   <span className="py-0.5">{item.displayTitle}</span>
@@ -51,8 +51,8 @@ export default function HeaderDrawer({
         })}
       </div>
 
-      <div className="pb-1">
-        <hr />
+      <div className="pb-2">
+        <hr className="border-t border-gray-200 dark:border-gray-700" />
       </div>
 
       <div className="text-black flex items-center justify-center gap-x-5 pb-3">
