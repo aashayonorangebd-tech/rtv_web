@@ -1,16 +1,65 @@
 import { notFound } from "next/navigation";
-import type { StoryDetailsResponse, StoryModel } from "@/lib/types";
+import type { StoryDetailsResponse, StoryModel, CategoryItem } from "@/lib/types";
 import { toStoryModel, ENDPOINTS } from "@/lib/api";
 import StoryPageClient from "@/components/StoryPageClient";
 
+const API_BASE = process.env.API_BASE_URL || "https://api.rtvonline.com";
+
 async function getStoryDetails(id: number): Promise<StoryDetailsResponse | null> {
   try {
-    const base = process.env.API_BASE_URL || "https://api.rtvonline.com";
-    const res = await fetch(`${base}/api/story/view/${id}`, {
+    const res = await fetch(`${API_BASE}/api/story/view/${id}`, {
       next: { revalidate: 60, tags: [`story-${id}`] },
     });
     if (!res.ok) return null;
     return res.json();
+  } catch {
+    return null;
+  }
+}
+
+async function getVideoStoryDetails(id: number): Promise<StoryDetailsResponse | null> {
+  try {
+    const res = await fetch(`${API_BASE}${ENDPOINTS.story.video(id)}`, {
+      next: { revalidate: 60, tags: [`story-video-${id}`] },
+    });
+    if (!res.ok) return null;
+    const raw: Record<string, unknown> = await res.json();
+    const category: CategoryItem = {
+      id: (raw.categoryId as number) || 0,
+      name: (raw.categoryName as string) || "",
+      displayTitle: (raw.categoryDisplayTitle as string) || "",
+      slug: (raw.categorySlug as string) || "",
+      parentId: 0, menuId: 0, type: "", metaTitle: "", metaDescription: "", metaKeywords: "",
+    };
+    return {
+      id: (raw.id as number) || id,
+      version: "",
+      mainTitle: (raw.mainTitle as string) || "",
+      subtitle: "",
+      mainImageFileName: "",
+      mainOgImageFileName: "",
+      bannerImageFileName: "",
+      alt: "",
+      passedTime: (raw.passedTime as string) || "",
+      seoMetaTitle: (raw.metaTitle as string) || (raw.mainTitle as string) || "",
+      expired: false,
+      live: (raw.live as boolean) || false,
+      liveContent: false,
+      shoulderText: "",
+      canonicalUrl: (raw.canonicalUrl as string) || "",
+      ampUrl: "",
+      storyGroupId: 0,
+      storyType: "VIDEO",
+      embeddedVideoLink: (raw.embeddedVideoLink as string) || null,
+      embeddedVideoType: (raw.embeddedVideoType as string) || null,
+      details: [],
+      tags: [],
+      writers: [],
+      categories: [category],
+      timelineStories: [],
+      readMoreStories: [],
+      attachments: [],
+    };
   } catch {
     return null;
   }
@@ -61,11 +110,17 @@ async function getCategoryPopularStories(categoryId: number): Promise<StoryModel
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { id } = await params;
-  const data = await getStoryDetails(Number(id));
+  const sp = await searchParams;
+  const isVideo = sp.type === "video";
+  const data = isVideo
+    ? await getVideoStoryDetails(Number(id))
+    : await getStoryDetails(Number(id));
   if (!data) return { title: "Story Not Found | RTV Online" };
 
   return {
@@ -81,11 +136,18 @@ export async function generateMetadata({
 
 export default async function StoryPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { id } = await params;
-  const data = await getStoryDetails(Number(id));
+  const sp = await searchParams;
+  const isVideo = sp.type === "video";
+
+  const data = isVideo
+    ? await getVideoStoryDetails(Number(id))
+    : await getStoryDetails(Number(id));
 
   if (!data) return notFound();
 
