@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Image from "next/image";
-import type { StoryModel } from "@/lib/types";
+import type { StoryModel, ArchiveApiItem } from "@/lib/types";
 
 const CATEGORIES = [
   { id: 8, displayTitle: "অন্যান্য" },
@@ -117,7 +117,7 @@ export default function ArchiveClient({
         );
         if (!res.ok) throw new Error("Failed");
         const data = await res.json();
-        const mapped = (data.model || []).map((item: any) => ({
+        const mapped = (data.model || []).map((item: ArchiveApiItem) => ({
           storyId: item.id,
           mainTitle: item.mainTitle,
           subTitle: item.subTitle,
@@ -132,7 +132,7 @@ export default function ArchiveClient({
         } else {
           setStories((prev) => {
             const existingIds = new Set(prev.map((s) => s.storyId));
-            const newStories = mapped.filter((s: any) => !existingIds.has(s.storyId));
+            const newStories = mapped.filter((s: StoryModel) => !existingIds.has(s.storyId));
             return [...prev, ...newStories];
           });
         }

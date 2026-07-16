@@ -14,7 +14,6 @@ import type {
   LatestApiItem,
   CategoryApiStory,
   CategoryHeaderResponse,
-  LatestResponse,
   ArchiveApiItem,
   ArchiveResponse,
   VideoGalleryData,
