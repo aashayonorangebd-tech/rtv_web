@@ -13,7 +13,10 @@ export default async function ArchivePage() {
   return (
     <div className="font-bangla">
       <div className="main-container max-sm:mt-2">
-        <ArchiveClient initialStories={initialData.stories} />
+        <ArchiveClient
+          initialStories={initialData.stories}
+          initialTotalPages={initialData.totalPages}
+        />
       </div>
     </div>
   );

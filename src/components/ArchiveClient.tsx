@@ -51,12 +51,14 @@ const CATEGORIES = [
 
 export default function ArchiveClient({
   initialStories,
+  initialTotalPages,
 }: {
   initialStories: StoryModel[];
+  initialTotalPages: number;
 }) {
   const [stories, setStories] = useState<StoryModel[]>(initialStories);
   const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(initialTotalPages);
   const [loading, setLoading] = useState(false);
   const loadingRef = useRef(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
@@ -125,7 +127,15 @@ export default function ArchiveClient({
           isVideo: item.hasVideo ? 1 : 0,
           banglaDate: item.banglaDate,
         }));
-        setStories(mapped);
+        if (reset) {
+          setStories(mapped);
+        } else {
+          setStories((prev) => {
+            const existingIds = new Set(prev.map((s) => s.storyId));
+            const newStories = mapped.filter((s: any) => !existingIds.has(s.storyId));
+            return [...prev, ...newStories];
+          });
+        }
         setTotalPages(data.totalPages || 0);
         setPage(pageNum);
       } catch {
