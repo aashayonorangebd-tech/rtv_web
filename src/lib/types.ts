@@ -148,6 +148,22 @@ export interface CategoryHeaderResponse {
   canonicalUrl: string;
   ampUrl: string;
   parentUrl: string;
+  children?: ChildCategory[];
+}
+
+export interface ChildCategory {
+  id: number;
+  displayTitle: string;
+  slug: string;
+  canonicalUrl?: string;
+}
+
+export interface VideoGalleryData {
+  stories: StoryModel[];
+  totalPages: number;
+  currentPage: number;
+  children: ChildCategory[];
+  displayTitle: string;
 }
 
 // Story details

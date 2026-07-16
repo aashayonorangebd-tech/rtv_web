@@ -13,9 +13,11 @@ import type {
   PopularApiItem,
   LatestApiItem,
   CategoryApiStory,
+  CategoryHeaderResponse,
   LatestResponse,
   ArchiveApiItem,
   ArchiveResponse,
+  VideoGalleryData,
 } from "@/lib/types";
 
 export const API_CONFIG = {
@@ -102,6 +104,57 @@ export function toCategoryStoryModel(item: CategoryApiStory): StoryModel {
     isLive: item.isLive ? 1 : 0,
     isVideo: item.isVideo ? 1 : 0,
   };
+}
+
+export function toImrsUrl(
+  cdnUrl: string,
+  w = 650,
+  h = 365
+): string {
+  try {
+    const u = new URL(cdnUrl);
+    return `https://imrs.rtvonline.com/api/image-service/resize?w=${w}&h=${h}&q=75&cmp=RM&img=${u.pathname}`;
+  } catch {
+    return cdnUrl;
+  }
+}
+
+export async function getVideoGalleryStories(
+  page: number = 1,
+  size: number = 20
+): Promise<VideoGalleryData> {
+  try {
+    const url = new URL(
+      `${process.env.API_BASE_URL || API_CONFIG.prod}${ENDPOINTS.category.header("video-gallery")}`
+    );
+    if (page > 1) {
+      url.searchParams.set("page", String(page));
+    }
+    url.searchParams.set("size", String(size));
+
+    const res = await fetch(url.toString(), {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok)
+      return { stories: [], totalPages: 0, currentPage: 0, children: [], displayTitle: "ভিডিও" };
+
+    const data: CategoryHeaderResponse = await res.json();
+
+    const stories = (data?.stories?.model || []).map((item) => ({
+      ...toCategoryStoryModel(item),
+      storyId: item.id,
+    }));
+
+    return {
+      stories,
+      totalPages: data?.stories?.totalPages || 0,
+      currentPage: data?.stories?.currentPage || 0,
+      children: data?.children || [],
+      displayTitle: data?.displayTitle || "ভিডিও",
+    };
+  } catch {
+    return { stories: [], totalPages: 0, currentPage: 0, children: [], displayTitle: "ভিডিও" };
+  }
 }
 
 export async function getArchiveStories(
