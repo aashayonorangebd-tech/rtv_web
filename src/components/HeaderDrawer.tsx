@@ -79,7 +79,7 @@ export default function HeaderDrawer({
               className="w-5 h-5"
             />
           </span>
-          <a href="https://rtvonline.com/live" className="text-[1rem]">লাইভ টিভি</a>
+          <Link href="/live" className="text-[1rem]">লাইভ টিভি</Link>
         </div>
         <div className="flex items-center justify-center gap-x-2">
           <span className="w-4 h-4 flex items-center justify-center">
@@ -91,7 +91,7 @@ export default function HeaderDrawer({
               className="w-5 h-5 text-[#045ba7]"
             />
           </span>
-          <a href="https://rtvonline.com/video-gallery" className="text-[1rem]">ভিডিও</a>
+          <Link href="/video-gallery" className="text-[1rem]">ভিডিও</Link>
         </div>
         <div className="flex items-center justify-center gap-x-2">
           <span className="w-5 h-5 flex items-center justify-center">
