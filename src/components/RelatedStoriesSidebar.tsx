@@ -28,12 +28,12 @@ export default function RelatedStoriesSidebar({
                 className="grid grid-cols-12 gap-2 max-w-full group"
               >
                 <div className="col-span-full pl-1">
-                  <h3 className="main-title-post dark:text-white group-hover:dark:text-blue-300 hover:text-blue-800">
+                  <h3 className="main-title-post dark:text-foreground group-hover:dark:text-blue-300 hover:text-blue-800">
                     {relStory.mainTitle}
                   </h3>
                 </div>
                 <div className="col-span-7">
-                  <h3 className="text-sm dark:text-white text-gray-600 line-clamp-3">
+                  <h3 className="text-sm dark:text-foreground text-gray-600 line-clamp-3">
                     {relStory.subTitle || relStory.mainTitle}
                   </h3>
                 </div>

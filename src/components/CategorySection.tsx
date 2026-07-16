@@ -45,9 +45,9 @@ export default function CategorySection({
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-gray-700">
+        <div className="grid gap-2.5 my-5 grid-cols-12 pb-5 border-b border-rtv-border-clr dark:border-border">
           {/* ─── 9-COL MAIN CONTENT (border-right) ──────────────────── */}
-          <div className="col-span-full md:col-span-12 lg:col-span-9 border-r border-[#e2e2e2] md:pr-2.5 dark:border-gray-700">
+          <div className="col-span-full md:col-span-12 lg:col-span-9 border-r border-[#e2e2e2] md:pr-2.5 dark:border-border">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
               {/* ── Side stories (4 cols) ───────────────────────────── */}
               <div className="col-span-4 sm:flex sm:flex-col gap-5">
@@ -96,7 +96,7 @@ export default function CategorySection({
                     </h3>
                   </div>
                   {featured.subTitle && (
-                    <p className="text-base text-[#555] dark:text-slate-300">
+                    <p className="text-base text-[#555] dark:text-foreground">
                       {featured.subTitle}
                     </p>
                   )}
@@ -131,7 +131,7 @@ export default function CategorySection({
                     </div>
                   </div>
                 </a>
-                {i < 3 && <hr className="border-[#e2e2e2] dark:border-gray-700" />}
+                {i < 3 && <hr className="border-[#e2e2e2] dark:border-border" />}
               </React.Fragment>
             ))}
           </div>

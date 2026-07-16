@@ -82,7 +82,7 @@ export default function HomePageSections({
 
         return (
           <div key={i}>
-            <div className="sm:container mt-4 sm:px-4 mx-auto dark:text-white sm:my-5">
+            <div className="sm:container mt-4 sm:px-4 mx-auto dark:text-foreground sm:my-5">
               <div className="flex justify-center items-center dark:bg-inherit overflow-hidden">
                 <AdBanner height={90} />
               </div>

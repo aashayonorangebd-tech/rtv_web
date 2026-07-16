@@ -15,7 +15,7 @@ export default function CategoryPopularSidebar({
 
   return (
     <div className="pb-5">
-      <h3 className="category-title mb-2 text-lg dark:text-white font-bold border-b-2 border-blue-600 w-min inline">
+      <h3 className="category-title mb-2 text-lg dark:text-foreground font-bold border-b-2 border-blue-600 w-min inline">
         {categoryName} এর পাঠক প্রিয়
       </h3>
       <div className="overflow-y-auto w-full h-min overflow-x-hidden mt-5">
@@ -27,12 +27,12 @@ export default function CategoryPopularSidebar({
                 className="grid grid-cols-12 gap-2 max-w-full group"
               >
                 <div className="col-span-full pl-1">
-                  <h3 className="main-title-post dark:text-white group-hover:dark:text-blue-300 hover:text-blue-800">
+                  <h3 className="main-title-post dark:text-foreground group-hover:dark:text-blue-300 hover:text-blue-800">
                     {story.mainTitle}
                   </h3>
                 </div>
                 <div className="col-span-7">
-                  <h3 className="text-sm dark:text-white text-gray-600 line-clamp-3">
+                  <h3 className="text-sm dark:text-foreground text-gray-600 line-clamp-3">
                     {story.subTitle || story.mainTitle}
                   </h3>
                 </div>

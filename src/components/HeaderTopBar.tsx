@@ -73,13 +73,13 @@ export default function HeaderTopBar() {
   return (
     <div className="h-[55px] md:h-[65px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6">
       {/* Left: Location & Date */}
-      <div className="hidden lg:flex items-center gap-5 text-gray-600 dark:text-gray-300 text-[14px] font-medium">
+      <div className="hidden lg:flex items-center gap-5 text-gray-600 dark:text-foreground text-[14px] font-medium">
         <div className="flex items-center gap-1.5">
-          <MapPin size={16} className="text-gray-500 dark:text-gray-400" />
+          <MapPin size={16} className="text-gray-500 dark:text-foreground" />
           <span>ঢাকা</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <Calendar size={16} className="text-gray-500 dark:text-gray-400" />
+          <Calendar size={16} className="text-gray-500 dark:text-foreground" />
           <span>{dateStr}</span>
         </div>
       </div>
@@ -88,12 +88,12 @@ export default function HeaderTopBar() {
       <div className="flex items-center justify-center gap-x-3 ml-auto">
         <div className="hidden md:flex items-center justify-center">
           <a href="/election" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
-            <span className="text-[13px] font-light text-gray-800 dark:text-gray-200 hover:text-blue-700">নির্বাচন</span>
+            <span className="text-[13px] font-light text-gray-800 dark:text-foreground hover:text-blue-700">নির্বাচন</span>
           </a>
         </div>
         <div className="hidden md:flex items-center justify-center">
           <a href="/latest" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
-            <span className="text-[13px] font-light text-gray-800 dark:text-gray-200 hover:text-blue-700">সর্বশেষ</span>
+            <span className="text-[13px] font-light text-gray-800 dark:text-foreground hover:text-blue-700">সর্বশেষ</span>
           </a>
         </div>
         <div className="flex items-center justify-center">
@@ -131,7 +131,7 @@ export default function HeaderTopBar() {
           </a>
         </div>
         <div>
-          <button onClick={toggleTheme} className="bg-gray-200 dark:bg-slate-700 p-1.5 hover:bg-gray-400 dark:hover:bg-slate-600 rounded-full transition-colors flex items-center justify-center">
+          <button onClick={toggleTheme} className="bg-gray-200 dark:bg-surface p-1.5 hover:bg-gray-400 dark:hover:bg-surface rounded-full transition-colors flex items-center justify-center">
             {mounted && theme === "dark" ? (
               <Sun className="w-4 h-4 text-gray-200" />
             ) : (

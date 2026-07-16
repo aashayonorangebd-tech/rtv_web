@@ -22,13 +22,13 @@ export default function SectionHeader({
       {/* ── Title row: left = heading, right = "আরও" link + chevron ───── */}
       <a href={href} className="flex justify-between items-baseline group">
         {/* Section title — 24px, bold, theme blue */}
-        <h2 className="text-2xl font-bold text-[#2c4b9c] dark:text-slate-300">
+        <h2 className="text-2xl font-bold text-[#2c4b9c] dark:text-foreground">
           {title}
         </h2>
 
         {/* "আরও" link with right arrow SVG */}
         <div className="flex gap-1 items-center">
-          <p className="text-base dark:text-white text-[#2c4b9c] font-bold">
+          <p className="text-base dark:text-foreground text-[#2c4b9c] font-bold">
             আরও
           </p>
           <svg
@@ -37,7 +37,7 @@ export default function SectionHeader({
             viewBox="0 0 24 24"
             strokeWidth="3"
             stroke="currentColor"
-            className="w-3.5 h-3.5 text-[#2c4b9c] dark:text-slate-300"
+            className="w-3.5 h-3.5 text-[#2c4b9c] dark:text-foreground"
           >
             <path
               strokeLinecap="round"

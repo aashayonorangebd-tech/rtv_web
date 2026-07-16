@@ -53,7 +53,7 @@ export default function AdBanner({
         </div>
       )}
       <div
-        className={`w-full bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400`}
+        className={`w-full bg-gray-100 dark:bg-surface rounded flex items-center justify-center text-xs text-gray-400`}
         style={{ minHeight: height }}
       >
         Ad Space 300×{height}

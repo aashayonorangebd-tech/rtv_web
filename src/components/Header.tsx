@@ -29,7 +29,7 @@ export default async function Header() {
 
   return (
     <StickyHeader>
-      <header className="w-full font-sans bg-white dark:bg-slate-900 mt-[3px]">
+      <header className="w-full font-sans bg-white dark:bg-background mt-[3px]">
         <div className="max-w-[1350px] mx-auto relative">
           <HeaderLogo />
           <HeaderTopBar />

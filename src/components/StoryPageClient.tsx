@@ -244,7 +244,7 @@ export default function StoryPageClient({
                 )}
 
                 {/* Article Body */}
-                <article className="storyDetailFont custom-a-tag pTagGap dark:text-white mx-2 sm:mx-24 text-left">
+                <article className="storyDetailFont custom-a-tag pTagGap dark:text-foreground mx-2 sm:mx-24 text-left">
                   {rewrittenHtml && (
                     <div dangerouslySetInnerHTML={{ __html: rewrittenHtml }} />
                   )}
@@ -284,7 +284,7 @@ export default function StoryPageClient({
                 <div className="flex flex-wrap flex-wrap items-center justify-start gap-2 mt-5 mb-5 mx-2 sm:mx-0 list-none">
                   {story.tags?.map((tag) => (
                     <span key={tag.id} className="bg-[#e8e8e9] dark:bg-slate-500 rounded-[5px] py-1 hover:drop-shadow-md">
-                      <a href={`/topic/${tag.slug}`} className="text-[1.2rem] outline-none px-3 cursor-pointer hover:text-[#D12026] dark:text-white dark:hover:text-white">
+                      <a href={`/topic/${tag.slug}`} className="text-[1.2rem] outline-none px-3 cursor-pointer hover:text-[#D12026] dark:text-foreground dark:hover:text-foreground">
                         {tag.name}
                       </a>
                     </span>

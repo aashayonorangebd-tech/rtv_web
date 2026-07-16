@@ -26,7 +26,7 @@ export default function DualCategorySection({
           <SectionHeader title={cat.title} href={cat.href} />
         </div>
 
-        <div className="border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+        <div className="border-r border-[#e2e2e2] pr-2.5 dark:border-border">
           <a className="flex flex-col w-full group" href={storyPath(featured)}>
             <div className="relative aspect-video overflow-hidden">
               <Image
@@ -44,7 +44,7 @@ export default function DualCategorySection({
               </h3>
             </div>
             {featured.subTitle && (
-              <p className="text-base text-[#555] dark:text-slate-300">
+              <p className="text-base text-[#555] dark:text-foreground">
                 {featured.subTitle}
               </p>
             )}
@@ -77,7 +77,7 @@ export default function DualCategorySection({
                 </div>
               </a>
               {i < sideStories.length - 1 && (
-                <hr className="mt-4 border-[#e2e2e2] dark:border-gray-700" />
+                <hr className="mt-4 border-[#e2e2e2] dark:border-border" />
               )}
             </div>
           ))}
@@ -89,7 +89,7 @@ export default function DualCategorySection({
   return (
     <section className="section-padding">
       <div className="main-container">
-        <div className="grid md:grid-cols-2 gap-2.5 border-b border-rtv-border-clr dark:border-gray-700 pb-5">
+        <div className="grid md:grid-cols-2 gap-2.5 border-b border-rtv-border-clr dark:border-border pb-5">
           {renderCategory(left, true)}
           {renderCategory(right, false)}
         </div>

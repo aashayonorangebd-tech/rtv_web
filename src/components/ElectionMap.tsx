@@ -23,7 +23,7 @@ export default function ElectionMap() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-full text-gray-600 dark:text-gray-300">
+      <div className="flex items-center justify-center h-full text-gray-600 dark:text-foreground">
         মানচিত্র লোড করা যায়নি।
       </div>
     );

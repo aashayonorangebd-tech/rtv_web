@@ -103,14 +103,14 @@ function OnlinePollCard() {
   if (loading || !poll) return null;
 
   return (
-    <div className="w-full border border-rtv-border-clr dark:border-gray-700 rounded-md shadow-lg">
+    <div className="w-full border border-rtv-border-clr dark:border-border rounded-md shadow-lg">
       <div className="flex flex-col items-center mx-5">
         <a href="/opinion-poll" className="w-full pt-2">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold text-rtv-bg-blue dark:text-slate-300">
+            <h2 className="text-xl font-bold text-rtv-bg-blue dark:text-foreground">
               অনলাইন জরিপ
             </h2>
-            <div className="flex items-center gap-1 text-rtv-bg-blue dark:text-slate-300">
+            <div className="flex items-center gap-1 text-rtv-bg-blue dark:text-foreground">
               <p className="text-sm font-bold"> সকল জরিপ </p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ function OnlinePollCard() {
               d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-          <p className="text-sm text-slate-600 dark:text-slate-300">
+          <p className="text-sm text-slate-600 dark:text-foreground">
             {poll.date}
           </p>
         </div>
@@ -192,14 +192,14 @@ function OnlinePollCard() {
                     disabled={voted}
                   />
                 </div>
-                <div className={`relative flex-1 mt-1 h-8 bg-gray-200 dark:bg-slate-600 rounded border border-black dark:border-slate-500 ${voted ? "opacity-50" : ""}`}>
+                <div className={`relative flex-1 mt-1 h-8 bg-gray-200 dark:bg-surface rounded border border-black dark:border-border ${voted ? "opacity-50" : ""}`}>
                   <div
                     className="absolute top-0 left-0 h-full bg-blue-300 dark:bg-blue-500 rounded"
                     style={{ width: `${option.percentage}%` }}
                   />
-                  <p className="absolute inset-0 font-medium text-left pl-2 text-black dark:text-white text-xl flex flex-row justify-between items-center">
+                  <p className="absolute inset-0 font-medium text-left pl-2 text-black dark:text-foreground text-xl flex flex-row justify-between items-center">
                     <span className="text-sm font-bold">{option.label}</span>
-                    <span className="text-slate-600 dark:text-slate-300 font-semibold text-base pr-1">
+                    <span className="text-slate-600 dark:text-foreground font-semibold text-base pr-1">
                       {option.percentage.toFixed(2)}%
                     </span>
                   </p>
@@ -211,7 +211,7 @@ function OnlinePollCard() {
             );
           })}
 
-          <p className="text-center text-base text-gray-600 dark:text-slate-300 my-4">
+          <p className="text-center text-base text-gray-600 dark:text-foreground my-4">
             মোট ভোটদাতাঃ {poll.totalVotes} জন
           </p>
         </div>
@@ -240,12 +240,12 @@ export default function LifestyleSection({
       <div className="main-container">
         <SectionHeader title={title} href={href} />
 
-        <div className="grid grid-cols-12 gap-2.5 my-5 pb-5 border-b border-rtv-border-clr dark:border-gray-700">
+        <div className="grid grid-cols-12 gap-2.5 my-5 pb-5 border-b border-rtv-border-clr dark:border-border">
           {/* ─── 8-col: Lifestyle stories 2-column grid ──────────────── */}
           <div className="col-span-full md:col-span-12 lg:col-span-8">
             <div className="grid grid-cols-2 gap-2.5">
               {/* ─── Left col: featured + horizontal card ──────────────── */}
-              <div className="col-span-full md:col-span-1 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700 flex flex-col justify-between">
+              <div className="col-span-full md:col-span-1 border-r border-[#e2e2e2] pr-2.5 dark:border-border flex flex-col justify-between">
                 <a className="flex flex-col w-full group" href={storyPath(featured)}>
                   <div className="relative aspect-video overflow-hidden">
                     <Image
@@ -263,7 +263,7 @@ export default function LifestyleSection({
                     </h3>
                   </div>
                   {featured.subTitle && (
-                    <p className="text-base text-[#555] dark:text-slate-300">
+                    <p className="text-base text-[#555] dark:text-foreground">
                       {featured.subTitle}
                     </p>
                   )}
@@ -319,7 +319,7 @@ export default function LifestyleSection({
                         </div>
                       </div>
                     </a>
-                    {i < 3 && <hr className="border-[#e2e2e2] dark:border-gray-700" />}
+                    {i < 3 && <hr className="border-[#e2e2e2] dark:border-border" />}
                   </React.Fragment>
                 ))}
               </div>

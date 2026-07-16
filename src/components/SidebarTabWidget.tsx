@@ -58,7 +58,7 @@ export default function SidebarTabWidget({
                 className={`w-full text-center dark:text-white dark:border py-0.5 rounded-md cursor-pointer transition duration-300 ${
                   isActive
                     ? "bg-[#2c4b9c] text-white font-bold"
-                    : "bg-transparent text-gray-700 dark:text-gray-300 hover:text-[#2c4b9c]"
+                    : "bg-transparent text-gray-700 dark:text-foreground hover:text-[#2c4b9c]"
                 }`}
               >
                 {tab.label}
@@ -82,10 +82,10 @@ export default function SidebarTabWidget({
           {stories.slice(0, 10).map((story, idx) => (
             <div
               key={story.storyId || idx}
-              className="flex flex-col items-start justify-center py-2.5 border-b border-[#dddddd] dark:border-gray-700 last:border-b-0"
+              className="flex flex-col items-start justify-center py-2.5 border-b border-[#dddddd] dark:border-border last:border-b-0"
             >
               <a href={storyPath(story)} className="w-full">
-                <p className="px-[5px] text-[#555] dark:text-slate-300 hover:text-[#0d6efd] dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px]">
+                <p className="px-[5px] text-[#555] dark:text-foreground hover:text-[#0d6efd] dark:hover:text-blue-300 flex items-center text-left leading-relaxed text-[15px]">
                   {story.mainTitle}
                 </p>
               </a>
@@ -107,7 +107,7 @@ export default function SidebarTabWidget({
 
       {/* ── AD PLACEHOLDER (300×250) below the tab content ─────────────── */}
       {showBottomAd && (
-        <div className="w-full min-h-[250px] bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center text-xs text-gray-400 mt-4">
+        <div className="w-full min-h-[250px] bg-gray-100 dark:bg-surface rounded flex items-center justify-center text-xs text-gray-400 mt-4">
           বিজ্ঞাপন — 300×250
         </div>
       )}

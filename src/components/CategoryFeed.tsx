@@ -56,7 +56,7 @@ function SecondCard({ story }: { story: StoryModel }) {
         </h3>
       </div>
       {story.subTitle && (
-        <p className="text-[#555] dark:text-slate-300 line-clamp-3">
+        <p className="text-[#555] dark:text-foreground line-clamp-3">
           {story.subTitle}
         </p>
       )}
@@ -103,13 +103,13 @@ function VerticalItem({ story }: { story: StoryModel }) {
           </h2>
 
           {story.passedTime && (
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            <p className="mt-2 text-sm text-gray-500 dark:text-foreground">
               {story.passedTime}
             </p>
           )}
 
           {story.subTitle && (
-            <p className="mt-3 text-[16px] leading-7 text-[#555] dark:text-gray-300 line-clamp-2">
+            <p className="mt-3 text-[16px] leading-7 text-[#555] dark:text-foreground line-clamp-2">
               {story.subTitle}
             </p>
           )}
@@ -225,12 +225,12 @@ export default function CategoryFeed({
               <div className="grid grid-cols-12 gap-4">
 
                 {/* ── Lead Story (Left side, 8 columns) ────────────────── */}
-                <div className="col-span-12 lg:col-span-8 group border-r border-gray-400 dark:border-gray-200 pr-4">
+                <div className="col-span-12 lg:col-span-8 group border-r border-gray-400 dark:border-border pr-4">
                   {lead && <LeadCard story={lead} />}
                 </div>
 
                 {/* ── Second Story (Middle, 4 columns) ─────────────────── */}
-                <div className="col-span-12 lg:col-span-4 border-r border-gray-400 dark:border-gray-200 pr-4">
+                <div className="col-span-12 lg:col-span-4 border-r border-gray-400 dark:border-border pr-4">
                   {second && <SecondCard story={second} />}
                 </div>
 
@@ -262,7 +262,7 @@ export default function CategoryFeed({
 
                 {/* ── Divider between vertical items ───────────────────── */}
                 {i < vertical.length - 1 && (
-                  <div className="h-px bg-gray-400 dark:bg-gray-200" />
+                  <div className="h-px bg-gray-400 dark:bg-border" />
                 )}
               </div>
             ))}
@@ -270,7 +270,7 @@ export default function CategoryFeed({
 
           {/* ── Infinite Scroll Sentinel & Loading Status ──────────────── */}
           <div ref={sentinelRef} className="h-px w-full" aria-hidden />
-          <div className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+          <div className="py-6 text-center text-sm text-gray-500 dark:text-foreground">
             {loading && "লোড হচ্ছে…"}
             {!hasMore && stories.length > 0 && "সব খবর দেখানো হয়েছে"}
           </div>

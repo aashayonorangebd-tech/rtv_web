@@ -60,11 +60,11 @@ function PrayerTimeWidget() {
   }, []);
 
   return (
-    <div className="text-center border border-[#e2e2e2] dark:border-gray-700 shadow-md rounded">
+    <div className="text-center border border-[#e2e2e2] dark:border-border shadow-md rounded">
       <div className="flex items-center justify-center py-2.5">
         <a
           href="/namaz-time"
-          className="text-2xl font-bold text-rtv-bg-blue dark:text-slate-300 hover:text-rtv-blue-text-hover"
+          className="text-2xl font-bold text-rtv-bg-blue dark:text-foreground hover:text-rtv-blue-text-hover"
         >
           নামাজের সময়সূচি
         </a>
@@ -75,10 +75,10 @@ function PrayerTimeWidget() {
           <div className="mx-auto max-sm:mt-2">
             <div className="pr-2.5">
               <div className="text-center mt-5">
-                <p className="text-[15px] font-bold dark:text-slate-300">
+                <p className="text-[15px] font-bold dark:text-foreground">
                   {prayerData?.hijriDate || ""}
                 </p>
-                <p className="text-sm dark:text-slate-300 mt-1">
+                <p className="text-sm dark:text-foreground mt-1">
                   {prayerData?.currentDate || ""}
                 </p>
               </div>
@@ -86,12 +86,12 @@ function PrayerTimeWidget() {
                 {prayerData && (
                   <>
                     <div>
-                      <p className="text-[15px] whitespace-nowrap dark:text-slate-300">
+                      <p className="text-[15px] whitespace-nowrap dark:text-foreground">
                         সেহেরি শেষ {toBanglaTime(prayerData.sehr)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-[15px] whitespace-nowrap dark:text-slate-300">
+                      <p className="text-[15px] whitespace-nowrap dark:text-foreground">
                         ইফতার শুরু {toBanglaTime(prayerData.iftar)}
                       </p>
                     </div>
@@ -111,10 +111,10 @@ function PrayerTimeWidget() {
                   key={key}
                   className="grid grid-flow-col items-center grid-cols-2 text-left pr-3 px-2"
                 >
-                  <p className="col-span-1 text-[15px] dark:text-slate-300 mr-5 my-1">
+                  <p className="col-span-1 text-[15px] dark:text-foreground mr-5 my-1">
                     {PRAYER_NAMES_BN[key]}
                   </p>
-                  <p className="col-span-1 text-[15px] dark:text-slate-300 whitespace-nowrap">
+                  <p className="col-span-1 text-[15px] dark:text-foreground whitespace-nowrap">
                     {time ? toBanglaTime(time as string) : ""}
                   </p>
                 </div>
@@ -124,7 +124,7 @@ function PrayerTimeWidget() {
         </div>
       </div>
 
-      <small className="text-black dark:text-slate-300 block pb-2">
+      <small className="text-black dark:text-foreground block pb-2">
         *স্থানভেদে সময়ের পার্থক্য হতে পারে
       </small>
     </div>
@@ -202,13 +202,13 @@ function CalendarWidget() {
   })();
 
   return (
-    <div className="border border-[#e2e2e2] dark:border-gray-700 shadow-md p-5 w-full grid items-center justify-center rounded">
+    <div className="border border-[#e2e2e2] dark:border-border shadow-md p-5 w-full grid items-center justify-center rounded">
       <div className="p-2 flex flex-col justify-center items-center gap-2">
-        <a href={`/api/story/view/archive?page=0&size=15`} className="text-lg font-bold text-rtv-bg-blue dark:text-slate-300 hover:text-rtv-blue-text-hover">আর্কাইভ</a>
+        <a href={`/api/story/view/archive?page=0&size=15`} className="text-lg font-bold text-rtv-bg-blue dark:text-foreground hover:text-rtv-blue-text-hover">আর্কাইভ</a>
         <div className="p-2 flex justify-between items-center gap-2">
           <button
             onClick={prevMonth}
-            className="text-lg font-bold text-rtv-bg-blue dark:text-slate-300 hover:text-rtv-blue-text-hover"
+            className="text-lg font-bold text-rtv-bg-blue dark:text-foreground hover:text-rtv-blue-text-hover"
           >
             &lt;
           </button>
@@ -216,7 +216,7 @@ function CalendarWidget() {
           <select
             value={year}
             onChange={(e) => setYear(Number(e.target.value))}
-            className="text-sm border border-[#e2e2e2] dark:border-gray-700 rounded px-1 py-0.5 bg-white dark:bg-slate-800"
+            className="text-sm border border-[#e2e2e2] dark:border-border rounded px-1 py-0.5 bg-white dark:bg-surface"
           >
             {generateBanglaYears().map((y) => (
               <option key={y} value={y}>
@@ -228,7 +228,7 @@ function CalendarWidget() {
           <select
             value={month}
             onChange={(e) => setMonth(Number(e.target.value))}
-            className="text-sm border border-[#e2e2e2] dark:border-gray-700 rounded px-1 py-0.5 bg-white dark:bg-slate-800"
+            className="text-sm border border-[#e2e2e2] dark:border-border rounded px-1 py-0.5 bg-white dark:bg-surface"
           >
             {MONTHS_BN.map((m, i) => (
               <option key={m} value={i}>
@@ -240,7 +240,7 @@ function CalendarWidget() {
           <button
             onClick={nextMonth}
             disabled={isFuture && month >= todayMonth && year >= todayYear}
-            className="text-lg font-bold text-rtv-bg-blue dark:text-slate-300 hover:text-rtv-blue-text-hover disabled:opacity-30 disabled:cursor-not-allowed"
+            className="text-lg font-bold text-rtv-bg-blue dark:text-foreground hover:text-rtv-blue-text-hover disabled:opacity-30 disabled:cursor-not-allowed"
           >
             &gt;
           </button>
@@ -249,7 +249,7 @@ function CalendarWidget() {
 
       <div className="grid grid-cols-7 gap-0 text-center">
         {DAYS_BN.map((d) => (
-          <div key={d} className="text-xs font-semibold dark:text-slate-300 py-1">
+          <div key={d} className="text-xs font-semibold dark:text-foreground py-1">
             {d}
           </div>
         ))}
@@ -262,8 +262,8 @@ function CalendarWidget() {
                 : d === todayDate && month === todayMonth && year === todayYear
                   ? "bg-rtv-blue-text-hover text-white rounded-full"
                   : d >= firstFutureDay && firstFutureDay > 0
-                    ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                    : "dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer"
+                    ? "text-gray-300 dark:text-foreground cursor-not-allowed"
+                    : "dark:text-foreground hover:bg-gray-100 dark:hover:bg-surface cursor-pointer"
             }`}
           >
             {d > 0 ? getBanglaNumber(d) : ""}
@@ -295,17 +295,17 @@ export default function ProbashSection({
   return (
     <section className="section-padding">
       <div className="main-container">
-        <div className="border-b border-rtv-border-clr dark:border-gray-700 py-5">
+        <div className="border-b border-rtv-border-clr dark:border-border py-5">
           <SectionHeader title={title} href={href} />
 
           <div className="grid grid-cols-12 gap-5">
             {/* ─── 8-col: Stories grid ────────────────────────────────── */}
-            <div className="col-span-full md:col-span-12 lg:col-span-8 border-r border-[#e2e2e2] pr-5 dark:border-gray-700">
+            <div className="col-span-full md:col-span-12 lg:col-span-8 border-r border-[#e2e2e2] pr-5 dark:border-border">
               {/* ── Row 1 ──────────────────────────────────────────────── */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 <div className="col-span-full grid grid-cols-2 gap-2.5">
                   {/* Left: featured card */}
-                  <div className="col-span-1 border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+                  <div className="col-span-1 border-r border-[#e2e2e2] pr-2.5 dark:border-border">
                     <a className="flex flex-col w-full group" href={storyPath(featured)}>
                       <div className="relative aspect-video overflow-hidden">
                         <Image
@@ -323,7 +323,7 @@ export default function ProbashSection({
                         </h3>
                       </div>
                       {featured.subTitle && (
-                        <p className="text-base text-[#555] dark:text-slate-300">
+                        <p className="text-base text-[#555] dark:text-foreground">
                           {featured.subTitle}
                         </p>
                       )}
@@ -356,17 +356,17 @@ export default function ProbashSection({
                             </div>
                           </div>
                         </a>
-                        {i < 2 && <hr className="border-[#e2e2e2] dark:border-gray-700 my-2.5" />}
+                        {i < 2 && <hr className="border-[#e2e2e2] dark:border-border my-2.5" />}
                       </React.Fragment>
                     ))}
                   </div>
                 </div>
-                <hr className="col-span-full border-[#e2e2e2] dark:border-gray-700" />
+                <hr className="col-span-full border-[#e2e2e2] dark:border-border" />
               </div>
 
               {/* ── Row 2: 4 big horizontal cards ──────────────────────── */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mt-2">
-                <div className="border-r border-[#e2e2e2] pr-2.5 dark:border-gray-700">
+                <div className="border-r border-[#e2e2e2] pr-2.5 dark:border-border">
                   {bottomRowLeft.map((story, i) => (
                     <React.Fragment key={story.storyId}>
                       <a
@@ -378,7 +378,7 @@ export default function ProbashSection({
                             {story.mainTitle}
                           </h3>
                           {story.subTitle && (
-                            <p className="text-base font-semibold text-slate-500 dark:text-slate-300">
+                            <p className="text-base font-semibold text-slate-500 dark:text-foreground">
                               {story.subTitle}
                             </p>
                           )}
@@ -396,7 +396,7 @@ export default function ProbashSection({
                           </div>
                         </div>
                       </a>
-                      {i === 0 && <hr className="border-[#e2e2e2] dark:border-gray-700 my-2.5" />}
+                      {i === 0 && <hr className="border-[#e2e2e2] dark:border-border my-2.5" />}
                     </React.Fragment>
                   ))}
                 </div>
@@ -413,7 +413,7 @@ export default function ProbashSection({
                             {story.mainTitle}
                           </h3>
                           {story.subTitle && (
-                            <p className="text-base font-semibold text-slate-500 dark:text-slate-300">
+                            <p className="text-base font-semibold text-slate-500 dark:text-foreground">
                               {story.subTitle}
                             </p>
                           )}
@@ -431,7 +431,7 @@ export default function ProbashSection({
                           </div>
                         </div>
                       </a>
-                      {i === 0 && <hr className="border-[#e2e2e2] dark:border-gray-700 my-2.5" />}
+                      {i === 0 && <hr className="border-[#e2e2e2] dark:border-border my-2.5" />}
                     </React.Fragment>
                   ))}
                 </div>
