@@ -40,10 +40,10 @@ export default function VideoGalleryGrid({
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {stories.map((story) => (
-          <div key={story.storyId} className="col-span-1">
+          <div key={story.storyId} className="col-span-1 h-full">
             <Link
               href={storyPath(story)}
-              className="flex flex-col group w-full"
+              className="flex flex-col group w-full h-full"
             >
               <div className="relative aspect-video overflow-hidden">
                 <Image
@@ -80,7 +80,7 @@ export default function VideoGalleryGrid({
                   </svg>
                 </div>
               </div>
-              <h3 className="font-semibold group-hover:text-blue-500 hover:cursor-pointer py-2 dark:text-white">
+              <h3 className="font-semibold group-hover:text-blue-500 hover:cursor-pointer py-2 dark:text-white flex-1">
                 {story.mainTitle}
               </h3>
             </Link>
