@@ -115,7 +115,7 @@ export default function HeaderDrawer({
               className="w-5 h-4"
             />
           </span>
-          <a href="https://play.google.com/store/apps/details?id=com.mcc.RTV&pli=1" className="text-[1rem]">অ্যান্ড্রয়েড</a>
+          <a href="https://play.google.com/store/apps/details?id=com.rtv.newsportal" className="text-[1rem]">অ্যান্ড্রয়েড</a>
         </div>
         <div className="flex items-center justify-center gap-x-2">
           <span className="w-5 h-5 flex items-center justify-center">
@@ -127,7 +127,7 @@ export default function HeaderDrawer({
               className="w-5 h-7"
             />
           </span>
-          <a href="https://apps.apple.com/us/app/rtv/id734250822" className="text-[1rem]">আইফোন</a>
+          <a href="https://apps.apple.com/us/app/rtv/id6753746064" className="text-[1rem]">আইফোন</a>
         </div>
         <div className="flex items-center justify-center gap-x-2">
           <span className="w-5 h-5 flex items-center justify-center">
