@@ -139,7 +139,7 @@ export default function HeaderDrawer({
               className="w-5 h-5"
             />
           </span>
-          <a href="https://rtvonline.com/archive" className="text-[1rem]">আর্কাইভ</a>
+          <a href="/archive" className="text-[1rem]">আর্কাইভ</a>
         </div>
         <div className="flex items-center justify-center gap-x-2">
           <span className="w-5 h-5 flex items-center justify-center">

@@ -104,20 +104,6 @@ export function toCategoryStoryModel(item: CategoryApiStory): StoryModel {
   };
 }
 
-export async function getLatestStories(): Promise<StoryModel[]> {
-  try {
-    const res = await fetch(
-      `${process.env.API_BASE_URL || API_CONFIG.prod}${ENDPOINTS.story.latest}`,
-      { next: { revalidate: 30 } }
-    );
-    if (!res.ok) return [];
-    const data: LatestResponse = await res.json();
-    return (data.model || []).map(toStoryModel);
-  } catch {
-    return [];
-  }
-}
-
 export async function getArchiveStories(
   page: number = 0,
   size: number = 12
