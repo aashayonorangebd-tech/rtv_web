@@ -8,6 +8,7 @@
 
 import { useSyncExternalStore, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useTheme } from "@/components/ThemeProvider";
 import { MapPin, Calendar, Sun } from "lucide-react";
 
@@ -87,17 +88,17 @@ export default function HeaderTopBar() {
       {/* Right: Actions & Links */}
       <div className="flex items-center justify-center gap-x-3 ml-auto">
         <div className="hidden md:flex items-center justify-center">
-          <a href="/election" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
+          <Link href="/election" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
             <span className="text-[13px] font-light text-gray-800 dark:text-foreground hover:text-blue-700">নির্বাচন</span>
-          </a>
+          </Link>
         </div>
         <div className="hidden md:flex items-center justify-center">
-          <a href="/latest" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
+          <Link href="/latest" className="w-8 h-auto flex flex-row items-center justify-center gap-0.5 text-center">
             <span className="text-[13px] font-light text-gray-800 dark:text-foreground hover:text-blue-700">সর্বশেষ</span>
-          </a>
+          </Link>
         </div>
         <div className="flex items-center justify-center">
-          <a href="/live" className="w-auto h-auto flex flex-row items-center justify-center gap-1.5 text-center">
+          <Link href="/live" className="w-auto h-auto flex flex-row items-center justify-center gap-1.5 text-center">
             <Image
               alt="live_icon"
               src="/rtvIcon/live_icon2.png"
@@ -112,10 +113,10 @@ export default function HeaderTopBar() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-red-700"></span>
             </span>
             <span className="text-[13px] font-bold text-red-700 dark:text-red-500">LIVE</span>
-          </a>
+          </Link>
         </div>
         <div className="flex items-center justify-center gap-x-2">
-          <a href="/video-gallery" className="hover:opacity-80 transition-opacity">
+          <Link href="/video-gallery" className="hover:opacity-80 transition-opacity">
             <span className="text-[1rem]">
               <span className="w-6 h-6 block">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-[#5d68c2]">
@@ -123,7 +124,7 @@ export default function HeaderTopBar() {
                 </svg>
               </span>
             </span>
-          </a>
+          </Link>
         </div>
         <div>
           <a href="/english" className="text-[12px] bg-[#2e4b99] hover:bg-[#1e305e] transition-colors py-[3px] px-[6px] text-white rounded-sm" target="_blank" rel="noreferrer">

@@ -10,6 +10,8 @@
 //   href  : category URL the title + "আরও" link point to
 // ─────────────────────────────────────────────────────────────────────────
 
+import Link from "next/link";
+
 export default function SectionHeader({
   title,
   href = "#",
@@ -20,7 +22,7 @@ export default function SectionHeader({
   return (
     <div>
       {/* ── Title row: left = heading, right = "আরও" link + chevron ───── */}
-      <a href={href} className="flex justify-between items-baseline group">
+      <Link href={href} className="flex justify-between items-baseline group">
         {/* Section title — 24px, bold, theme blue */}
         <h2 className="text-2xl font-bold text-[#2c4b9c] dark:text-foreground">
           {title}
@@ -46,7 +48,7 @@ export default function SectionHeader({
             />
           </svg>
         </div>
-      </a>
+      </Link>
 
       {/* ── Blue divider line — 2px thick, theme blue / white in dark ──── */}
       <div className="mt-1 mb-[15px] flex items-baseline">
