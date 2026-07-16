@@ -42,7 +42,7 @@ export default function VideoGalleryGrid({
         {stories.map((story) => (
           <div key={story.storyId} className="col-span-1 h-full">
             <Link
-              href={storyPath(story)}
+              href={`${storyPath(story)}?type=video`}
               className="flex flex-col group w-full h-full"
             >
               <div className="relative aspect-video overflow-hidden">
