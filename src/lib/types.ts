@@ -361,3 +361,50 @@ export interface SubDistrict {
   districtName: string;
   districtId: number;
 }
+
+// ── Location stories (deshjure / election district filter) ─────────────────
+// GET /api/story/view/location?page=&districtName=
+export interface NearbyLocation {
+  id: number;
+  name: string;
+  displayName: string;
+  locationUrl: string;
+}
+
+export interface LocationBreadcrumb {
+  title: string;
+  url: string;
+  orderIndex: number;
+}
+
+// Raw story shape from the location endpoint (isVideo boolean, no isLive).
+export interface LocationApiStory {
+  id: number;
+  mainTitle: string;
+  subTitle: string;
+  fileName: string;
+  alt: string;
+  caption: string;
+  authorAlias: string;
+  datePublished: string;
+  passedTime: string;
+  banglaDate: string;
+  canonicalUrl: string;
+  ampUrl: string;
+  isVideo: boolean;
+  isLive?: boolean;
+}
+
+export interface LocationResponse {
+  id?: number;
+  displayName?: string;
+  locationUrl?: string;
+  nearbyLocations?: NearbyLocation[];
+  breadcrumb?: LocationBreadcrumb[];
+  stories: {
+    model: StoryModel[];
+    totalPages: number;
+    currentPage: number;
+    totalElements: number;
+  };
+}
