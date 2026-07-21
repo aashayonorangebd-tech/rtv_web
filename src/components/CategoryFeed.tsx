@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { StoryModel } from "@/lib/types";
+import Link from "next/link";
+import type { StoryModel, ChildCategory } from "@/lib/types";
 import { toCategoryStoryModel, ENDPOINTS } from "@/lib/api";
 import AdBanner from "@/components/AdBanner";
 
@@ -13,6 +14,9 @@ type Props = {
   displayTitle: string;
   initialStories: StoryModel[];
   totalPages: number;
+  subcategories?: ChildCategory[];
+  parentTitle?: string;
+  parentUrl?: string;
 };
 
 function img(src: string, alt: string, className: string) {
@@ -125,6 +129,9 @@ export default function CategoryFeed({
   displayTitle,
   initialStories,
   totalPages,
+  subcategories,
+  parentTitle,
+  parentUrl,
 }: Props) {
   const [stories, setStories] = useState<StoryModel[]>(initialStories);
   const [page, setPage] = useState(0);
@@ -207,16 +214,57 @@ export default function CategoryFeed({
   const horizontal = rest.slice(0, 4);
   const vertical = rest.slice(4);
 
+  const toCategoryPath = (url?: string) => {
+    if (!url) return "#";
+    try {
+      const u = new URL(url);
+      const path = u.pathname.replace(/\/$/, "");
+      return `/category${path}`;
+    } catch {
+      return "#";
+    }
+  };
+
+  const toChildCategoryPath = (child: ChildCategory): string => {
+    if (child.canonicalUrl) {
+      return toCategoryPath(child.canonicalUrl);
+    }
+    return toCategoryPath(`https://rtvonline.com${child.slug}`);
+  };
+
   return (
       <div className="grid grid-cols-12 gap-x-2.5">
         <div className="col-span-12">
 
-          {/* ── Category Title & Blue Underline ────────────────────────── */}
+          {/* ── Category Breadcrumb & Subcategories ───────────────────── */}
           <div className="flex flex-col gap-y-1">
-            <a href={`/category/${slug}`}>
-              <h1 className="text-3xl font-bold text-[#D12026]">{displayTitle}</h1>
-            </a>
-            <span className="block h-0.5 bg-blue-600 w-full" />
+            {parentTitle && (
+              <Link href={toCategoryPath(parentUrl)}>
+                <h1 className="text-blue-500 font-bold underline underline-offset-2 text-lg w-full dark:text-blue-400 dark:hover:text-blue-300">
+                  {parentTitle}
+                </h1>
+              </Link>
+            )}
+            <div className="flex flex-col gap-y-1">
+              <Link href={`/category/${slug}`}>
+                <h1 className="text-3xl font-bold text-[#D12026]">{displayTitle}</h1>
+              </Link>
+              {subcategories && subcategories.length > 0 && (
+                <div className="flex flex-wrap items-center justify-start gap-2">
+                  {subcategories.map((child) => (
+                    <span key={child.id} className="py-1 flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-rtv-category-dot-color dark:bg-gray-300"></div>
+                      <Link href={toChildCategoryPath(child)}>
+                        <span className="text-[1.2rem] pr-3 cursor-pointer hover:text-blue-600 dark:hover:text-[#d8d7d7] text-[#222] dark:text-white">
+                          {child.displayTitle}
+                        </span>
+                      </Link>
+                    </span>
+                  ))}
+                </div>
+              )}
+              <span className="block h-0.5 bg-blue-600 w-full" />
+            </div>
           </div>
 
           {/* ── Top Section: Lead Story, Second Story, and Ad Banner ───── */}

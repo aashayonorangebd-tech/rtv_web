@@ -148,6 +148,7 @@ export interface CategoryHeaderResponse {
   canonicalUrl: string;
   ampUrl: string;
   parentUrl: string;
+  parentTitle?: string;
   children?: ChildCategory[];
 }
 

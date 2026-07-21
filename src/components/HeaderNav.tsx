@@ -39,7 +39,7 @@ export default function HeaderNav({
   // has no active category, so the highlight is cleared.
   let currentSlug: string | null = null;
   if (pathname?.startsWith("/category/")) {
-    currentSlug = decodeURIComponent(pathname.split("/")[2] || "");
+    currentSlug = decodeURIComponent(pathname.replace(/^\/category\//, ""));
   } else if (pathname?.startsWith("/story/")) {
     currentSlug = activeSlug;
   }

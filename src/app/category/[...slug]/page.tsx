@@ -24,14 +24,15 @@ import CategoryFeed from "@/components/CategoryFeed";
 const PAGE_SIZE = 10;
 
 async function getCategoryData(
-  slug: string,
+  slug: string[],
   page: number,
 ): Promise<CategoryHeaderResponse | null> {
   try {
     const base = process.env.API_BASE_URL || "https://api.rtvonline.com";
+    const leafSlug = slug[slug.length - 1];
     const res = await fetch(
-      `${base}${ENDPOINTS.category.header(slug)}?page=${page}&size=${PAGE_SIZE}&lang=bn`,
-      { next: { revalidate: 60, tags: [`category-${slug}`] } },
+      `${base}${ENDPOINTS.category.header(leafSlug)}?page=${page}&size=${PAGE_SIZE}&lang=bn`,
+      { next: { revalidate: 60, tags: [`category-${leafSlug}`] } },
     );
     if (!res.ok) return null;
     return res.json();
@@ -43,7 +44,7 @@ async function getCategoryData(
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
   const data = await getCategoryData(slug, 0);
@@ -62,9 +63,10 @@ export async function generateMetadata({
 export default async function CategoryPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
+  const slugPath = slug.join("/");
 
   const data = await getCategoryData(slug, 0);
   if (!data) return notFound();
@@ -76,11 +78,14 @@ export default async function CategoryPage({
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6 dark:text-white">
       <CategoryFeed
-        slug={slug}
+        slug={slugPath}
         categoryId={data.id}
         displayTitle={data.displayTitle}
         initialStories={initialStories}
         totalPages={data.stories.totalPages}
+        subcategories={data.children}
+        parentTitle={data.parentTitle}
+        parentUrl={data.parentUrl}
       />
     </div>
   );
