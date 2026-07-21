@@ -75,7 +75,7 @@ export default function HeaderTopBar() {
       <div className="max-w-[1350px] px-[15px] mx-auto">
         <div className="h-[55px] md:h-[65px] flex items-center justify-between pl-[100px] md:pl-[140px] lg:pl-[160px] pr-4 md:pr-6">
           {/* Left: Location & Date */}
-          <div className="hidden lg:flex items-center mt-6 gap-5 text-gray-600 dark:text-gray-300 text-[14px] font-medium">
+          <div className="hidden lg:flex items-center mt-6 gap-3 text-gray-600 dark:text-gray-300 text-[14px] font-medium">
             <div className="flex items-center gap-1.5">
               <MapPin
                 size={16}
