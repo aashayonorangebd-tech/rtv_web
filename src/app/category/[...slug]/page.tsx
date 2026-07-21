@@ -17,6 +17,7 @@ import { notFound } from "next/navigation";
 import type {
   CategoryHeaderResponse,
   StoryModel,
+  ChildCategory,
 } from "@/lib/types";
 import { ENDPOINTS, toCategoryStoryModel } from "@/lib/api";
 import CategoryFeed from "@/components/CategoryFeed";
@@ -29,13 +30,39 @@ async function getCategoryData(
 ): Promise<CategoryHeaderResponse | null> {
   try {
     const base = process.env.API_BASE_URL || "https://api.rtvonline.com";
-    const leafSlug = slug[slug.length - 1];
-    const res = await fetch(
-      `${base}${ENDPOINTS.category.header(leafSlug)}?page=${page}&size=${PAGE_SIZE}&lang=bn`,
-      { next: { revalidate: 60, tags: [`category-${leafSlug}`] } },
+
+    if (slug.length === 1) {
+      const res = await fetch(
+        `${base}${ENDPOINTS.category.header(slug[0])}?page=${page}&size=${PAGE_SIZE}&lang=bn`,
+        { next: { revalidate: 60, tags: [`category-${slug[0]}`] } },
+      );
+      if (!res.ok) return null;
+      return res.json();
+    }
+
+    const parentSlug = slug[0];
+    const parentRes = await fetch(
+      `${base}${ENDPOINTS.category.header(parentSlug)}?page=0&size=0&lang=bn`,
+      { next: { revalidate: 60, tags: [`category-${parentSlug}`] } },
     );
-    if (!res.ok) return null;
-    return res.json();
+    if (!parentRes.ok) return null;
+    const parentData = await parentRes.json();
+
+    const leafSlug = slug[slug.length - 1];
+    const child = parentData.children?.find(
+      (c: ChildCategory) =>
+        c.slug === `/${slug.join("/")}` ||
+        c.displayTitle === leafSlug,
+    );
+
+    if (!child?.id) return null;
+
+    const childRes = await fetch(
+      `${base}${ENDPOINTS.category.view(child.id)}?page=${page}&size=${PAGE_SIZE}&lang=bn`,
+      { next: { revalidate: 60, tags: [`category-${child.slug ?? leafSlug}`] } },
+    );
+    if (!childRes.ok) return null;
+    return childRes.json();
   } catch {
     return null;
   }
