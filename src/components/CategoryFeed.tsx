@@ -273,12 +273,12 @@ export default function CategoryFeed({
               <div className="grid grid-cols-12 gap-4">
 
                 {/* ── Lead Story (Left side, 8 columns) ────────────────── */}
-                <div className="col-span-12 lg:col-span-8 group border-r border-gray-400 dark:border-border pr-4">
+                <div className="col-span-12 lg:col-span-8 group border-r border-gray-600 pr-4">
                   {lead && <LeadCard story={lead} />}
                 </div>
 
                 {/* ── Second Story (Middle, 4 columns) ─────────────────── */}
-                <div className="col-span-12 lg:col-span-4 border-r border-gray-400 dark:border-border pr-4">
+                <div className="col-span-12 lg:col-span-4 border-r border-gray-600 pr-4">
                   {second && <SecondCard story={second} />}
                 </div>
 
@@ -293,7 +293,7 @@ export default function CategoryFeed({
 
           {/* ── Horizontal Cards Row (4 items side-by-side) ────────────── */}
           {horizontal.length > 0 && (
-            <div className="flex flex-row flex-wrap lg:flex-nowrap divide-x divide-gray-400 dark:divide-gray-200 border-b pb-4 mb-5">
+            <div className="flex flex-row flex-wrap lg:flex-nowrap divide-x divide-gray-600 border-b pb-4 mb-5">
               {horizontal.map((story) => (
                 <div key={story.storyId} className="flex-1 min-w-0 px-3 first:pl-0 last:pr-0">
                   <HorizontalCard story={story} />
