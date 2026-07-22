@@ -38,7 +38,9 @@ export default function HeaderNav({
   // by the story details page (the URL itself has no category). Any other page
   // has no active category, so the highlight is cleared.
   let currentSlug: string | null = null;
-  if (pathname?.startsWith("/category/")) {
+  if (pathname?.startsWith("/category/others/media")) {
+    currentSlug = "others/media";
+  } else if (pathname?.startsWith("/category/")) {
     currentSlug = decodeURIComponent(pathname.replace(/^\/category\//, "").split("/")[0] || "");
   } else if (pathname?.startsWith("/story/")) {
     currentSlug = activeSlug;
@@ -58,12 +60,14 @@ export default function HeaderNav({
           <ul className="flex items-center h-full whitespace-nowrap">
             {sortedItems.slice(0, 9).map((item, index, arr) => {
               const slug = getSlug(item.clientUrl);
-              const isActive = currentSlug != null && slug === currentSlug;
+              const isMedia = slug === "others/media";
+              const navSlug = isMedia ? "others/media" : slug;
+              const isActive = currentSlug != null && (navSlug === currentSlug || (isMedia && currentSlug === "others/media"));
               return (
               <React.Fragment key={item.id}>
                 <li className="h-full flex items-center">
                   <a
-                    href={`/category/${slug}`}
+                    href={isMedia ? "/category/others/media" : `/category/${slug}`}
                     aria-current={isActive ? "page" : undefined}
                     className={`text-[15px] md:text-[16px] font-bold transition-colors px-3 md:px-5 tracking-wide ${
                       isActive
