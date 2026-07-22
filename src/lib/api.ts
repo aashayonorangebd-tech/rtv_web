@@ -84,6 +84,39 @@ export const ENDPOINTS = {
   },
 } as const;
 
+export async function getCategoryPageData(
+  categoryId: number,
+  page: number = 0,
+  size: number = 10,
+): Promise<{ metadata: CategoryHeaderResponse | null; stories: { model: CategoryHeaderResponse["stories"]["model"]; totalPages: number } }> {
+  try {
+    const base = process.env.API_BASE_URL || API_CONFIG.prod;
+    const [metaRes, storiesRes] = await Promise.all([
+      fetch(
+        `${base}${ENDPOINTS.category.view(categoryId)}?page=${page}&size=${size}&lang=bn`,
+        { next: { revalidate: 60, tags: [`category-${categoryId}`] } },
+      ),
+      fetch(
+        `${base}${ENDPOINTS.category.view(categoryId)}/stories?page=${page}&size=${size}&lang=bn`,
+        { next: { revalidate: 60, tags: [`category-${categoryId}`] } },
+      ),
+    ]);
+
+    const metadata = metaRes.ok ? await metaRes.json() : null;
+    const storiesData = storiesRes.ok ? await storiesRes.json() : { model: [], totalPages: 0 };
+
+    return {
+      metadata,
+      stories: {
+        model: storiesData.model ?? [],
+        totalPages: storiesData.totalPages ?? 0,
+      },
+    };
+  } catch {
+    return { metadata: null, stories: { model: [], totalPages: 0 } };
+  }
+}
+
 export function toStoryModel(
   item: PopularApiItem | LatestApiItem | ArchiveApiItem
 ): StoryModel {

@@ -4,8 +4,8 @@ import { getCategoryPageData, toCategoryStoryModel } from "@/lib/api";
 import CategoryFeed from "@/components/CategoryFeed";
 
 export async function generateMetadata() {
-  const { metadata } = await getCategoryPageData(9);
-  if (!metadata) return { title: "মিডিয়া | RTV Online" };
+  const { metadata } = await getCategoryPageData(103);
+  if (!metadata) return { title: "R কিছু ফান | RTV Online" };
 
   return {
     title: `${metadata.displayTitle} | RTV Online`,
@@ -17,8 +17,8 @@ export async function generateMetadata() {
   };
 }
 
-export default async function MediaCategoryPage() {
-  const { metadata, stories } = await getCategoryPageData(9);
+export default async function RKichuFunCategoryPage() {
+  const { metadata, stories } = await getCategoryPageData(103);
 
   if (!metadata) return notFound();
 
@@ -27,12 +27,12 @@ export default async function MediaCategoryPage() {
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6 dark:text-white">
       <CategoryFeed
-        slug="others/media"
+        slug="others/r-kichu-fun"
         categoryId={metadata.id}
         displayTitle={metadata.displayTitle}
         initialStories={initialStories}
         totalPages={stories.totalPages}
-        subcategories={metadata.children}
+        subcategories={[]}
         parentTitle={metadata.parentTitle}
         parentUrl={metadata.parentUrl}
       />
