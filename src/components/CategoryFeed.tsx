@@ -253,7 +253,7 @@ export default function CategoryFeed({
                 <div className="flex flex-wrap items-center justify-start gap-2">
                   {subcategories.map((child) => (
                     <span key={child.id} className="py-1 flex items-center justify-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-rtv-category-dot-color dark:bg-gray-300"></div>
+                       <div className="w-2 h-2 rounded-full bg-[#2c4c9d] dark:bg-gray-300"></div>
                       <Link href={toChildCategoryPath(child)}>
                         <span className="text-[1.2rem] pr-3 cursor-pointer hover:text-blue-600 dark:hover:text-[#d8d7d7] text-[#222] dark:text-white">
                           {child.displayTitle}
