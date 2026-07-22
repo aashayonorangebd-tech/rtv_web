@@ -321,15 +321,15 @@ export default function StoryPageClient({
               {/* Sidebar Ad Placeholder 2 */}
               <AdBanner height={250} />
 
-              {/* Sidebar Tab Widget */}
+              {/*
               <SidebarTabWidget
                 latestStories={latestStories}
                 popularStories={popularStories}
                 showBottomAd={false}
               />
 
-              {/* Sidebar Ad Placeholder 3 */}
               <AdBanner height={250} />
+              */}
 
               {/* Category Popular Stories */}
               <CategoryPopularSidebar
