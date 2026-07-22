@@ -1,40 +1,55 @@
 import { notFound } from "next/navigation";
 import type { CategoryHeaderResponse, StoryModel } from "@/lib/types";
-import { getCategoryPageData, toCategoryStoryModel } from "@/lib/api";
+import { toCategoryStoryModel } from "@/lib/api";
 import CategoryFeed from "@/components/CategoryFeed";
 
+async function getHeaderMediaData(): Promise<CategoryHeaderResponse | null> {
+  try {
+    const base = process.env.API_BASE_URL || "https://api.rtvonline.com";
+    const res = await fetch(
+      `${base}/api/category/view/header/media?page=0&size=10&lang=bn`,
+      { next: { revalidate: 60, tags: ["category-media"] } },
+    );
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
+}
+
 export async function generateMetadata() {
-  const { metadata } = await getCategoryPageData(9);
-  if (!metadata) return { title: "মিডিয়া | RTV Online" };
+  const data = await getHeaderMediaData();
+  if (!data) return { title: "মিডিয়া | RTV Online" };
 
   return {
-    title: `${metadata.displayTitle} | RTV Online`,
-    description: `${metadata.displayTitle} – সর্বশেষ খবর ও আপডেট`,
+    title: `${data.displayTitle} | RTV Online`,
+    description: `${data.displayTitle} – সর্বশেষ খবর ও আপডেট`,
     openGraph: {
-      title: `${metadata.displayTitle} | RTV Online`,
-      description: `${metadata.displayTitle} – সর্বশেষ খবর ও আপডেট`,
+      title: `${data.displayTitle} | RTV Online`,
+      description: `${data.displayTitle} – সর্বশেষ খবর ও আপডেট`,
     },
   };
 }
 
 export default async function MediaCategoryPage() {
-  const { metadata, stories } = await getCategoryPageData(9);
+  const data = await getHeaderMediaData();
+  if (!data) return notFound();
 
-  if (!metadata) return notFound();
-
-  const initialStories: StoryModel[] = stories.model.map(toCategoryStoryModel);
+  const initialStories: StoryModel[] = data.stories.model.map(
+    toCategoryStoryModel,
+  );
 
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6 dark:text-white">
       <CategoryFeed
         slug="others/media"
-        categoryId={metadata.id}
-        displayTitle={metadata.displayTitle}
+        categoryId={data.id}
+        displayTitle={data.displayTitle}
         initialStories={initialStories}
-        totalPages={stories.totalPages}
-        subcategories={metadata.children}
-        parentTitle={metadata.parentTitle}
-        parentUrl={metadata.parentUrl}
+        totalPages={data.stories.totalPages}
+        subcategories={data.children}
+        parentTitle={data.parentTitle}
+        parentUrl={data.parentUrl}
       />
     </div>
   );

@@ -34,7 +34,7 @@ export default function HeaderDrawer({
         {sortedItems.map((item) => {
           const slug = getSlug(item.clientUrl);
           const isMedia = slug === "others/media";
-          const href = isMedia ? "/category/others/media" : `/category/${slug}`;
+          const href = isMedia ? "/category/media" : `/category/${slug}`;
           return (
             <div
               key={item.id}
