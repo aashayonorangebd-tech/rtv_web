@@ -4,8 +4,8 @@ import { getCategoryPageData, toCategoryStoryModel } from "@/lib/api";
 import CategoryFeed from "@/components/CategoryFeed";
 
 export async function generateMetadata() {
-  const { metadata } = await getCategoryPageData(10);
-  if (!metadata) return { title: "সাক্ষাৎকার | RTV Online" };
+  const { metadata } = await getCategoryPageData(8);
+  if (!metadata) return { title: "অন্যান্য | RTV Online" };
 
   return {
     title: `${metadata.displayTitle} | RTV Online`,
@@ -17,8 +17,8 @@ export async function generateMetadata() {
   };
 }
 
-export default async function InterviewCategoryPage() {
-  const { metadata, stories } = await getCategoryPageData(10);
+export default async function OthersCategoryPage() {
+  const { metadata, stories } = await getCategoryPageData(8);
 
   if (!metadata) return notFound();
 
@@ -27,12 +27,12 @@ export default async function InterviewCategoryPage() {
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6 dark:text-white">
       <CategoryFeed
-        slug="others/interview"
+        slug="others"
         categoryId={metadata.id}
         displayTitle={metadata.displayTitle}
         initialStories={initialStories}
         totalPages={stories.totalPages}
-        subcategories={[]}
+        subcategories={metadata.children}
         parentTitle={metadata.parentTitle}
         parentUrl={metadata.parentUrl}
       />

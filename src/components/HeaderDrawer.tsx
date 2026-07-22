@@ -33,15 +33,13 @@ export default function HeaderDrawer({
       <div className="grid grid-cols-6 gap-1.5 pt-3">
         {sortedItems.map((item) => {
           const slug = getSlug(item.clientUrl);
-          const isMedia = slug === "others/media";
-          const href = isMedia ? "/category/media" : `/category/${slug}`;
           return (
             <div
               key={item.id}
               className="text-[1.125rem] font-medium cursor-pointer text-black dark:text-white"
             >
               <Link
-                href={href}
+                href={`/category/${slug}`}
                 onClick={onClose}
                 className="w-full hover:text-red-600 text-black"
               >

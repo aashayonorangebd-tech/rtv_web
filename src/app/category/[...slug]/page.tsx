@@ -41,6 +41,37 @@ async function getCategoryData(
     }
 
     const parentSlug = slug[0];
+
+    if (parentSlug === "others") {
+      const mediaRes = await fetch(
+        `${base}/api/category/view/header/media?page=0&size=10&lang=bn`,
+        { next: { revalidate: 60, tags: ["category-media"] } },
+      );
+      if (!mediaRes.ok) return null;
+      const mediaData = await mediaRes.json();
+
+      const leafSlug = slug[slug.length - 1];
+      const child = mediaData.children?.find(
+        (c: ChildCategory) =>
+          c.slug === `/${slug.join("/")}` ||
+          c.displayTitle === leafSlug,
+      );
+
+      if (!child?.id) return null;
+
+      const childRes = await fetch(
+        `${base}${ENDPOINTS.category.view(child.id)}?page=${page}&size=${PAGE_SIZE}&lang=bn`,
+        { next: { revalidate: 60, tags: [`category-${child.slug ?? leafSlug}`] } },
+      );
+      if (!childRes.ok) return null;
+      const childData = await childRes.json();
+
+      return {
+        ...childData,
+        children: mediaData.children,
+      };
+    }
+
     const parentRes = await fetch(
       `${base}${ENDPOINTS.category.header(parentSlug)}?page=0&size=0&lang=bn`,
       { next: { revalidate: 60, tags: [`category-${parentSlug}`] } },
