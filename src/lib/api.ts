@@ -21,6 +21,9 @@ import type {
   LocationApiStory,
   NearbyLocation,
   LocationBreadcrumb,
+  Division,
+  District,
+  SubDistrict,
 } from "@/lib/types";
 
 export const API_CONFIG = {
@@ -72,8 +75,8 @@ export const ENDPOINTS = {
     divisions: "/api/get-area-serach",
     districts: (divisionId: number) => `/api/get-district-value?divisionId=${divisionId}`,
     subDistricts: (districtId: number) => `/api/get-subdistrict-value?districtId=${districtId}`,
-    stories: (districtName: string) =>
-      `/api/story/view/location?districtName=${encodeURIComponent(districtName)}`,
+    stories: (districtName: string, subDistrictName?: string) =>
+      `/api/story/view/location?districtName=${encodeURIComponent(districtName)}${subDistrictName ? `&subDistrictName=${encodeURIComponent(subDistrictName)}` : ""}`,
   },
 
   electionArea: {
@@ -237,17 +240,26 @@ export async function getArchiveStories(
 }
 
 // ─── Location stories (deshjure / election district filter) ───────────────────
-// GET /api/story/view/location?page=&districtName=
+// GET /api/story/view/location?page=&districtName=&subDistrictName=
 // Returns district info, nearby upazilas and a paginated story list.
 export async function getLocationStories(
-  districtName: string,
+  districtName: string | undefined,
+  subDistrictName: string | undefined,
   page: number = 1,
-  size: number = 10
+  size: number = 10,
+  divisionName?: string
 ): Promise<LocationResponse> {
   try {
-    const url = new URL(
-      `${process.env.API_BASE_URL || API_CONFIG.prod}${ENDPOINTS.location.stories(districtName)}`
-    );
+    let url: URL;
+    if (divisionName) {
+      url = new URL(
+        `${process.env.API_BASE_URL || API_CONFIG.prod}/api/story/view/location?divisionName=${encodeURIComponent(divisionName)}`
+      );
+    } else {
+      url = new URL(
+        `${process.env.API_BASE_URL || API_CONFIG.prod}${ENDPOINTS.location.stories(districtName!, subDistrictName!)}`
+      );
+    }
     url.searchParams.set("page", String(page));
     url.searchParams.set("size", String(size));
     url.searchParams.set("lang", "bn");
@@ -293,6 +305,49 @@ export async function getLocationStories(
     };
   } catch {
     return { stories: { model: [], totalPages: 0, currentPage: 0, totalElements: 0 } };
+  }
+}
+
+// ─── Area / Division tags (country category) ─────────────────────────────────
+// GET /api/get-area-serach — returns the list of Bangladesh divisions
+// used as area tags on the /category/country page.
+export async function fetchAreas(): Promise<Division[]> {
+  try {
+    const res = await fetch("https://rtvonline.com/api/get-area-serach", {
+      next: { revalidate: 300, tags: ["areas"] },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
+// GET /api/get-district-value?divisionId= — returns districts for a division.
+export async function fetchDistricts(divisionId: number): Promise<District[]> {
+  try {
+    const res = await fetch(
+      `https://rtvonline.com/api/get-district-value?divisionId=${divisionId}`,
+      { next: { revalidate: 300, tags: [`districts-${divisionId}`] } },
+    );
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
+// GET /api/get-subdistrict-value?districtId= — returns sub-districts for a district.
+export async function fetchSubDistricts(districtId: number): Promise<SubDistrict[]> {
+  try {
+    const res = await fetch(
+      `https://rtvonline.com/api/get-subdistrict-value?districtId=${districtId}`,
+      { next: { revalidate: 300, tags: [`subdistricts-${districtId}`] } },
+    );
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
   }
 }
 

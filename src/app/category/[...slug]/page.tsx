@@ -18,8 +18,9 @@ import type {
   CategoryHeaderResponse,
   StoryModel,
   ChildCategory,
+  Division,
 } from "@/lib/types";
-import { ENDPOINTS, toCategoryStoryModel } from "@/lib/api";
+import { ENDPOINTS, toCategoryStoryModel, fetchAreas } from "@/lib/api";
 import CategoryFeed from "@/components/CategoryFeed";
 
 const PAGE_SIZE = 10;
@@ -133,6 +134,9 @@ export default async function CategoryPage({
     toCategoryStoryModel,
   );
 
+  const isCountryCategory = slug.length === 1 && slug[0] === "country";
+  const areas = isCountryCategory ? await fetchAreas() : [];
+
   return (
     <div className="max-w-[1350px] mx-auto px-4 md:px-6 lg:px-8 py-6 dark:text-white">
       <CategoryFeed
@@ -144,6 +148,7 @@ export default async function CategoryPage({
         subcategories={data.children}
         parentTitle={data.parentTitle}
         parentUrl={data.parentUrl}
+        areas={areas}
       />
     </div>
   );
