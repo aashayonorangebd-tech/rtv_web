@@ -42,6 +42,8 @@ export default function HeaderNav({
     currentSlug = "others/media";
   } else if (pathname?.startsWith("/category/")) {
     currentSlug = decodeURIComponent(pathname.replace(/^\/category\//, "").split("/")[0] || "");
+  } else if (pathname?.startsWith("/country/")) {
+    currentSlug = "country";
   } else if (pathname?.startsWith("/story/")) {
     currentSlug = activeSlug;
   }
