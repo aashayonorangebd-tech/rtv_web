@@ -110,10 +110,10 @@ export default function StoryPageClient({
         }
       `}</style>
       <div className="sm:mt-5">
-        <div className="main-container-inner grid grid-cols-12 gap-5 place-content-between">
+        <div className="main-container-inner grid grid-cols-1 md:grid-cols-12 gap-5 place-content-between">
 
           {/* ── LEFT COLUMN: MAIN ARTICLE (9 Columns) ──────────────────────── */}
-          <div className="max-sm:col-span-12 md:col-span-9">
+          <div className="md:col-span-9">
             <div className="content-section">
 
               {/* Category Breadcrumb */}
@@ -244,7 +244,7 @@ export default function StoryPageClient({
                 )}
 
                 {/* Article Body */}
-                <article className="storyDetailFont custom-a-tag pTagGap dark:text-foreground mx-2 sm:mx-24 text-left">
+                <article className="storyDetailFont custom-a-tag pTagGap dark:text-foreground mx-2 sm:mx-4 md:mx-24 text-left">
                   {rewrittenHtml && (
                     <div dangerouslySetInnerHTML={{ __html: rewrittenHtml }} />
                   )}
@@ -306,7 +306,7 @@ export default function StoryPageClient({
           </div>
 
           {/* ── RIGHT COLUMN: SIDEBAR (3 Columns) ──────────────────────────── */}
-          <div className="max-sm:col-span-12 md:col-span-3" id="printBlock1">
+          <div className="md:col-span-3" id="printBlock1">
             <div className="grid grid-cols-1 justify-center gap-y-3">
               {story.categories?.[0] && (
                 <div className="h-11" aria-hidden="true" />
