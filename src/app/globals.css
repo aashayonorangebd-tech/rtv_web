@@ -122,8 +122,22 @@ body {
 
 @media (min-width: 640px) {
   .main-container-inner {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-container-inner {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-container-inner {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
